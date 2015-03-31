@@ -1,0 +1,54 @@
+=== Game Design Document ===
+
+O _designer_ é o principal responsável pelo documento que registra todo
+o desenho do jogo - o _Game Design Document_ (GDD). Embora seja um
+documento fundamental ao longo do desenvolvimento do jogo, muitas equipes,
+principalmente as iniciantes, optam por não escrevê-lo, com o intuito de 
+"não perder tempo", passando direto para a etapa da implementação.
+Contudo, esta decisão, de fato, pode sim levar a atrasos e, em casos extremos,
+ao cancelamento do jogo.
+
+O GDD serve como referência e, principalmente, como centralizador da ideia do
+jogo, fazendo que toda a equipe trabalhe com o mesmo objetivo, na mesma visão.
+A inexistência de um GDD, ou um GDD inacabado e desatualizado, podem fazer com
+que cada membro da equipe implemente sua "visão" do jogo, de modo
+que ao fim do projeto o resultado seja um jogo sem coesão e unidade.
+
+Não há um padrão oficial para GDDs: uma boa proposta foi feita no 
+apêndice do livro "Level Up! The Guide to Great Video Game Design", 
+de Scott Rogers.
+
+A versão inicial deverá contemplar os seguintes pontos:
+
+	1. Capa, com o título do jogo, versão do documento, autor, contato, data;
+
+	2. Índice (de preferência com _hiperlinks_);
+
+	3. Tabela de revisão do documento, contendo a data, o autor e um
+	   breve relato da alterações realizadas em relação a versão anterior
+	   do documento. Neste primeiro momento, teremos a apenas versão inicial 
+	   registrada na tabela;
+
+	4. Objetivo do jogo, contendo o conceito do jogo (que pode ser retirado
+	do documento de conceito) e lista das principais características (que foram
+	apresentadas inicialmente do documento de visão);
+
+	5. Visão geral da história do jogo, de forma sucinta, abordando os 
+	   seguintes tópicos:
+
+	        a. como e aonde o jogador começa o jogo;
+		    b. quais os cenários do jogo e como eles se interrelacionam;
+		    c. como o jogador se move de um cenário para o outro;
+		    d. qual é o final do jogo;
+		    e. o que o jogador deve fazer ou onde deve chegar para alcançar o
+		       final do jogo.
+
+	6. Controles, com a lista dos movimentos e ações que o jogador tem
+	   à sua disposição (sem detalhar a sequência de botões neste momento) e o
+	   esquema básico de controle, com o mapeamento dos botões em uma imagem
+	   (idêntica a imagem preparada para o documento de visão).
+
+
+=> Outputs:
+
+A versão inicial do GDD, contemplando os pontos listados acima. 

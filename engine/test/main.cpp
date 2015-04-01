@@ -9,7 +9,7 @@
 
 int main()
 {
-    Game game;
+    Game game("game name");
     game.run();
 
     return 0;

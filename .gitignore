@@ -4,3 +4,5 @@
 prog
 *.swp
 *.d
+lib
+test/test

@@ -11,7 +11,8 @@ AR = ar
 
 ARFLAGS = rcs
 CFLAGS = -W -Wall -pedantic -ansi -std=c++11 -MMD
-INCLUDES = -Iinclude
+INCLUDES = -Iinclude `sdl2-config --cflags`
+LIBS = `sdl2-config --libs`
 
 TARGET = $(LIB_DIR)/$(NAME)
 
@@ -35,7 +36,7 @@ $(TARGET): $(OBJ)
 	$(AR) $(ARFLAGS) $@ $(OBJ)
 
 $(TEST): $(TST_MAIN) $(TARGET)
-	$(CC) $(CFLAGS) $(INCLUDES) $(TST_MAIN) $(TARGET) -o $@ 
+	$(CC) $(CFLAGS) $(INCLUDES) $(TST_MAIN) $(TARGET) -o $@ $(LIBS)
 
 clean:
 	@find . -name *.o -exec rm {} \;

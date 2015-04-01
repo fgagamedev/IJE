@@ -8,27 +8,27 @@
 #ifndef GAME_H
 #define GAME_H
 
- #include <SDL2/SDL.h>
 #include <string>
+#include <SDL2/SDL.h>
 
-#define WIDTH 800
-#define HEIGHT 600
-#define BPP 0
+#include "exception.h"
 
-#include <iostream>
+using std::string;
 
 class Game
 {
 public:
-    Game(std::string);
+    Game(const string& title);
     ~Game();
 
+    void init(int w = 800, int h = 600) throw (Exception);
     void run();
 
 private:
-	SDL_Window *window = nullptr;
-	SDL_Surface *screen = nullptr;
-	
+    string m_title;
+    SDL_Window *m_window;
+    SDL_Renderer *m_renderer;
+
     void update_timestep();
     void process_input();
     void runIA();

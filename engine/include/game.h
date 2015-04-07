@@ -9,8 +9,6 @@
 #define GAME_H
 
 #include <string>
-#include <SDL2/SDL.h>
-
 #include "exception.h"
 
 using std::string;
@@ -18,22 +16,20 @@ using std::string;
 class Game
 {
 public:
-    Game(const string& title);
+    Game();
     ~Game();
 
-    void init(int w = 800, int h = 600) throw (Exception);
+    void init(const string& title, int w = 800, int h = 600) throw (Exception);
     void run();
 
-private:
-    string m_title;
-    SDL_Window *m_window;
-    SDL_Renderer *m_renderer;
+protected:
+    bool m_done;
 
     void update_timestep();
-    void process_input();
+    virtual void process_input();
     void runIA();
     void runPhysics();
-    bool update();
+    void update();
     void draw();
 };
 

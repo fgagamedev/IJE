@@ -6,62 +6,38 @@
  * Licença: LGPL. Sem copyright.
  */
 #include "game.h"
+#include "environment.h"
 
-Game::Game(const string& title)
-    : m_title(title)
+Game::Game()
+    : m_done(false)
 {
 }
 
 Game::~Game()
 {
-    if (m_renderer)
-    {
-        SDL_DestroyRenderer(m_renderer);
-    }
-
-    if (m_window)
-    {
-        SDL_DestroyWindow(m_window);
-    }
-
-    if (SDL_WasInit(SDL_INIT_EVERYTHING))
-    {
-        SDL_Quit();
-    }
+    Environment::release_instance();
 }
 
 void
-Game::init(int w, int h) throw (Exception)
+Game::init(const string& title, int w, int h) throw (Exception)
 {
-    int rc = SDL_Init(SDL_INIT_VIDEO);
+    Environment *env = Environment::get_instance();
+    env->init();
 
-    if (rc)
-    {
-        throw Exception(SDL_GetError());
-    }
-
-    rc = SDL_CreateWindowAndRenderer(w, h, 0, &m_window, &m_renderer);
-
-    if (rc or not m_window or not m_renderer)
-    {
-        throw Exception(SDL_GetError());
-    }
-
-    SDL_SetWindowTitle(m_window, m_title.c_str());
+    env->video->set_resolution(w, h);
+    env->video->set_window_name(title);
 }
 
 void
 Game::run()
 {
-    bool done = false;
-
-    while (not done)
+    while (not m_done)
     {
         update_timestep();
         process_input();
         runIA();
         runPhysics();
-        done = update();
+        update();
         draw();
     }
 }
@@ -74,6 +50,15 @@ Game::update_timestep()
 void
 Game::process_input()
 {
+    SDL_Event event;
+
+    while (SDL_PollEvent(&event))
+    {
+        if (event.type == SDL_QUIT)
+        {
+            m_done = true;
+        }
+    }
 }
 
 void
@@ -86,20 +71,9 @@ Game::runPhysics()
 {
 }
 
-bool
+void
 Game::update()
 {
-    SDL_Event event;
-
-    while (SDL_PollEvent(&event) != 0)
-    {
-        if (event.type == SDL_QUIT)
-        {
-            return true;
-        }
-    }
-
-    return false;
 }
 
 void

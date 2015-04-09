@@ -1,0 +1,26 @@
+=== Requisitos Tecnológicos ===
+
+Os requisitos tecnológicos trazem uma descrição breve das ferramentas utilizadas
+na criação do jogo, ou que farão parte do jogo. Esta seção deve ser mantida
+breve, pois uma maior detalhamento destes tópicos pertence ao documento
+técnico do jogo ("Technical Design Document" - TDD).
+
+Este descrição dos requisitos técnicos deve conter:
+
+	1. As ferramentas que serão utilizadas na codificação do jogo, como
+	compiladores, editores, depuradores, linguagens de _script_, etc.
+
+	2. As ferramentas que darão suporte ao design do jogo, como editores
+	de níveis e ferramentas de _script_. Talvez estas ferramentas 
+	tenham que ser desenvolvidas pela própria equipe, na ausência de uma 
+	solução já existente.
+
+	3. As ferramentas para suporte a _cheats_, se houverem. Mesmo
+	que não estejam presentes na versão final do jogo, os _cheats_ 
+	podem ser úteis em apresentações e demonstrações do jogo, permitindo
+	saltar níveis ou exibir armas, inimigos, recursos, dentre outros, de forma
+	rápida e eficiente.
+
+=> Outputs:
+
+Um capítulo ou seção do GDD, contemplando os requisitos tecnológicos do jogo.

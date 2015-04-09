@@ -1,0 +1,29 @@
+=== Imagens ===
+
+Uma parte importante da engine do jogo é responsável pelo carregamento
+de imagens a partir de arquivos. A forma e a quantidade de imagens por arquivo
+são decididas pela própria equipe, e o gênero do jogo pode ser mais ou menos
+apropriado para cada abordagem.
+
+Também é importante ter um módulo que gerencia as imagens já carregas, para
+evitar o carregamento duplicado de uma mesma imagem e o consequente 
+desperdício de memória. Além disso, o gerenciador também manterá registro de
+quantas referências a uma certa imagem estão ativas, permitindo a liberação
+dos recursos alocados para a imagem quando não houverem mais referências.
+
+O formato PNG é uma boa opção para o armazenamento de imagens, uma
+vez que resulta em arquivos de tamanho reduzido, além de ter suporte à 
+transparência. Contudo, existem outros formatos que podem atender as 
+necessidades da equipe, e até mesmo a possibilidade de carregar a imagem a 
+partir de um vetor de _bytes_.
+
+
+=> Outputs:
+
+(a) Os códigos que implementem o módulo de carregamento e gerenciamento de 
+    imagens;
+
+(b) A cena chave do jogo, que foram montada anteriormente somente com
+    primitivas geométricas, deve ser refeita utilizando apenas imagens.
+    Estas imagens são os _low-fi sketches_ que estão sob a responsabilidade
+    do gerente.

@@ -22,7 +22,6 @@ void
 Game::init(const string& title, int w, int h) throw (Exception)
 {
     Environment *env = Environment::get_instance();
-    env->init();
 
     env->video->set_resolution(w, h);
     env->video->set_window_name(title);

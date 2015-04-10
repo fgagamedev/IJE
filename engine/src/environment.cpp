@@ -6,8 +6,9 @@
  * Licença: LGPL. Sem copyright.
  */
 #include "environment.h"
+#include "video.h"
 
-Environment *env = nullptr;
+static Environment *env = nullptr;
 
 Environment::Environment()
     : video(nullptr)
@@ -30,6 +31,8 @@ Environment::get_instance() throw (Exception)
         {
             throw Exception("Out of memory for a new Environment");
         }
+
+        env->init();
     }
 
     return env;
@@ -39,6 +42,7 @@ void
 Environment::release_instance()
 {
     delete env;
+    env = nullptr;
 }
 
 void

@@ -19,12 +19,11 @@ public:
     static Environment * get_instance() throw (Exception);
     static void release_instance();
 
-    void init() throw (Exception);
-
     Video *video;
 
 private:
     Environment();
+    void init() throw (Exception);
 };
 
 #endif

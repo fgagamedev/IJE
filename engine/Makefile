@@ -26,8 +26,8 @@ OBJ = ${addprefix $(OBJ_DIR)/, ${notdir ${SRC:.cpp=.o}}}
 
 all: 
 	@mkdir -p $(OBJ_DIR) $(LIB_DIR)
-	@make $(TARGET)
-	@make $(TEST)
+	$(MAKE) $(TARGET)
+	$(MAKE) $(TEST)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@

@@ -1,0 +1,23 @@
+=== Hi-Fi Sketches ===
+
+
+A medida que o desenvolvimento do jogo avança, é necessário substituir a
+arte provisória por uma nova arte que, embora ainda não seja a definitiva, 
+seja mais elaborada, tanto para a validação da composição visual do jogo,
+como para testes de animação.
+
+Também é necessário trabalhar a arte a ser usada nas telas do jogo (abertura,
+game over, menus, opções, créditos, etc) como a que comporá a documentação e a 
+capa do jogo. Importante também trabalhar na arte a ser utilizada na divulgação 
+do jogo.
+
+Como boa parte desta arte será uma evolução dos low-fi sketches,
+no contexto da disciplina o termo utilizado para estas novas artes será 
+hi-fi sketches, embora o termo tenha outras conotações.
+
+
+=> Outputs:
+
+Uma série de imagens, em formato PNG, com maior acabamento gráfico (resolução, 
+cores, etc), assim como a arte da capa do jogo, da documentação e do material 
+de divulgação.

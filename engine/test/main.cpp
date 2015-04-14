@@ -6,8 +6,15 @@
  * Licença: LGPL. Sem copyright.
  */
 #include <iostream>
+#include <ctime>
+#include <SDL2/SDL.h>
 
 #include "game.h"
+#include "point.h"
+#include "line.h"
+#include "rect.h"
+#include "circle.h"
+
 #include "environment.h"
 
 using namespace std;
@@ -19,6 +26,8 @@ public:
         : m_fullscreen(false), m_w(640), m_h(480)
     {
         env = Environment::get_instance();
+        env->canvas->clear();
+        srand(time(NULL));
     }
 
 private:
@@ -28,21 +37,66 @@ private:
 
     void process_input()
     {
+        env->canvas->update();
         SDL_Event event;
 
         while (SDL_PollEvent(&event))
         {
-            env->video->clear();
-
             if (event.type == SDL_QUIT)
             {
                 m_done = true;
             }
 
+            Point point;
+            Line line;
+            Rect rect;
+            Circle circle;
+            Color color;
+
             if (event.type == SDL_KEYDOWN)
             {
                 switch (event.key.keysym.sym)
                 {
+                    case SDLK_r:
+                        rect.set(rand() % m_w, rand() % m_h);
+                        rect.set_dimensions(rand() % m_w, rand() % m_h);
+                        color.set(rand() % 255, rand() % 255, rand() % 255);
+                        env->canvas->draw(rect, color);
+                        break;
+
+                    case SDLK_o:
+                        circle.set(Point(rand() % m_w, rand() % m_h), rand() % 300);
+                        color.set(rand() % 255, rand() % 255, rand() % 255);
+                        env->canvas->draw(circle, color);
+                        break;
+
+                    case SDLK_c:
+                        circle.set(Point(rand() % m_w, rand() % m_h), rand() % 300);
+                        color.set(rand() % 255, rand() % 255, rand() % 255);
+                        env->canvas->fill(circle, color);
+                        break;
+
+                    case SDLK_t:
+                        rect.set(rand() % m_w, rand() % m_h);
+                        rect.set_dimensions(rand() % m_w, rand() % m_h);
+                        color.set(rand() % 255, rand() % 255, rand() % 255);
+                        env->canvas->fill(rect, color);
+                        break;
+
+                    case SDLK_p:
+                        point.set(rand() % m_w, rand() % m_h);
+                        color.set(rand() % 255, rand() % 255, rand() % 255);
+                        env->canvas->draw(point, color);
+                        break;
+
+                    case SDLK_l:
+                        line.set(Point(rand() % m_w, rand() % m_h),
+                            Point(rand() % m_w, rand() % m_h));
+                        color.set(rand() % 255, rand() % 255, rand() % 255);
+                        env->canvas->draw(line, color);
+                        break;
+
+
                     case SDLK_f:
                         m_fullscreen = not m_fullscreen;
                         env->video->set_fullscreen(m_fullscreen);

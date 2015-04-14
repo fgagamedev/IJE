@@ -10,6 +10,7 @@
 
 #include "exception.h"
 #include "video.h"
+#include "canvas.h"
 
 class Environment
 {
@@ -20,6 +21,7 @@ public:
     static void release_instance();
 
     Video *video;
+    Canvas *canvas;
 
 private:
     Environment();

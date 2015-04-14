@@ -16,6 +16,8 @@
 using std::string;
 using std::pair;
 
+class Canvas;
+
 class Video
 {
 public:
@@ -24,16 +26,17 @@ public:
 
     void init() throw (Exception);
 
-    void set_resolution(int w, int h);
+    void set_resolution(int w, int h) throw (Exception);
     void set_fullscreen(bool fullscreen = true) throw (Exception);
     void set_window_name(const string& name);
-    void clear() const;
 
-    pair<int, int> get_resolution() const;
+    pair<int, int> resolution() const;
+    Canvas * canvas() const;
 
 private:
     SDL_Window *m_window;
     SDL_Renderer *m_renderer;
+    Canvas *m_canvas;
 
     int m_w, m_h;
 };

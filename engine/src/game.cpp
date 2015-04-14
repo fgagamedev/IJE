@@ -6,6 +6,7 @@
  * Licença: LGPL. Sem copyright.
  */
 #include "game.h"
+#include "video.h"
 #include "environment.h"
 
 Game::Game()

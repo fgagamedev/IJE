@@ -6,16 +6,23 @@
  * Licença: LGPL. Sem copyright.
  */
 #include "video.h"
+#include "canvas.h"
 
 using namespace std;
 
 Video::Video()
-    : m_window(nullptr), m_renderer(nullptr), m_w(800), m_h(600)
+    : m_window(nullptr), m_renderer(nullptr), m_canvas(nullptr),
+    m_w(800), m_h(600)
 {
 }
 
 Video::~Video()
 {
+    if (m_canvas)
+    {
+        delete m_canvas;
+    }
+
     if (m_renderer)
     {
         SDL_DestroyRenderer(m_renderer);
@@ -48,16 +55,30 @@ Video::init() throw (Exception)
     {
         throw Exception(SDL_GetError());
     }
+
+    m_canvas = new Canvas(m_renderer);
+
+    if (not m_canvas)
+    {
+        throw Exception("Out of memory for a new Canvas");
+    }
 }
 
 void
-Video::set_resolution(int w, int h)
+Video::set_resolution(int w, int h) throw (Exception)
 {
     if (m_window and w > 0 and h > 0)
     {
         m_w = w;
         m_h = h;
         SDL_SetWindowSize(m_window, w, h);
+
+        int rc = SDL_RenderSetLogicalSize(m_renderer, m_w, m_h);
+
+        if (rc != 0)
+        {
+            throw Exception(SDL_GetError());
+        }
     }
 }
 
@@ -77,6 +98,7 @@ Video::set_fullscreen(bool fullscreen) throw (Exception)
     {
         throw Exception(SDL_GetError());
     }
+
 }
 
 void
@@ -89,14 +111,13 @@ Video::set_window_name(const string& name)
 }
 
 pair<int, int>
-Video::get_resolution() const
+Video::resolution() const
 {
     return make_pair(m_w, m_h);
 }
 
-void
-Video::clear() const
+Canvas *
+Video::canvas() const
 {
-    SDL_RenderClear(m_renderer);
-    SDL_RenderPresent(m_renderer);
+    return m_canvas;
 }

@@ -56,4 +56,5 @@ Environment::init() throw (Exception)
     }
 
     video->init();
+    canvas = video->canvas();
 }

@@ -1,0 +1,29 @@
+=== Controles ===
+
+
+A interface de controle do jogo, que permite ao jogador comunicar ao jogo suas
+decisões, é responsável por boa parte da impressão que o jogador tem do jogo 
+em si. Uma interface que não corresponda as expectativas do jogador, dentro da
+premissa do jogo, pode gerar uma frustração que levará o jogador a abandonar
+o jogo.
+
+A implementação desta interface envolve a captura e tratamento de eventos 
+gerados pelo teclado, mouse, controle, câmera, ou quaisquer outros dispositivos
+que estejam a disposição do jogador. Este tratamento deve ser bastante 
+cuidadoso, para que não haja percas de entradas, e nem ambiguidades que façam
+com que o resultado obtido seja diferente do esperado pelo jogador.
+
+Neste momento do desenvolvimento ainda não será implementada a jogabilidade do
+jogo: o foco agora é montar uma interface consistente com os periféricos 
+suportados, de modo que devem ser implementada apenas a movimentação básica
+da personagem principal. Artes de baixa resolução ou mesmos protótipos são 
+interessantes para a validação desta interface já neste estágio inicial.
+
+
+=> Outputs:
+
+1. os códigos que contenham a interface de controle do jogo, que deve 
+   contemplar ao menos um periférico (mouse, teclado, joystick, etc); 
+2. a implementação dos mecanismos de encerrar o jogo (através do x da 
+   janela, tecla ESC, etc);
+3. e a implementação da movimentação básica da personagem principal. 

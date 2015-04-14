@@ -1,0 +1,15 @@
+=== Textos ===
+
+Muitas das informações sobre o mundo do jogo (sinais, indicadores, história,
+diálogos, datas, etc) e sobre o status do jogador (vidas, tempo, poderes, 
+energia, nível, etc) são, em geral, apresentadas na forma de textos e números.
+
+Por este motivo, é importante desenvolver um módulo na engine que permita a 
+renderização de textos e números, além de sua correta posição na tela do jogo. 
+
+
+=> Outputs:
+
+1. O módulo da engine responsável pela renderização de textos e números;
+2. a exibição de todos os textos relacionados a interface com o jogador, 
+   assim como diálogos e história.  

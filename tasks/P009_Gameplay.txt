@@ -1,0 +1,23 @@
+=== Gameplay ===
+
+
+Não há jogo se não houver a participação efetiva do jogador. Todas as mecânicas
+que permitem uma interação do jogador com o jogo (saltos, cliques, seleções,
+tiros, etc) são denominadas _gameplay_. Também fazem parte do gameplay as 
+conexões entre o jogo e o jogador, os desafios e modos de superá-los, e a trama 
+do jogo.
+
+A implementação do gameplay é tarefa fundamental do desenvolvimento, e
+requer tempo, esforço e dedicação. Embora o jogador tenha percepções visuais e
+auditivas de forma direta, ele percebe o gameplay de uma forma 
+inconsciente, estabelecendo e entendendo relações e conexões entre os entes do
+jogo. É comum um jogador não se agradar de um determinado jogo e não conseguir
+expressar objetivamente o que ele não gostou. Neste casos, o mais provável é 
+que ele tenha algum problema com o gameplay.
+
+
+=> Outputs:
+
+Uma versão do jogo com toda a jogabilidade implementada, conforme descrito no
+GDD. Mesmo que haja somente um nível e a arte ainda seja provisória, deve ser
+possível testar todo o gameplay já nesta versão do jogo.

@@ -1,0 +1,47 @@
+=== Câmera e HUD ===
+
+
+A. Câmera
+
+Também é importante definir qual será o tipo de câmera utilizada ao longo do 
+jogo. As alternativas mais comuns são:
+
+	1. primeira pessoa;
+	2. terceira pessoa;
+	3. isométrica;
+	4. 2.5D;
+	5. 2D estática;
+	6. 2D com _scrolling_;
+	7. fixa;
+	8. móvel, com caminho pré-determinado;
+	9. controlável pelo jogador;
+	10. automática, de acordo com o posicionamento da personagem principal.
+
+
+B. HUD
+
+O HUD (Heads-Up Display) é o conjunto de informações a serem apresentadas, em 
+tela, ao jogador, dando a este os subsídios necessários para entender o seu 
+estado e progresso ao longo do mundo do jogo. Fazem parte do HUD:
+
+	1. Energia (_life_)
+	2. Vidas (e _continues_)
+	3. Dinheiro, pontuação e ranking
+	4. Barra de poder, magia, combustível e golpes especiais disponíveis
+	5. Munição
+	6. Habilidades e perícias
+	7. Tempo
+	8. Mapa e sistemas de navegação
+	9. Opções e configurações
+	10. Sistemas de mira e cursores
+	11. Odômetro
+
+O jogo pode mesmo não ter HUD: neste caso, é preciso descrever como estas 
+informações serão passadas visualmente ao jogador.
+
+
+=> Outputs:
+
+Um capítulo ou seção do GDD, descrevendo a câmera e o HUD do jogo (tais 
+informações podem estar associadas no documento às informações das telas, as
+quais já foram introduzidas anteriormente).

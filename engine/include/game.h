@@ -30,7 +30,7 @@ protected:
     void runIA();
     void runPhysics();
     void update();
-    void draw();
+    virtual void draw();
 };
 
 #endif

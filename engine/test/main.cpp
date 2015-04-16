@@ -40,6 +40,7 @@ private:
         env->canvas->update();
         SDL_Event event;
 
+        SDL_Delay(1);
         while (SDL_PollEvent(&event))
         {
             if (event.type == SDL_QUIT)
@@ -102,6 +103,11 @@ private:
                         env->video->set_fullscreen(m_fullscreen);
                         break;
 
+                    case SDLK_i:
+                        rect.set(0, 0);
+                        rect.set_dimensions(m_w, m_h);
+                        env->canvas->load_image("res/images/image.png", rect);
+                        break;
                     case SDLK_UP:
                         m_w += 100;
                         m_h += 100;

@@ -11,6 +11,7 @@
 #include "line.h"
 #include "rect.h"
 #include "circle.h"
+#include "image.h"
 
 Canvas::Canvas(SDL_Renderer *renderer)
     : m_renderer(renderer)
@@ -228,4 +229,24 @@ Canvas::fill_circle_points(int cx, int cy, int x, int y) const
     draw(Line(Point(cx - x, cy + y), Point(cx - x, cy - y)));
     draw(Line(Point(cx + y, cy + x), Point(cx + y, cy - x)));
     draw(Line(Point(cx - y, cy + x), Point(cx - y, cy - x)));
+}
+
+void 
+Canvas::load_image(const string path, const Rect rect) const throw (Exception)
+{
+    Image image;
+    image.load_texture(m_renderer, path);
+
+    SDL_Rect frame;
+    frame.x = rect.x();
+    frame.y = rect.y();
+    frame.w = rect.w(); 
+    frame.h = rect.h(); 
+
+    int rc = SDL_RenderCopy(m_renderer, image.texture(), nullptr, &frame);
+
+    if(rc)
+    {
+        throw Exception(SDL_GetError());
+    }
 }

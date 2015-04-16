@@ -1,0 +1,20 @@
+=== Visão Geral do Mundo do Jogo ===
+
+Alguns gêneros apresentam ao jogador uma visão geral do mundo, com todas as
+suas localizações e elementos, conforme citado na descrição dos veículos.
+
+Se for o caso do jogo que está sendo desenvolvido, o game designer deverá 
+inserir no GDD:
+
+	1. as imagens da visão geral do mundo;
+	2. a lista de todos os níveis disponíveis nesta visualização;
+	3. a descrição de como estas informações serão apresentadas ao jogador;
+	4. o detalhamento de como o jogador irá navegar por estas telas (via
+	   cursor, avatar, etc);
+	5. as animações necessárias nestas telas;
+	6. as músicas e efeitos necessários nestas telas.
+
+
+=> Outputs:
+
+Um capítulo ou seção do GDD, contemplando a visão geral do mundo do jogo.

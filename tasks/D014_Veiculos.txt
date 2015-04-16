@@ -1,0 +1,27 @@
+=== Veículos ===
+
+Um mecanismo útil para a movimentação da personagem principal pelo mundo do
+jogo são os veículos, que podem ser artefatos mecânicos, tecnológicos, mágicos
+ou mesmo animais.
+
+O game designer deve definir quantos e quais serão os veículos disponíveis, se 
+houverem. Também deve tratar os pontos abaixo:
+
+	1. Como o jogador entra ou deixa o veículo;
+	2. Como o veículo interage com o mundo (por onde passa ou não, etc);
+	3. Descrição de cada veículo, com imagem;
+	4. Modos de controle do veículo, com os botões e comandos necessários 
+	   e/ou disponíveis;
+	5. Parâmetros do veículo: velocidade, tamanho, capacidade de carga,
+	   resistência, etc;
+	6. Atributos do veículo: armas, armadura, efeitos especiais, etc.
+
+Dependendo do gênero, pode ser desnecessário o uso de um veículo, utilizando-se
+apenas um mapa do mundo do jogo com as localizações disponíveis, de modo que o 
+jogador possa acessá-las através de uma simples seleção.
+
+
+=> Outputs:
+
+Um capítulo ou seção do GDD, contemplando a descrição dos veículos disponíveis
+no mundo do jogo.

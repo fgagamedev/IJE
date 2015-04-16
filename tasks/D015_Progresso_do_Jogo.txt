@@ -1,0 +1,33 @@
+=== Progresso do Jogo ===
+
+O progresso do jogo diz respeito a maneira como o jogador irá avançar no
+mundo do jogo e na história, passando por níveis, localizações, planetas,
+em busca de seu objetivo principal.
+
+Este progresso não se dá apenas em nível de história ou jogabilidade: ela 
+também pode ser mensurada pela aquisição de novas habilidades, atributos,
+perícias, e colecionáveis que podem ou não influenciar a história do jogo.
+
+O GDD deverá conter um _beat chart_ para cada nível do jogo, que é uma
+planilha que contém:
+
+	1. o nome do nível;
+	2. o nome do arquivo que contém a descrição do nível;
+	3. o objetivo principal do jogador no nível;
+	4. uma descrição curta da história do nível;
+	5. a(s) jogabilidade(s) do nível;
+	6. inimigos;
+	7. mecânicas;
+	8. NPCs;
+	9. material bônus (colecionáveis, etc);
+	10. tempo (dia, noite, tarde, etc);
+	11. mapa de cores (indicação das cores predominantes no visual do nível).
+
+Além dos beat charts, o game designer deverá descrever onde e como o jogador 
+obterá novas habilidades, perícias, armas e colecionáveis que o levem ao 
+cumprimento do objetivo do jogo.
+
+
+=> Outputs:
+
+Um capítulo ou seção do GDD, contemplando a descrição do progresso do jogo.

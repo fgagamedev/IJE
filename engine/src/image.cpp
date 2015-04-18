@@ -27,6 +27,7 @@ Image::h() const
 {
 	return m_h;
 }
+
 void 
 Image::load_texture(SDL_Renderer *renderer, string path) throw (Exception)
 {

@@ -8,34 +8,38 @@
 #include "input.h"
 #include <stddef.h>
 
-using namespace std;
+Input* 
+Input::instance = NULL;
 
-Input* Input::instance = NULL;
-
-Input* Input::Instance()
+Input* 
+Input::Instance()
 {
     if(!instance)
         instance = new Input;
     return instance;
 }
 
-void Input::quitGame()
+void 
+Input::quitGame()
 {
     m_done = true;
 }
 
-bool Input::hasQuit()
+bool 
+Input::hasQuit()
 {
     return m_done;
 }
 
-void Input::onKeyDown(SDL_Event &event)
+void 
+Input::onKeyDown(SDL_Event &event)
 {
     if(event.key.keysym.sym == SDLK_ESCAPE)
         quitGame();
 }
 
-void Input::handle(SDL_Event &event)
+void 
+Input::handle(SDL_Event &event)
 {
     switch(event.type)
     {

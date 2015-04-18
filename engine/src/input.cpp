@@ -35,10 +35,6 @@ void Input::onKeyDown(SDL_Event &event)
         quitGame();
 }
 
-void Input::onKeyUp(SDL_Event &event)
-{
-}
-
 void Input::handle(SDL_Event &event)
 {
     switch(event.type)
@@ -49,10 +45,6 @@ void Input::handle(SDL_Event &event)
         case SDL_KEYDOWN:
             onKeyDown(event);
             break;
-        case SDL_KEYUP:
-            onKeyUp(event);
-            break;
-
         default:
             break;
     }

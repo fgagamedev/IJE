@@ -20,12 +20,11 @@ public:
 
 private:
     Input(){};
-    Input(Input const&){};
-    Input& operator=(Input const&){};
+    Input(Input const&);
+    Input& operator=(Input const&);
     ~Input(){};
 
     void onKeyDown(SDL_Event &event);
-    void onKeyUp(SDL_Event &event);
     bool m_done = false;
 
     static Input * instance;

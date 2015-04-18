@@ -1,5 +1,4 @@
 #include "image.h"
-#include "exception.h"
 
 Image::Image()
 	: m_texture(nullptr), m_w(0), m_h(0)

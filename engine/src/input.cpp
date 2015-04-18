@@ -6,38 +6,40 @@
  * Licença: LGPL. Sem copyright.
  */
 #include "input.h"
-#include <iostream>
+#include <stddef.h>
 
 using namespace std;
 
-Input * Input::instance = NULL;
+Input* Input::instance = NULL;
 
-static Input * Instance()
+Input* Input::Instance()
 {
     if(!instance)
-        instance = new Input();
+        instance = new Input;
     return instance;
 }
 
-Input::quitGame()
+void Input::quitGame()
 {
+    m_done = true;
 }
 
-Input::onKeyDown(SDL_Event &event)
+bool Input::hasQuit()
+{
+    return m_done;
+}
+
+void Input::onKeyDown(SDL_Event &event)
 {
     if(event.key.keysym.sym == SDLK_ESCAPE)
         quitGame();
 }
 
-Input::onKeyUp(SDL_Event &event)
+void Input::onKeyUp(SDL_Event &event)
 {
 }
 
-bool Input::isKeyDown(SDL_Scancode key)
-{
-}
-
-Input::handle(SDL_Event &event)
+void Input::handle(SDL_Event &event)
 {
     switch(event.type)
     {

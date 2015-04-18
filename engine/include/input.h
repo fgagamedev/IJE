@@ -12,23 +12,23 @@
 
 class Input
 {
-    static Input * instance;
-
 public:
+    static Input* Instance();
     void quitGame();
     void handle(SDL_Event &event);
-    bool isKeyDown(SDL_Scancode key);
+    bool hasQuit();
 
 private:
-    Input();
-    ~Input();
-
-    const Uint8 keystate;
+    Input(){};
+    Input(Input const&){};
+    Input& operator=(Input const&){};
+    ~Input(){};
 
     void onKeyDown(SDL_Event &event);
     void onKeyUp(SDL_Event &event);
-};
+    bool m_done = false;
 
-typedef Input InputSingleton;
+    static Input * instance;
+};
 
 #endif

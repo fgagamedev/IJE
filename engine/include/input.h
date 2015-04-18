@@ -1,5 +1,5 @@
 /*
- * Classe que representa a área da janela a ser desenhada.
+ * Classe que representa o input a ser utilizado pelo usuário.
  *
  * Autor: Carlos Oliveira
  * Data: 17/04/2015
@@ -8,19 +8,27 @@
 #ifndef INPUT_H
 #define INPUT_H
 
+#include <SDL2/SDL.h>
+
 class Input
 {
     static Input * instance;
-public:
 
-    static Input * Instance()
-    {
-        if(instance == 0)
-        {
-            instance = new Input();
-        }
-        return instance;
-    }
-}
+public:
+    void quitGame();
+    void handle(SDL_Event &event);
+    bool isKeyDown(SDL_Scancode key);
+
+private:
+    Input();
+    ~Input();
+
+    const Uint8 keystate;
+
+    void onKeyDown(SDL_Event &event);
+    void onKeyUp(SDL_Event &event);
+};
+
+typedef Input InputSingleton;
 
 #endif

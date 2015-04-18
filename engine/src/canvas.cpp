@@ -250,3 +250,30 @@ Canvas::load_image(const string path, const Rect rect) const throw (Exception)
         throw Exception(SDL_GetError());
     }
 }
+
+void 
+Canvas::load_font(const string path, unsigned int font_size) throw (Exception)
+{
+	m_font = Font_Manager::Instance();
+	m_font->load_font(path,font_size);		
+}
+
+void 
+Canvas::draw_message(const string message, const Rect rect, const Color& color) const throw (Exception)
+{
+	m_font->make_message(m_renderer, message,color);
+
+    SDL_Rect frame;
+    frame.x = rect.x();
+    frame.y = rect.y();
+    frame.w = rect.w(); 
+    frame.h = rect.h(); 
+
+    int rc = SDL_RenderCopy(m_renderer, m_font->message(), nullptr, &frame);
+
+    if(rc)
+    {
+        throw Exception(SDL_GetError());
+    }
+}
+

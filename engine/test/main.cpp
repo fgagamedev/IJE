@@ -105,6 +105,14 @@ private:
                         env->canvas->draw(line, color);
                         break;
 
+					case SDLK_k:
+                        rect.set(rand() % m_w, rand() % m_h);
+                        rect.set_dimensions(rand() % m_w, rand() % m_h);
+						color.set(rand() % 255, rand() % 255, rand() % 255);
+
+						env->canvas->load_font("res/fonts/FLATS.ttf",75);	
+						env->canvas->draw_message( "My first Message",rect, color);
+						break;
 
                     case SDLK_f:
                         m_fullscreen = not m_fullscreen;

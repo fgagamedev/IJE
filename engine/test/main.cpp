@@ -14,6 +14,7 @@
 #include "line.h"
 #include "rect.h"
 #include "circle.h"
+#include "input.h"
 
 #include "environment.h"
 
@@ -54,6 +55,13 @@ private:
             Circle circle;
             Color color;
 
+            Input::Instance()->handle(event);
+            m_done = Input::Instance()->hasQuit();
+
+            /*
+             * From now on, it's advised to move input
+             * code to input handler class
+             */
             if (event.type == SDL_KEYDOWN)
             {
                 switch (event.key.keysym.sym)

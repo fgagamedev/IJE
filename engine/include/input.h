@@ -19,13 +19,13 @@ public:
     bool hasQuit();
 
 private:
-    Input(){};
+    Input(bool done=false);
     Input(Input const&);
     Input& operator=(Input const&);
     ~Input(){};
 
     void onKeyDown(SDL_Event &event);
-    bool m_done = false;
+    bool m_done;
 
     static Input * instance;
 };

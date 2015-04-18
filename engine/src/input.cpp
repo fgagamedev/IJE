@@ -1,4 +1,4 @@
-/*
+	/*
  * Implementação da classe que representa o input a ser utilizado pelo usuário.
  *
  * Autor: Carlos Oliveira
@@ -36,6 +36,12 @@ Input::onKeyDown(SDL_Event &event)
 {
     if(event.key.keysym.sym == SDLK_ESCAPE)
         quitGame();
+}
+
+
+Input::Input(bool done)
+	: m_done(done)
+{
 }
 
 void 

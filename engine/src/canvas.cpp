@@ -29,7 +29,7 @@ void
 Canvas::set_color(const Color& color)
 {
     m_color = color;
-    SDL_SetRenderDrawColor(m_renderer, color.r(), color.g(), color.b(), 255);
+    SDL_SetRenderDrawColor(m_renderer, color.r(), color.g(), color.b(), color.a());
 }
 
 void

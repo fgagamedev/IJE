@@ -12,7 +12,7 @@ AR = ar
 ARFLAGS = rcs
 CFLAGS = -W -Wall -pedantic -ansi -std=c++11 -MMD
 INCLUDES = -Iinclude `sdl2-config --cflags`
-LIBS = `sdl2-config --libs` -lSDL2_image
+LIBS = `sdl2-config --libs` -lSDL2_image -lSDL2_ttf
 
 TARGET = $(LIB_DIR)/$(NAME)
 

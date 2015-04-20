@@ -14,6 +14,7 @@
 #include "line.h"
 #include "rect.h"
 #include "circle.h"
+#include "input.h"
 
 #include "environment.h"
 
@@ -54,6 +55,13 @@ private:
             Circle circle;
             Color color;
 
+            Input::Instance()->handle(event);
+            m_done = Input::Instance()->hasQuit();
+
+            /*
+             * From now on, it's advised to move input
+             * code to input handler class
+             */
             if (event.type == SDL_KEYDOWN)
             {
                 switch (event.key.keysym.sym)
@@ -97,6 +105,14 @@ private:
                         env->canvas->draw(line, color);
                         break;
 
+					case SDLK_k:
+                        rect.set(rand() % m_w, rand() % m_h);
+                        rect.set_dimensions(rand() % m_w, rand() % m_h);
+						color.set(rand() % 255, rand() % 255, rand() % 255);
+
+						env->canvas->load_font("res/fonts/FLATS.ttf",75);	
+						env->canvas->draw_message( "My first Message",rect, color);
+						break;
 
                     case SDLK_f:
                         m_fullscreen = not m_fullscreen;

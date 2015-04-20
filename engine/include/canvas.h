@@ -12,6 +12,7 @@
 
 #include "exception.h"
 #include "color.h"
+#include "font.h"
 
 using std::string;
 
@@ -52,8 +53,12 @@ public:
 
     void load_image(const string path, const Rect rect) const throw (Exception);
 
+    void load_font(const string path, unsigned int font_size = 28) throw (Exception);
+    void draw_message(const string message, const Rect rect, const Color& color = Color::YELLOW) const throw (Exception);
+
 private:
     SDL_Renderer *m_renderer;
+    Font_Manager *m_font; 
     Color m_color;
 
     void draw_circle_points(int cx, int cy, int x, int y) const;

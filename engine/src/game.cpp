@@ -8,6 +8,9 @@
 #include "game.h"
 #include "video.h"
 #include "environment.h"
+#include "input.h"
+
+using namespace std;
 
 Game::Game()
     : m_done(false)
@@ -54,10 +57,8 @@ Game::process_input()
 
     while (SDL_PollEvent(&event))
     {
-        if (event.type == SDL_QUIT)
-        {
-            m_done = true;
-        }
+        Input::Instance()->handle(event);
+        m_done = Input::Instance()->hasQuit();
     }
 }
 

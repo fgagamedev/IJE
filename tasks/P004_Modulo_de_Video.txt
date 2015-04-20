@@ -42,4 +42,3 @@ representar os novos elementos que forem inseridos no código.
 Os códigos que implementem as rotinas gráficas de baixo nível, além da
 exibição de uma cena chave do jogo, composta apenas por _pixels_ e 
 por primitivas geométricas.
-O

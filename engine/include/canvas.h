@@ -20,6 +20,7 @@ class Point;
 class Line;
 class Rect;
 class Circle;
+class Image;
 
 class Canvas
 {
@@ -45,6 +46,8 @@ public:
     void draw(const Circle& circle) const;
     void draw(const Circle& circle, const Color& color);
 
+    void draw(const Image *image, int x = 0, int y = 0) const;
+
     void fill(const Rect& rect) const;
     void fill(const Rect& rect, const Color& color);
 
@@ -55,6 +58,8 @@ public:
 
     void load_font(const string path, unsigned int font_size = 28) throw (Exception);
     void draw_message(const string message, const Rect rect, const Color& color = Color::YELLOW) const throw (Exception);
+
+    SDL_Renderer * renderer() const;
 
 private:
     SDL_Renderer *m_renderer;

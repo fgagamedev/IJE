@@ -231,7 +231,7 @@ Canvas::fill_circle_points(int cx, int cy, int x, int y) const
     draw(Line(Point(cx - y, cy + x), Point(cx - y, cy - x)));
 }
 
-void 
+void
 Canvas::load_image(const string path, const Rect rect) const throw (Exception)
 {
     Image image;
@@ -240,12 +240,12 @@ Canvas::load_image(const string path, const Rect rect) const throw (Exception)
     SDL_Rect frame;
     frame.x = rect.x();
     frame.y = rect.y();
-    frame.w = rect.w(); 
-    frame.h = rect.h(); 
+    frame.w = rect.w();
+    frame.h = rect.h();
 
     int rc = SDL_RenderCopy(m_renderer, image.texture(), nullptr, &frame);
 
-    if(rc)
+    if (rc)
     {
         throw Exception(SDL_GetError());
     }

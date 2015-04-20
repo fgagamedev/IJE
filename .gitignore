@@ -6,3 +6,4 @@ prog
 *.d
 lib
 engine/test/test
+*.komodoproject

@@ -1,3 +1,10 @@
+/*
+ * Classe que representa uma imagem.
+ *
+ * Autor: Jefferson Xavier
+ * Data: 16/04/2015
+ * Licença: LGPL. Sem copyright.
+ */
 #ifndef IMAGE_H
 #define IMAGE_H
 
@@ -8,19 +15,21 @@
 
 using std::string;
 
-class Image {
+class Image
+{
 public:
-	Image();
-	~Image();
+    Image();
+    ~Image();
 
-	int w() const;
+    int w() const;
     int h() const;
-	void load_texture(SDL_Renderer *renderer, string path = "") throw (Exception);
-	SDL_Texture * texture() const;
+
+    void load_texture(SDL_Renderer *renderer, string path = "") throw (Exception);
+    SDL_Texture * texture() const;
 
 private:
-	SDL_Texture *m_texture;
-	int m_w, m_h;
+    SDL_Texture *m_texture;
+    int m_w, m_h;
 };
 
 #endif

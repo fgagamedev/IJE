@@ -7,15 +7,15 @@
  */
 #include "color.h"
 
-Color::Color(unsigned char r, unsigned char g, unsigned char b)
-    : m_r(r), m_g(g), m_b(b)
+Color::Color(unsigned char r, unsigned char g, unsigned char b, unsigned char a)
+    : m_r(r), m_g(g), m_b(b), m_a(a)
 {
 }
 
 bool
 Color::operator!=(const Color& color) const
 {
-    return m_r != color.m_r or m_b != color.m_b or m_g != color.m_g;
+    return m_r != color.m_r or m_b != color.m_b or m_g != color.m_g or m_a != color.m_a;
 }
 
 unsigned char
@@ -34,6 +34,12 @@ unsigned char
 Color::b() const
 {
     return m_b;
+}
+
+unsigned char
+Color::a() const
+{
+    return m_a;
 }
 
 void
@@ -55,11 +61,18 @@ Color::set_b(unsigned char b)
 }
 
 void
-Color::set(unsigned char r, unsigned char g, unsigned char b)
+Color::set_a(unsigned char a)
+{
+    m_b = a;
+}
+
+void
+Color::set(unsigned char r, unsigned char g, unsigned char b, unsigned char a)
 {
     m_r = r;
     m_b = b;
     m_g = g;
+    m_a = a;
 }
 
 Color Color::WHITE {255, 255, 255};

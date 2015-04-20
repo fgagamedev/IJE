@@ -18,16 +18,18 @@ using std::string;
 class Image
 {
 public:
-    Image();
     ~Image();
 
     int w() const;
     int h() const;
 
-    void load_texture(SDL_Renderer *renderer, string path = "") throw (Exception);
+    static Image * fromFile(const string& path) throw (Exception);
+
     SDL_Texture * texture() const;
 
 private:
+    Image(SDL_Texture *texture, int w, int h);
+
     SDL_Texture *m_texture;
     int m_w, m_h;
 };

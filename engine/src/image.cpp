@@ -7,14 +7,19 @@
  */
 #include "image.h"
 #include "exception.h"
+#include "environment.h"
 
-Image::Image()
-    : m_texture(nullptr), m_w(0), m_h(0)
+Image::Image(SDL_Texture *texture, int w, int h)
+    : m_texture(texture), m_w(w), m_h(h)
 {
 }
 
 Image::~Image()
 {
+    if (m_texture)
+    {
+        SDL_DestroyTexture(m_texture);
+    }
 }
 
 SDL_Texture *
@@ -35,20 +40,34 @@ Image::h() const
     return m_h;
 }
 
-void
-Image::load_texture(SDL_Renderer *renderer, string path) throw (Exception)
+Image *
+Image::fromFile(const string& path) throw (Exception)
 {
-    m_texture = IMG_LoadTexture(renderer, path.c_str());
+    Environment *env = Environment::get_instance();
+    SDL_Renderer *renderer = env->canvas->renderer();
+    SDL_Texture *texture = IMG_LoadTexture(renderer, path.c_str());
 
-    if (m_texture == nullptr)
+    if (texture == nullptr)
     {
         throw Exception(SDL_GetError());
     }
 
-    int rc = SDL_QueryTexture(m_texture, nullptr, nullptr, &m_w, &m_h);
+    int w, h;
+
+    int rc = SDL_QueryTexture(texture, nullptr, nullptr, &w, &h);
 
     if (rc)
     {
         throw Exception(SDL_GetError());
     }
+
+    Image *image = new Image(texture, w, h);
+
+
+    if (not image)
+    {
+        throw Exception("Out of memory for a new Image");
+    }
+
+    return image;
 }

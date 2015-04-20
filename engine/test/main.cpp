@@ -14,6 +14,7 @@
 #include "line.h"
 #include "rect.h"
 #include "circle.h"
+#include "image.h"
 
 #include "environment.h"
 
@@ -28,12 +29,14 @@ public:
         env = Environment::get_instance();
         env->canvas->clear();
         srand(time(NULL));
+        m_image = Image::fromFile("res/images/image.png");
     }
 
 private:
     bool m_fullscreen;
     int m_w, m_h;
     Environment *env;
+    Image *m_image;
 
     void process_input()
     {
@@ -104,10 +107,9 @@ private:
                         break;
 
                     case SDLK_i:
-                        rect.set(0, 0);
-                        rect.set_dimensions(m_w, m_h);
-                        env->canvas->load_image("res/images/image.png", rect);
+                        env->canvas->draw(m_image);
                         break;
+
                     case SDLK_UP:
                         m_w += 100;
                         m_h += 100;

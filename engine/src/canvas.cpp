@@ -232,21 +232,19 @@ Canvas::fill_circle_points(int cx, int cy, int x, int y) const
 }
 
 void
-Canvas::load_image(const string path, const Rect rect) const throw (Exception)
+Canvas::draw(const Image *image, int x, int y) const
 {
-    Image image;
-    image.load_texture(m_renderer, path);
-
     SDL_Rect frame;
-    frame.x = rect.x();
-    frame.y = rect.y();
-    frame.w = rect.w();
-    frame.h = rect.h();
+    frame.x = x;
+    frame.y = y;
+    frame.w = image->w();
+    frame.h = image->h();
 
-    int rc = SDL_RenderCopy(m_renderer, image.texture(), nullptr, &frame);
+    SDL_RenderCopy(m_renderer, image->texture(), nullptr, &frame);
+}
 
-    if (rc)
-    {
-        throw Exception(SDL_GetError());
-    }
+SDL_Renderer *
+Canvas::renderer() const
+{
+    return m_renderer;
 }

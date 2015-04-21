@@ -8,29 +8,33 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <string>
 #include "exception.h"
+#include "level.h"
+
+#include <string>
 
 using std::string;
 
 class Game
 {
 public:
-    Game();
-    ~Game();
+    Game(const string& id);
+    virtual ~Game();
 
     void init(const string& title, int w = 800, int h = 600) throw (Exception);
     void run();
 
 protected:
+    string m_id;
+    Level *m_level;
     bool m_done;
 
-    void update_timestep();
-    virtual void process_input();
-    void runIA();
-    void runPhysics();
-    void update();
-    virtual void draw();
+    virtual Level * load_level(const string& id);
+
+    unsigned long update_timestep() const;
+    void process_input();
+    void update_screen();
+    void delay(unsigned long ms);
 };
 
 #endif

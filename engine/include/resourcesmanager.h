@@ -24,8 +24,6 @@ class ResourcesManager
     friend ostream& operator<<(ostream& os, const ResourcesManager& rm);
 
 public:
-    ~ResourcesManager();
-
     shared_ptr<Resource> get(Resource::Type type, const string& id)
         throw (Exception);
 

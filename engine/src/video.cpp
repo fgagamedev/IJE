@@ -56,7 +56,7 @@ Video::init() throw (Exception)
         throw Exception(SDL_GetError());
     }
 
-    m_canvas = new Canvas(m_renderer);
+    m_canvas = new Canvas(m_renderer, m_w, m_h);
 
     if (not m_canvas)
     {
@@ -79,6 +79,8 @@ Video::set_resolution(int w, int h) throw (Exception)
         {
             throw Exception(SDL_GetError());
         }
+
+        m_canvas->set_resolution(w, h);
     }
 }
 

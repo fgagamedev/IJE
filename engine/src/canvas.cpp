@@ -13,10 +13,22 @@
 #include "circle.h"
 #include "image.h"
 
-Canvas::Canvas(SDL_Renderer *renderer)
-    : m_renderer(renderer)
+Canvas::Canvas(SDL_Renderer *renderer, int w, int h)
+    : m_renderer(renderer), m_w(w), m_h(h)
 {
     set_color(Color::WHITE);
+}
+
+int
+Canvas::w() const
+{
+    return m_w;
+}
+
+int
+Canvas::h() const
+{
+    return m_h;
 }
 
 const Color&
@@ -30,6 +42,13 @@ Canvas::set_color(const Color& color)
 {
     m_color = color;
     SDL_SetRenderDrawColor(m_renderer, color.r(), color.g(), color.b(), color.a());
+}
+
+void
+Canvas::set_resolution(int w, int h)
+{
+    m_w = w;
+    m_h = h;
 }
 
 void
@@ -234,13 +253,10 @@ Canvas::fill_circle_points(int cx, int cy, int x, int y) const
 void
 Canvas::draw(const Image *image, int x, int y) const
 {
-    SDL_Rect frame;
-    frame.x = x;
-    frame.y = y;
-    frame.w = image->w();
-    frame.h = image->h();
+    SDL_Rect clip {0, 0, image->w(), image->h() };
+    SDL_Rect dest {x, y, image->w(), image->h() };
 
-    SDL_RenderCopy(m_renderer, image->texture(), nullptr, &frame);
+    SDL_RenderCopy(m_renderer, image->texture(), &clip, &dest);
 }
 
 SDL_Renderer *
@@ -249,27 +265,28 @@ Canvas::renderer() const
     return m_renderer;
 }
 
-void 
+void
 Canvas::load_font(const string path, unsigned int font_size) throw (Exception)
 {
-	m_font = Font_Manager::Instance();
-	m_font->load_font(path,font_size);		
+    m_font = Font_Manager::Instance();
+    m_font->load_font(path, font_size);
 }
 
-void 
-Canvas::draw_message(const string message, const Rect rect, const Color& color) const throw (Exception)
+void
+Canvas::draw_message(const string message, const Rect rect, const Color& color)
+    const throw (Exception)
 {
-	m_font->make_message(m_renderer, message,color);
+    m_font->make_message(m_renderer, message, color);
 
     SDL_Rect frame;
     frame.x = rect.x();
     frame.y = rect.y();
-    frame.w = rect.w(); 
-    frame.h = rect.h(); 
+    frame.w = rect.w();
+    frame.h = rect.h();
 
     int rc = SDL_RenderCopy(m_renderer, m_font->message(), nullptr, &frame);
 
-    if(rc)
+    if (rc)
     {
         throw Exception(SDL_GetError());
     }

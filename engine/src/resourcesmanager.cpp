@@ -26,10 +26,6 @@ operator<<(ostream& os, const ResourcesManager& rm)
     return os;
 }
 
-ResourcesManager::~ResourcesManager()
-{
-}
-
 shared_ptr<Resource>
 ResourcesManager::get(Resource::Type type, const string& id) throw (Exception)
 {

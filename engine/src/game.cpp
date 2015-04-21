@@ -10,15 +10,22 @@
 #include "environment.h"
 #include "input.h"
 
+#include <SDL2/SDL.h>
+
 using namespace std;
 
-Game::Game()
-    : m_done(false)
+Game::Game(const string& id)
+    : m_id(id), m_level(nullptr), m_done(false)
 {
 }
 
 Game::~Game()
 {
+    if (m_level)
+    {
+        delete m_level;
+    }
+
     Environment::release_instance();
 }
 
@@ -29,25 +36,37 @@ Game::init(const string& title, int w, int h) throw (Exception)
 
     env->video->set_resolution(w, h);
     env->video->set_window_name(title);
+
+    m_level = load_level(m_id);
 }
 
 void
 Game::run()
 {
-    while (not m_done)
+    while (m_level and not m_done)
     {
-        update_timestep();
+        unsigned long now = update_timestep();
         process_input();
-        runIA();
-        runPhysics();
-        update();
-        draw();
+
+        m_level->update(now);
+        m_level->draw();
+
+        update_screen();
+        delay(1);
+
+        if (m_level->is_done())
+        {
+            string next = m_level->next();
+            delete m_level;
+            m_level = load_level(next);
+        }
     }
 }
 
-void
-Game::update_timestep()
+unsigned long
+Game::update_timestep() const
 {
+    return SDL_GetTicks();
 }
 
 void
@@ -63,21 +82,20 @@ Game::process_input()
 }
 
 void
-Game::runIA()
+Game::update_screen()
 {
+    Environment *env = Environment::get_instance();
+    env->canvas->update();
 }
 
 void
-Game::runPhysics()
+Game::delay(unsigned long ms)
 {
+    SDL_Delay(ms);
 }
 
-void
-Game::update()
+Level *
+Game::load_level(const string&)
 {
-}
-
-void
-Game::draw()
-{
+    return nullptr;
 }

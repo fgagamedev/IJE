@@ -8,6 +8,7 @@
 #include <iostream>
 #include <ctime>
 #include <SDL2/SDL.h>
+#include <vector>
 
 #include "game.h"
 #include "point.h"
@@ -16,7 +17,7 @@
 #include "circle.h"
 #include "input.h"
 #include "image.h"
-
+#include "resourcesmanager.h"
 #include "environment.h"
 
 using namespace std;
@@ -30,13 +31,18 @@ public:
         env = Environment::get_instance();
         env->canvas->clear();
         srand(time(NULL));
-        m_image = Image::fromFile("res/images/image.png");
+
     }
+
+    virtual ~Test() {}
 
 private:
     bool m_fullscreen;
     int m_w, m_h;
+    int fig, x, y;
+    string path;
     Environment *env;
+    vector< shared_ptr<Resource> > m_resources;
     Image *m_image;
 
     void process_input()
@@ -108,14 +114,14 @@ private:
                         env->canvas->draw(line, color);
                         break;
 
-					case SDLK_k:
+                    case SDLK_k:
                         rect.set(rand() % m_w, rand() % m_h);
                         rect.set_dimensions(rand() % m_w, rand() % m_h);
-						color.set(rand() % 255, rand() % 255, rand() % 255);
-
-						env->canvas->load_font("res/fonts/FLATS.ttf",75);	
-						env->canvas->draw_message( "My first Message",rect, color);
-						break;
+                        color.set(rand() % 255, rand() % 255, rand() % 255);
+                        env->canvas->load_font("res/fonts/FLATS.ttf", 75);
+                        env->canvas->draw_message( "My first Message", rect,
+                            color);
+                        break;
 
                     case SDLK_f:
                         m_fullscreen = not m_fullscreen;
@@ -123,7 +129,35 @@ private:
                         break;
 
                     case SDLK_i:
-                        env->canvas->draw(m_image);
+                        fig = random() % 3;
+                        path = "res/images/";
+
+                        switch (fig)
+                        {
+                            case 0:
+                                path += "hexagon.png";
+                                break;
+
+                            case 1:
+                                path += "spiral.png";
+                                break;
+
+                            case 2:
+                                path += "star.png";
+                                break;
+                        }
+
+                        cout << "Antes: " << *env->resources_manager << endl;
+                        {
+                            shared_ptr<Resource> resource =
+                            env->resources_manager->get(Resource::IMAGE, path);
+                            m_image = dynamic_cast<Image *>(resource.get());
+                            m_resources.push_back(resource);
+                        }
+                        cout << "\nDepois: " << *env->resources_manager << endl;
+                        x = rand() % m_w;
+                        y = rand() % m_h;
+                        env->canvas->draw(m_image, x, y);
                         break;
 
                     case SDLK_UP:
@@ -145,16 +179,23 @@ private:
 
 int main()
 {
+    Test *test = nullptr;
+
     try
     {
-        Test test;
-        test.init("Engine Test", 640, 480);
-        test.run();
+        test = new Test();
+        test->init("Engine Test", 640, 480);
+        test->run();
     } catch (Exception ex)
     {
         cerr << ex.message() << endl;
         return -1;
     }
 
+    cout << "Antes do destrutor: " << *Environment::get_instance()->resources_manager << endl;
+    
+    delete test;
+
+    cout << "Depois do destrutor: " << *Environment::get_instance()->resources_manager << endl;
     return 0;
 }

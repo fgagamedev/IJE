@@ -17,6 +17,7 @@ Environment::Environment()
 
 Environment::~Environment()
 {
+    delete resources_manager;
     delete video;
 }
 
@@ -57,4 +58,11 @@ Environment::init() throw (Exception)
 
     video->init();
     canvas = video->canvas();
+
+    resources_manager = new ResourcesManager();
+
+    if (not resources_manager)
+    {
+        throw Exception("Out of memory for a new ResourcesManager");
+    }
 }

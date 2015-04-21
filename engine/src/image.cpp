@@ -9,8 +9,8 @@
 #include "exception.h"
 #include "environment.h"
 
-Image::Image(SDL_Texture *texture, int w, int h)
-    : m_texture(texture), m_w(w), m_h(h)
+Image::Image(SDL_Texture *texture, const string& id, int w, int h)
+    : Resource(id, Resource::IMAGE), m_texture(texture), m_w(w), m_h(h)
 {
 }
 
@@ -41,7 +41,7 @@ Image::h() const
 }
 
 Image *
-Image::fromFile(const string& path) throw (Exception)
+Image::from_file(const string& path) throw (Exception)
 {
     Environment *env = Environment::get_instance();
     SDL_Renderer *renderer = env->canvas->renderer();
@@ -61,7 +61,7 @@ Image::fromFile(const string& path) throw (Exception)
         throw Exception(SDL_GetError());
     }
 
-    Image *image = new Image(texture, w, h);
+    Image *image = new Image(texture, path, w, h);
 
 
     if (not image)

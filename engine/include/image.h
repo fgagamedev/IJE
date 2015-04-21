@@ -11,11 +11,13 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <string>
+
 #include "exception.h"
+#include "resource.h"
 
 using std::string;
 
-class Image
+class Image : public Resource
 {
 public:
     ~Image();
@@ -23,12 +25,12 @@ public:
     int w() const;
     int h() const;
 
-    static Image * fromFile(const string& path) throw (Exception);
+    static Image * from_file(const string& path) throw (Exception);
 
     SDL_Texture * texture() const;
 
 private:
-    Image(SDL_Texture *texture, int w, int h);
+    Image(SDL_Texture *texture, const string& id, int w, int h);
 
     SDL_Texture *m_texture;
     int m_w, m_h;

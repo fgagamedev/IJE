@@ -11,6 +11,7 @@
 #include "exception.h"
 #include "video.h"
 #include "canvas.h"
+#include "resourcesmanager.h"
 
 class Environment
 {
@@ -22,6 +23,7 @@ public:
 
     Video *video;
     Canvas *canvas;
+    ResourcesManager *resources_manager;
 
 private:
     Environment();

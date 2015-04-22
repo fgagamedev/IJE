@@ -21,8 +21,8 @@ public:
     Game(const string& id);
     virtual ~Game();
 
-    void init(const string& title, int w = 800, int h = 600) throw (Exception);
-    void run();
+    virtual void init(const string& title, int w = 800, int h = 600) throw (Exception);
+    virtual void run();
 
 protected:
     string m_id;

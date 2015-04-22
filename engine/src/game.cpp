@@ -73,11 +73,12 @@ void
 Game::process_input()
 {
     SDL_Event event;
-
+    Input * input = Input::get_instance();
+    
     while (SDL_PollEvent(&event))
     {
-        Input::Instance()->handle(event);
-        m_done = Input::Instance()->hasQuit();
+        input->handle(event);
+        m_done = input->is_quit();
     }
 }
 

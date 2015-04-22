@@ -9,25 +9,22 @@
 #define INPUT_H
 
 #include <SDL2/SDL.h>
+#include "exception.h"
 
 class Input
 {
 public:
-    static Input* Instance();
-    void quitGame();
+    static Input * get_instance() throw (Exception);
+    void quit_game();
     void handle(SDL_Event &event);
-    bool hasQuit();
+    bool is_quit();
 
-private:
-    Input(bool done=false);
-    Input(Input const&);
-    Input& operator=(Input const&);
-    ~Input(){};
+protected:
+    Input();
 
-    void onKeyDown(SDL_Event &event);
+    virtual void on_key_down(SDL_Event &event);
+    virtual void on_mouse_button_down();
     bool m_done;
-
-    static Input * instance;
 };
 
 #endif

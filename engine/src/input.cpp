@@ -8,39 +8,50 @@
 #include "input.h"
 #include <stddef.h>
 
-Input* 
-Input::instance = NULL;
+static Input * input = nullptr;
+
+Input::Input()
+    : m_done(false)
+{
+}
 
 Input* 
-Input::Instance()
+Input::get_instance() throw (Exception)
 {
-    if(!instance)
-        instance = new Input;
-    return instance;
+    if (not input)
+    {
+        input = new Input();
+
+        if (not input)
+        {
+            throw Exception("Out of memory for a new Input");
+        }
+    }
+
+    return input;
 }
 
 void 
-Input::quitGame()
+Input::quit_game()
 {
     m_done = true;
 }
 
 bool 
-Input::hasQuit()
+Input::is_quit()
 {
     return m_done;
 }
 
 void 
-Input::onKeyDown(SDL_Event &event)
+Input::on_key_down(SDL_Event &event)
 {
     if(event.key.keysym.sym == SDLK_ESCAPE)
-        quitGame();
+        quit_game();
 }
 
-
-Input::Input(bool done)
-	: m_done(done)
+void 
+Input::on_mouse_button_down()
 {
 }
 
@@ -50,10 +61,13 @@ Input::handle(SDL_Event &event)
     switch(event.type)
     {
         case SDL_QUIT:
-            quitGame();
+            quit_game();
             break;
         case SDL_KEYDOWN:
-            onKeyDown(event);
+            on_key_down(event);
+            break;
+        case SDL_MOUSEBUTTONDOWN:
+            on_mouse_button_down();
             break;
         default:
             break;

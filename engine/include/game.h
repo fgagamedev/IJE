@@ -19,7 +19,7 @@ using std::string;
 
 class Environment;
 
-class Game : public SystemEventListener, KeyboardEventListener
+class Game : public SystemEventListener, public KeyboardEventListener
 {
 public:
     Game(const string& id);

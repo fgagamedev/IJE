@@ -11,6 +11,7 @@
 #include "exception.h"
 #include "level.h"
 #include "systemeventlistener.h"
+#include "keyboardeventlistener.h"
 
 #include <string>
 
@@ -18,7 +19,7 @@ using std::string;
 
 class Environment;
 
-class Game : public SystemEventListener
+class Game : public SystemEventListener, KeyboardEventListener
 {
 public:
     Game(const string& id);
@@ -28,6 +29,7 @@ public:
     void run();
 
     bool onSystemEvent(const SystemEvent& event);
+    bool onKeyboardEvent(const KeyboardEvent& event);
 
 protected:
     string m_id;

@@ -7,34 +7,55 @@
  */
 #include "eventsmanager.h"
 #include "systemevent.h"
+#include "keyboardevent.h"
 #include "mousebuttonevent.h"
 #include "systemeventlistener.h"
+#include "keyboardeventlistener.h"
 #include "mousebuttoneventlistener.h"
 
 #include <list>
 
 using std::list;
 
+#include <iostream>
+using namespace std;
+
 void
-EventsManager::register_listener(SystemEventListener *listener)
+EventsManager::register_system_event_listener(SystemEventListener *listener)
 {
     m_system_event_listeners.push_back(listener);
 }
 
 void
-EventsManager::register_listener(MouseButtonEventListener *listener)
+EventsManager::register_keyboard_event_listener(KeyboardEventListener *listener)
+{
+    m_keyboard_event_listeners.push_back(listener);
+}
+
+
+void
+EventsManager::register_mouse_button_event_listener(MouseButtonEventListener
+    *listener)
 {
     m_mouse_button_event_listeners.push_back(listener);
 }
 
 void
-EventsManager::unregister_listener(SystemEventListener *listener)
+EventsManager::unregister_system_event_listener(SystemEventListener *listener)
 {
     m_system_event_listeners.remove(listener);
 }
 
 void
-EventsManager::unregister_listener(MouseButtonEventListener *listener)
+EventsManager::unregister_keyboard_event_listener(KeyboardEventListener *listener)
+{
+    m_keyboard_event_listeners.remove(listener);
+}
+
+
+void
+EventsManager::unregister_mouse_button_event_listener(MouseButtonEventListener
+    *listener)
 {
     m_mouse_button_event_listeners.remove(listener);
 }
@@ -70,6 +91,22 @@ EventsManager::dispatch_pending_events()
             for (auto ls : m_mouse_button_event_listeners)
             {
                 if (ls->onMouseButtonEvent(me))
+                {
+                    break;
+                }
+            }
+
+            break;
+        }
+
+        case SDL_KEYDOWN:
+        case SDL_KEYUP:
+        {
+            KeyboardEvent ke = KeyboardEvent::from_SDL(e);
+
+            for (auto ls : m_keyboard_event_listeners)
+            {
+                if (ls->onKeyboardEvent(ke))
                 {
                     break;
                 }

@@ -9,6 +9,7 @@
 #include "video.h"
 #include "environment.h"
 #include "systemevent.h"
+#include "keyboardevent.h"
 
 #include <SDL2/SDL.h>
 
@@ -27,7 +28,8 @@ Game::~Game()
         delete m_level;
     }
 
-    env->events_manager->unregister_listener(this);
+    env->events_manager->unregister_system_event_listener(this);
+    env->events_manager->unregister_keyboard_event_listener(this);
     Environment::release_instance();
 }
 
@@ -36,7 +38,9 @@ Game::init(const string& title, int w, int h) throw (Exception)
 {
     env->video->set_resolution(w, h);
     env->video->set_window_name(title);
-    env->events_manager->register_listener(this);
+
+    env->events_manager->register_system_event_listener(this);
+    env->events_manager->register_keyboard_event_listener(this);
 
     m_level = load_level(m_id);
 }
@@ -74,6 +78,19 @@ bool
 Game::onSystemEvent(const SystemEvent& event)
 {
     if (event.type() == SystemEvent::QUIT)
+    {
+        m_done = true;
+        return true;
+    }
+
+    return false;
+}
+
+bool
+Game::onKeyboardEvent(const KeyboardEvent& event)
+{
+    if (event.state() == KeyboardEvent::PRESSED
+        and event.key() == KeyboardEvent::ESCAPE)
     {
         m_done = true;
         return true;

@@ -19,7 +19,7 @@ FrontEnd::FrontEnd(const string& next, const string& image,
     : Level("", next), m_image(nullptr), m_start(0), m_duration(duration)
 {
     Environment *env = Environment::get_instance();
-    env->events_manager->register_listener(this);
+    env->events_manager->register_mouse_button_event_listener(this);
 
     shared_ptr<Resource> r = env->resources_manager->get(Resource::IMAGE,
         image);
@@ -32,7 +32,7 @@ FrontEnd::FrontEnd(const string& next, const string& image,
 FrontEnd::~FrontEnd()
 {
     Environment *env = Environment::get_instance();
-    env->events_manager->unregister_listener(this);
+    env->events_manager->unregister_mouse_button_event_listener(this);
 }
 
 void

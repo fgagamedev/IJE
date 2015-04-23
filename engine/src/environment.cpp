@@ -17,6 +17,7 @@ Environment::Environment()
 
 Environment::~Environment()
 {
+    delete events_manager;
     delete resources_manager;
     delete video;
 }
@@ -65,4 +66,12 @@ Environment::init() throw (Exception)
     {
         throw Exception("Out of memory for a new ResourcesManager");
     }
+
+    events_manager = new EventsManager();
+
+    if (not events_manager)
+    {
+        throw Exception("Out of memory for a new EventsManager");
+    }
+
 }

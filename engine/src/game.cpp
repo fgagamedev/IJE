@@ -8,7 +8,7 @@
 #include "game.h"
 #include "video.h"
 #include "environment.h"
-#include "input.h"
+#include "systemevent.h"
 
 #include <SDL2/SDL.h>
 
@@ -17,6 +17,7 @@ using namespace std;
 Game::Game(const string& id)
     : m_id(id), m_level(nullptr), m_done(false)
 {
+    env = Environment::get_instance();
 }
 
 Game::~Game()
@@ -26,16 +27,16 @@ Game::~Game()
         delete m_level;
     }
 
+    env->events_manager->unregister_listener(this);
     Environment::release_instance();
 }
 
 void
 Game::init(const string& title, int w, int h) throw (Exception)
 {
-    Environment *env = Environment::get_instance();
-
     env->video->set_resolution(w, h);
     env->video->set_window_name(title);
+    env->events_manager->register_listener(this);
 
     m_level = load_level(m_id);
 }
@@ -46,7 +47,7 @@ Game::run()
     while (m_level and not m_done)
     {
         unsigned long now = update_timestep();
-        process_input();
+        env->events_manager->dispatch_pending_events();
 
         m_level->update(now);
         m_level->draw();
@@ -69,16 +70,16 @@ Game::update_timestep() const
     return SDL_GetTicks();
 }
 
-void
-Game::process_input()
+bool
+Game::onSystemEvent(const SystemEvent& event)
 {
-    SDL_Event event;
-
-    while (SDL_PollEvent(&event))
+    if (event.type() == SystemEvent::QUIT)
     {
-        Input::Instance()->handle(event);
-        m_done = Input::Instance()->hasQuit();
+        m_done = true;
+        return true;
     }
+
+    return false;
 }
 
 void

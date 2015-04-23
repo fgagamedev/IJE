@@ -9,14 +9,18 @@
 #define FRONT_END_H
 
 #include "level.h"
+#include "mousebuttoneventlistener.h"
 
 class Image;
 
-class FrontEnd : public Level
+class FrontEnd : public Level, MouseButtonEventListener
 {
 public:
     FrontEnd(const string& next, const string& image,
         unsigned long duration = 3000);
+    virtual ~FrontEnd();
+
+    bool onMouseButtonEvent(const MouseButtonEvent& event);
 
 private:
     Image *m_image;

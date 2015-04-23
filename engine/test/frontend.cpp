@@ -8,18 +8,31 @@
 #include "frontend.h"
 #include "environment.h"
 #include "image.h"
+#include "mousebuttonevent.h"
+#include "mousebuttoneventlistener.h"
+
+#include <iostream>
+using namespace std;
 
 FrontEnd::FrontEnd(const string& next, const string& image,
     unsigned long duration)
     : Level("", next), m_image(nullptr), m_start(0), m_duration(duration)
 {
     Environment *env = Environment::get_instance();
+    env->events_manager->register_listener(this);
+
     shared_ptr<Resource> r = env->resources_manager->get(Resource::IMAGE,
         image);
     m_image = dynamic_cast<Image *>(r.get());
 
     m_x = (env->canvas->w() - m_image->w())/2;
     m_y = (env->canvas->h() - m_image->h())/2;
+}
+
+FrontEnd::~FrontEnd()
+{
+    Environment *env = Environment::get_instance();
+    env->events_manager->unregister_listener(this);
 }
 
 void
@@ -42,4 +55,17 @@ FrontEnd::update_self(unsigned long elapsed)
     {
         m_done = true;
     }
+}
+
+bool
+FrontEnd::onMouseButtonEvent(const MouseButtonEvent& event)
+{
+    if (event.action() == MouseButtonEvent::DOWN)
+    {
+        cout << "x = " << event.x() << endl;
+        cout << "y = " << event.y() << endl;
+        return true;
+    }
+
+    return false;
 }

@@ -12,6 +12,7 @@
 #include "video.h"
 #include "canvas.h"
 #include "resourcesmanager.h"
+#include "eventsmanager.h"
 
 class Environment
 {
@@ -24,6 +25,7 @@ public:
     Video *video;
     Canvas *canvas;
     ResourcesManager *resources_manager;
+    EventsManager *events_manager;
 
 private:
     Environment();

@@ -251,9 +251,9 @@ Canvas::fill_circle_points(int cx, int cy, int x, int y) const
 }
 
 void
-Canvas::draw(const Image *image, int x, int y) const
+Canvas::draw(const Image *image, int x, int y, int w, int h) const
 {
-    SDL_Rect clip {0, 0, image->w(), image->h() };
+    SDL_Rect clip {w, h, image->w(), image->h() };
     SDL_Rect dest {x, y, image->w(), image->h() };
 
     SDL_RenderCopy(m_renderer, image->texture(), &clip, &dest);

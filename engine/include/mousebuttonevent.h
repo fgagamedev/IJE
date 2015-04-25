@@ -1,5 +1,5 @@
 /*
- * Classe que representa um evento de butão do mouse.
+ * Classe que representa um evento de botão do mouse.
  *
  * Autor: Edson Alves
  * Data: 22/04/2015

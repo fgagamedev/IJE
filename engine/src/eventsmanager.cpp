@@ -9,9 +9,11 @@
 #include "systemevent.h"
 #include "keyboardevent.h"
 #include "mousebuttonevent.h"
+#include "mousemotionevent.h"
 #include "systemeventlistener.h"
 #include "keyboardeventlistener.h"
 #include "mousebuttoneventlistener.h"
+#include "mousemotioneventlistener.h"
 
 #include <list>
 
@@ -32,12 +34,18 @@ EventsManager::register_keyboard_event_listener(KeyboardEventListener *listener)
     m_keyboard_event_listeners.push_back(listener);
 }
 
-
 void
 EventsManager::register_mouse_button_event_listener(MouseButtonEventListener
     *listener)
 {
     m_mouse_button_event_listeners.push_back(listener);
+}
+
+void
+EventsManager::register_mouse_motion_event_listener(MouseMotionEventListener
+    *listener)
+{
+    m_mouse_motion_event_listeners.push_back(listener);
 }
 
 void
@@ -52,12 +60,18 @@ EventsManager::unregister_keyboard_event_listener(KeyboardEventListener *listene
     m_keyboard_event_listeners.remove(listener);
 }
 
-
 void
 EventsManager::unregister_mouse_button_event_listener(MouseButtonEventListener
     *listener)
 {
     m_mouse_button_event_listeners.remove(listener);
+}
+
+void
+EventsManager::unregister_mouse_motion_event_listener(MouseMotionEventListener
+    *listener)
+{
+    m_mouse_motion_event_listeners.remove(listener);
 }
 
 void
@@ -82,6 +96,22 @@ EventsManager::dispatch_pending_events()
 
             break;
         }
+
+        case SDL_MOUSEMOTION:
+        {
+            MouseMotionEvent me = MouseMotionEvent::from_SDL(e);
+
+            for (auto ls : m_mouse_motion_event_listeners)
+            {
+                if (ls->onMouseMotionEvent(me))
+                {
+                    break;
+                }
+            }
+
+            break;
+        }
+
 
         case SDL_MOUSEBUTTONDOWN:
         case SDL_MOUSEBUTTONUP:

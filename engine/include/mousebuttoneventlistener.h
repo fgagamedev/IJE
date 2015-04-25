@@ -1,5 +1,5 @@
 /*
- * Classe que representa um ouvinte de eventos de butão de mouse.
+ * Classe que representa um ouvinte de eventos de botão de mouse.
  *
  * Autor: Edson Alves
  * Data: 22/04/2015

@@ -65,9 +65,13 @@ public:
 
     SDL_Renderer * renderer() const;
 
+    void set_scale(const double scale);
+    double scale() const;
+
 private:
     SDL_Renderer *m_renderer;
     int m_w, m_h;
+    double m_scale;
     Font_Manager *m_font;
     Color m_color;
 

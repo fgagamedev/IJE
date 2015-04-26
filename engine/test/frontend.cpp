@@ -10,6 +10,8 @@
 #include "image.h"
 #include "mousebuttonevent.h"
 #include "mousebuttoneventlistener.h"
+#include "joystickevent.h"
+#include "joystickeventlistener.h"
 
 #include <iostream>
 using namespace std;
@@ -20,6 +22,7 @@ FrontEnd::FrontEnd(const string& next, const string& image,
 {
     Environment *env = Environment::get_instance();
     env->events_manager->register_mouse_button_event_listener(this);
+    env->events_manager->register_joystick_event_listener(this);
 
     shared_ptr<Resource> r = env->resources_manager->get(Resource::IMAGE,
         image);
@@ -33,6 +36,7 @@ FrontEnd::~FrontEnd()
 {
     Environment *env = Environment::get_instance();
     env->events_manager->unregister_mouse_button_event_listener(this);
+    env->events_manager->unregister_joystick_event_listener(this);
 }
 
 void
@@ -64,6 +68,18 @@ FrontEnd::onMouseButtonEvent(const MouseButtonEvent& event)
     {
         cout << "x = " << event.x() << endl;
         cout << "y = " << event.y() << endl;
+        return true;
+    }
+
+    return false;
+}
+
+bool
+FrontEnd::onJoyStickEvent(const JoyStickEvent& event)
+{
+    if (event.button() == JoyStickEvent::DOWN)
+    {
+        cout << "JoyStick Down!" << endl;
         return true;
     }
 

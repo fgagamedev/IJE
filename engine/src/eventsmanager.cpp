@@ -9,9 +9,11 @@
 #include "systemevent.h"
 #include "keyboardevent.h"
 #include "mousebuttonevent.h"
+#include "joystickevent.h"
 #include "systemeventlistener.h"
 #include "keyboardeventlistener.h"
 #include "mousebuttoneventlistener.h"
+#include "joystickeventlistener.h"
 
 #include <list>
 
@@ -41,6 +43,13 @@ EventsManager::register_mouse_button_event_listener(MouseButtonEventListener
 }
 
 void
+EventsManager::register_joystick_event_listener(JoyStickEventListener
+    *listener)
+{
+    m_joystick_event_listeners.push_back(listener);
+}
+
+void
 EventsManager::unregister_system_event_listener(SystemEventListener *listener)
 {
     m_system_event_listeners.remove(listener);
@@ -58,6 +67,13 @@ EventsManager::unregister_mouse_button_event_listener(MouseButtonEventListener
     *listener)
 {
     m_mouse_button_event_listeners.remove(listener);
+}
+
+void
+EventsManager::unregister_joystick_event_listener(JoyStickEventListener
+    *listener)
+{
+    m_joystick_event_listeners.remove(listener);
 }
 
 void
@@ -107,6 +123,22 @@ EventsManager::dispatch_pending_events()
             for (auto ls : m_keyboard_event_listeners)
             {
                 if (ls->onKeyboardEvent(ke))
+                {
+                    break;
+                }
+            }
+
+            break;
+        }
+
+        case SDL_CONTROLLERBUTTONDOWN:
+        case SDL_CONTROLLERBUTTONUP:
+        {
+            JoyStickEvent je = JoyStickEvent::from_SDL(e);
+
+            for (auto ls : m_joystick_event_listeners)
+            {
+                if (ls->onJoyStickEvent(je))
                 {
                     break;
                 }

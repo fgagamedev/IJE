@@ -1,0 +1,44 @@
+=== Níveis ===
+
+Os níveis citados na visão geral do mundo deverão ser detalhados em seguida,
+de modo que possam ser corretamente implementados pela equipe de arte e 
+desenvolvimento.
+
+Deverão ser descritos:
+
+	1. Nome ou título do nível
+
+		(a) descrição breve do nível;
+		(b) objetivo do jogador ao longo do nível;
+		(c) recompensa do nível;
+		(d) principal mecânica do nível;
+		(e) inimigos encontrados;
+		(f) guias para o visual do nível (cor, arte de inspiração, tempo, etc);
+		(g) música e efeitos sonoros.
+
+	2. Telas de seleção de níveis
+
+		(a) descrição e imagens das telas de seleção de níveis;
+		(b) lista das localizações disponíveis em cada tela;
+		(c) requisitos para ir de um nível ao outro e para desbloquear níveis;
+		(d) mudanças de estado das telas;
+		(e) opções de salvar e carregar, se for o caso.
+
+	3. Nível de treinamento
+
+		(a) objetivos do nível de treinamento;
+		(b) listagem das atividades a serem treinadas/apresentadas neste nível.
+
+	4. Mecânicas específicas de níveis (ameaças)
+
+		(a) descrição e imagem (espinhos, chamas, laser, etc);
+		(b) temporização;
+		(c) dano/efeitos;
+		(d) efeitos sobre o jogador (movimento, saúde, etc);
+		(e) modos de se evitar a ameaça;
+		(f) efeitos especiais.
+
+
+=> Outputs:
+
+Um capítulo ou seção do GDD, contemplando a descrição dos níveis do jogo.

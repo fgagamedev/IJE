@@ -19,6 +19,7 @@ Game::Game(const string& id)
     : m_id(id), m_level(nullptr), m_done(false)
 {
     env = Environment::get_instance();
+
 }
 
 Game::~Game()
@@ -38,6 +39,12 @@ Game::init(const string& title, int w, int h) throw (Exception)
 {
     env->video->set_resolution(w, h);
     env->video->set_window_name(title);
+
+    SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER);
+
+    if(SDL_NumJoysticks() > 0){
+        SDL_GameControllerOpen(0);
+    }
 
     env->events_manager->register_system_event_listener(this);
     env->events_manager->register_keyboard_event_listener(this);

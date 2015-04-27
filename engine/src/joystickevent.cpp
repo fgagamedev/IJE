@@ -9,8 +9,11 @@
 
 #include <SDL2/SDL.h>
 #include <map>
+#include <iostream>
 
 using std::map;
+
+using namespace std;
 
 static bool joystick_was_init = false;
 static map<int, JoyStickEvent::JoyStickButton> m_joystick_table;
@@ -46,9 +49,6 @@ JoyStickEvent::from_SDL(const SDL_Event& event)
     if (not joystick_was_init)
     {
         init_table_joystick();
-        if(SDL_NumJoysticks() > 0){
-        	SDL_GameControllerOpen(0);
- 		}
         joystick_was_init = true;
     }
 

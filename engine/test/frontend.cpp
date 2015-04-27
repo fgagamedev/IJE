@@ -77,7 +77,7 @@ FrontEnd::onMouseButtonEvent(const MouseButtonEvent& event)
 bool
 FrontEnd::onJoyStickEvent(const JoyStickEvent& event)
 {
-    if (event.button() == JoyStickEvent::DOWN)
+    if (event.button() == JoyStickEvent::DOWN && event.state() == JoyStickEvent::PRESSED)
     {
         cout << "JoyStick Down!" << endl;
         return true;

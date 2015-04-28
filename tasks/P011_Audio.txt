@@ -1,0 +1,24 @@
+=== Áudio ===
+
+Geralmente neglicenciado pelas equipes iniciantes, o áudio do jogo tem papel
+fundamental na construção da experiência de jogo, dando vida e credibilidade
+ao mundo virtual criado pela equipe. 
+
+Embora o áudio possa ser subdividido em três partes (músicas, efeitos sonoros
+e vozes), o módulo da engine do jogo que permite a mixagem e a execução de 
+clips sonoros trata todos estes recursos uniformemente.
+
+Como boa parte destes sons são disparados por ações do jogador ou através
+de gatilhos pré-determinados, o módulo de áudio deve ser flexível o suficiente
+para permitir sua interação com os módulos de vídeo e eventos.
+
+
+=> Outputs:
+
+(a) Os códigos que implementem o módulo de carregamento e gerenciamento de 
+    áudios;
+
+(b) A implementação da música de fundo da tela de apresentação e da cena do
+    jogo; 
+
+(c) A implementação de, ao menos, 3 (três) efeitos sonoros na cena do jogo.

@@ -1,0 +1,25 @@
+=== Primeira Fase Jogável ===
+
+Embora seja possível, até certo ponto, desenvolver os diferentes componentes
+da engine do jogo separadamente, é necessário unir todo este código 
+na forma de uma fase jogável.
+
+Esta fase pode ser um mapa, um estágio, um trecho do mapa-mundi, uma batalha,
+etc. O importante é validar todos os componentes desenvolvidos até então 
+(vídeo, áudio, entradas, rede, etc), e também mudar o foco do desenvolvimento
+da engine para o jogo em si, focando nos aspectos de jogabilidade, balanço e 
+fluxo do jogo.
+
+Além disso, esta versão servirá para validar as ideias e conceitos do GDD,
+e pode evidenciar a necessidade de mudanças e adaptações de diversos 
+aspectos que, no papel, pareciam já solucionados, mas que não se concretizaram
+efetivamente na prática. Uma mudança neste estágio de desenvolvimento já é
+difícil e cara, em termos de desenvolvimento, mas pior é manter uma 
+característica que pode comprometer o sucesso e as vendas do jogo.
+
+
+=> Outputs:
+
+Uma versão do jogo com a primeira fase jogável, com todos os controles e
+jogabilidade implementados (com condições de vitória e derrota, inclusive), 
+e com todos os módulos principais ativos (áudio, rede, vídeo, entradas).

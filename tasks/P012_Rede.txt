@@ -1,0 +1,23 @@
+=== Rede ===
+
+A opção de multijogador via rede vem se consolidando ao longo dos últimos anos,
+e está cada vez mais presente nos jogos modernos. A possibilidade de 
+enfrentar adversários humanos de qualquer parte do planeta estende a vida
+útil do jogo, e por si só pode constituir o fator determinante para o jogador
+na hora da decisão da compra ou não do jogo desenvolvido pela equipe.
+
+A implementação do módulo de rede depende do modelo escolhido pela equipe 
+(cliente/servidor, _peer-to-peer_, etc). Esta escolha deve ser feita
+com cuidado, e antes mesmo do início da implementação deste módulo e do
+núcleo básico da jogabilidade. Tentar inserir um módulo de rede nos estágios
+finais do desenvolvimento pode levar a um módulo rígido, de difícil integração
+e que não fornecerá uma experiência agradável ao jogador.
+
+
+=> Outputs:
+
+(a) Os códigos que implementem o módulo de comunicação em rede (se o jogo
+    tiver suporte ao modo multiplayer em rede);
+
+(b) A implementação de uma troca de mensagens entre dois clientes do jogo
+    (se o jogo tiver suporte ao modo multiplayer em rede).

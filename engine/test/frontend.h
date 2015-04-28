@@ -9,18 +9,20 @@
 #define FRONT_END_H
 
 #include "level.h"
-#include "mousemotioneventlistener.h"
+#include "mousebuttoneventlistener.h"
+#include "joystickeventlistener.h"
 
 class Image;
 
-class FrontEnd : public Level, MouseMotionEventListener
+class FrontEnd : public Level, MouseButtonEventListener, JoyStickEventListener
 {
 public:
     FrontEnd(const string& next, const string& image,
         unsigned long duration = 3000);
     virtual ~FrontEnd();
 
-    bool onMouseMotionEvent(const MouseMotionEvent& event);
+    bool onMouseButtonEvent(const MouseButtonEvent& event);
+    bool onJoyStickEvent(const JoyStickEvent& event);
 
 private:
     Image *m_image;

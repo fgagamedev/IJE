@@ -1,0 +1,26 @@
+=== Instalador ===
+
+O instalador é um programa ou um conjunto de scripts que permite a
+instalação do software no ambiente do usuário final, copiando os
+arquivos necessários à sua execução nas localizações adequadas, dando aos
+arquivos as permissões de leitura e execução necessárias e também criando 
+atalhos e links ao executável.
+
+A instalação, aos olhos do usuário final, deverá ser a mais intuitiva e 
+fácil possível, de modo que a tarefa seja realizada com alguns poucos cliques.
+Também é importante oferecer opções para a customização da instalação para
+usuários mais avançados ou para os casos onde o processo padrão falha. Estas
+opções avançadas devem estar em menor evidência do que as opções do fluxo 
+padrão, mas ainda assim acessíveis.
+
+Ao final da execução do instalador, o jogo deve estar corretamente configurado
+para sua execução, sem a necessidade de passos adicionais. Também é
+necessário deixar o desinstalador acessível e pronto para remover todos os
+arquivos não-compartilhados que foram instalados.
+
+=> Outputs:
+
+Um arquivo executável que permita a instalação completado do jogo, de modo que 
+ao final de sua execução o jogo esteja corretamente instalado na máquina do 
+usuário final. O jogo deve já estar pré-compilado e configurado, de modo que o 
+usuário não deva realizar processos de compilação durante a instalação. 

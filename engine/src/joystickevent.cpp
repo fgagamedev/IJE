@@ -52,9 +52,12 @@ JoyStickEvent::from_SDL(const SDL_Event& event)
         joystick_was_init = true;
     }
 
-    JoyStickEvent::JoyStickState state = (event.type == SDL_CONTROLLERBUTTONDOWN ?
+    JoyStickEvent::JoyStickState state = 
+        (event.type == SDL_CONTROLLERBUTTONDOWN ?
         JoyStickEvent::PRESSED : JoyStickEvent::RELEASED);
-    JoyStickEvent::JoyStickButton button = m_joystick_table[event.cbutton.button];
+
+    JoyStickEvent::JoyStickButton button = 
+        m_joystick_table[event.cbutton.button];
 
     return JoyStickEvent(state, button);
 }

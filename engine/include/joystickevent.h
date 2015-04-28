@@ -17,10 +17,10 @@ public:
 
     typedef
     enum {
-	        LEFT, RIGHT, UP, DOWN, 
-	        START, OPTIONS, 
-	        L1, L2, R1, R2, 
-	        CIRCLE, SQUARE, TRIANGLE, X 
+        LEFT, RIGHT, UP, DOWN,
+        START, OPTIONS,
+        L1, L2, R1, R2,
+        CIRCLE, SQUARE, TRIANGLE, X
          } JoyStickButton;
 
     JoyStickEvent(JoyStickState state, JoyStickButton button);

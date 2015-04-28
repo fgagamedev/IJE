@@ -42,7 +42,8 @@ Game::init(const string& title, int w, int h) throw (Exception)
 
     SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER);
 
-    if(SDL_NumJoysticks() > 0){
+    if (SDL_NumJoysticks() > 0)
+    {
         SDL_GameControllerOpen(0);
     }
 

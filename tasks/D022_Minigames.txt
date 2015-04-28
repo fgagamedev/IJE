@@ -1,0 +1,22 @@
+=== Minigames ===
+
+Os minigames são jogos menores dentro do contexto de um jogo maior.
+Atualmente existe mesmo gêneros de jogos que nada mais são que coleções de 
+minigames. 
+
+Não é necessário um GDD inteiro para cada minigame, uma vez que cada um deve
+ser simples e direto, uma vez que se o nível de sofisticação for muito alto
+o melhor é transformá-lo em um novo projeto independente.
+
+Deve, contudo, ser registrado no GDD,
+
+	1. os tipos de minigames que aparecerão ao longo do jogo;
+	2. como tais minigames são acessados;
+	3. os modos de controle de cada minigame;
+	4. os elementos que compõem cada minigame;
+	5. os níveis onde os minigames são encontrados.
+
+
+=> Outputs:
+
+Um capítulo ou seção do GDD, contemplando a descrição dos minigames do jogo.

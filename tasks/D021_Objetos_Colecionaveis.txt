@@ -1,0 +1,22 @@
+=== Objetos Colecionáveis ===
+
+Os objetos colecionáveis são itens que podem ser acumulados pelo jogador ao
+longo da partida, e que podem tanto ser o objetivo principal do jogo como
+ter finalidade apenas de motivação de _replay_ (artes, vídeos com a equipe de 
+produção, etc).
+
+É preciso utilizar deste recurso com cautela, para que o jogo não mude seu
+objetivo para simplesmente "completar a coleção" (a menos que este seja, desde 
+o princípio, o mote do jogo, vide a série Pokémon).
+
+A relação dos itens colecionáveis deve conter
+
+	1. imagem de cada item colecionável;
+	2. descrição dos níveis onde cada item é encontrado;
+	3. o que o objeto ou conjunto de objetos destrava ou beneficia o jogador.
+
+
+=> Outputs:
+
+Um capítulo ou seção do GDD, contemplando a descrição dos objetos colecionáveis
+do jogo.

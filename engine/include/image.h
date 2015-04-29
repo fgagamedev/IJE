@@ -24,6 +24,8 @@ public:
 
     int w() const;
     int h() const;
+    Uint8 alpha() const;
+    void set_alpha(const Uint8 alpha);
 
     static Image * from_file(const string& path) throw (Exception);
 
@@ -34,6 +36,7 @@ private:
 
     SDL_Texture *m_texture;
     int m_w, m_h;
+    Uint8 m_alpha;
 };
 
 #endif

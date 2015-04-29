@@ -14,7 +14,7 @@
 #include "image.h"
 
 Canvas::Canvas(SDL_Renderer *renderer, int w, int h)
-    : m_renderer(renderer), m_w(w), m_h(h)
+    : m_renderer(renderer), m_w(w), m_h(h), m_scale(1)
 {
     set_color(Color::WHITE);
 }
@@ -251,13 +251,26 @@ Canvas::fill_circle_points(int cx, int cy, int x, int y) const
 }
 
 void
-Canvas::draw(const Image *image, int x, int y) const
+Canvas::draw(const Image *image, Rect rect_clip, int x, int y) const
 {
-    SDL_Rect clip {0, 0, image->w(), image->h() };
-    SDL_Rect dest {x, y, image->w(), image->h() };
+    int dest_w = rect_clip.w() * m_scale;
+    int dest_h = rect_clip.h() * m_scale;
+    SDL_Rect clip {(int)rect_clip.x(), (int)rect_clip.y(), (int)rect_clip.w(), (int)rect_clip.h() };
+    SDL_Rect dest {x, y, dest_w, dest_h };
 
     SDL_RenderCopy(m_renderer, image->texture(), &clip, &dest);
 }
+
+void
+Canvas::draw(const Image *image, int x, int y) const
+{
+    int dest_w = image->w() * m_scale;
+    int dest_h = image->h() * m_scale;
+    SDL_Rect dest {x, y, dest_w, dest_h };
+
+    SDL_RenderCopy(m_renderer, image->texture(), nullptr, &dest);
+}
+
 
 SDL_Renderer *
 Canvas::renderer() const
@@ -290,4 +303,16 @@ Canvas::draw_message(const string message, const Rect rect, const Color& color)
     {
         throw Exception(SDL_GetError());
     }
+}
+
+void
+Canvas::set_scale(const double scale)
+{
+    m_scale *= scale;
+}
+
+double
+Canvas::scale() const
+{
+    return m_scale;
 }

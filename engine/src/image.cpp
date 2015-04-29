@@ -40,6 +40,18 @@ Image::h() const
     return m_h;
 }
 
+Uint8
+Image::alpha() const
+{
+    return m_alpha;
+}
+
+void
+Image::set_alpha(const Uint8 alpha)
+{
+    m_alpha = alpha;
+}
+
 Image *
 Image::from_file(const string& path) throw (Exception)
 {

@@ -50,6 +50,7 @@ public:
     void draw(const Circle& circle, const Color& color);
 
     void draw(const Image *image, int x = 0, int y = 0) const;
+    void draw(const Image *image, Rect rect_clip, int x = 0, int y = 0) const;
 
     void fill(const Rect& rect) const;
     void fill(const Rect& rect, const Color& color);
@@ -65,9 +66,13 @@ public:
 
     SDL_Renderer * renderer() const;
 
+    void set_scale(const double scale);
+    double scale() const;
+
 private:
     SDL_Renderer *m_renderer;
     int m_w, m_h;
+    double m_scale;
     Font_Manager *m_font;
     Color m_color;
 

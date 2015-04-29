@@ -26,7 +26,7 @@ public:
     void set(double x, double y);
     void set_dimensions(double w, double h);
 
-private:
+protected:
     double m_x, m_y;
     double m_w, m_h;
 };

@@ -49,7 +49,8 @@ public:
     void draw(const Circle& circle) const;
     void draw(const Circle& circle, const Color& color);
 
-    void draw(const Image *image, int x = 0, int y = 0, int w = 0, int h = 0) const;
+    void draw(const Image *image, int x = 0, int y = 0) const;
+    void draw(const Image *image, Rect rect_clip, int x = 0, int y = 0) const;
 
     void fill(const Rect& rect) const;
     void fill(const Rect& rect, const Color& color);

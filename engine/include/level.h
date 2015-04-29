@@ -9,6 +9,7 @@
 #define LEVEL_H
 
 #include "object.h"
+#include "environment.h"
 
 #include <string>
 
@@ -25,6 +26,7 @@ public:
 protected:
     string m_next;
     bool m_done;
+    Environment * env;
 };
 
 #endif

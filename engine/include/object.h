@@ -9,36 +9,61 @@
 #define OBJECT_H
 
 #include <string>
-#include <list>
-
-#include "point.h"
+#include <memory>
 
 using std::string;
-using std::list;
+using std::unique_ptr;
 
+class Rect;
+
+typedef string ObjectID;
+typedef string ActionID;
+typedef string MessageID;
+typedef string Parameters;
 
 class Object
 {
 public:
-    Object(const string& id, Object * parent = nullptr);
+    Object(Object *parent = nullptr, ObjectID id = "", double x = 0,
+        double y = 0, double w = 1, double h = 1);
     virtual ~Object();
 
     Object * parent() const;
+    ObjectID id() const;
 
-    void add_children(Object *children);
-    void remove_children(Object *children);
+    double x() const;
+    double y() const;
+    double w() const;
+    double h() const;
+
+    const Rect& bounding_box() const;
+
+    void set_x(double x);
+    void set_y(double y);
+    void set_w(double w);
+    void set_h(double h);
+
+    void set_position(double x, double y);
+    void set_dimensions(double w, double h);
+    void set_parent(Object *parent);
+
+    void add_child(Object *child);
+    void remove_child(Object *child);
+
+    bool send_message(Object *receiver, MessageID id, Parameters parameters);
+    virtual bool on_message(Object *sender, MessageID id, Parameters p);
+
+    void add_observer(Object *observer);
+    void remove_observer(Object *observer);
+
+    void notify(ActionID action, Parameters parameters);
 
     void update(unsigned long elapsed);
     void draw();
 
-    const Point& position() const;
-    void set_position(const Point& position);
-
-protected:
-    string m_id;
-    Object *m_parent;
-    Point m_position;
-    list<Object *> m_children;
+private:
+    class Impl;
+    unique_ptr<Impl> m_impl;
 
     virtual void update_self(unsigned long elapsed);
     virtual void draw_self();

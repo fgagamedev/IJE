@@ -7,6 +7,7 @@
  */
 #include "test.h"
 #include "frontend.h"
+#include "titlescreen.h"
 
 Test::Test()
     : Game("a")
@@ -26,7 +27,10 @@ Test::load_level(const string& id)
     }
     else if (id == "c")
     {
-        return new FrontEnd("", "res/images/spiral.png");
+        return new FrontEnd("title", "res/images/spiral.png");
+    } else if (id == "title")
+    {
+        return new TitleScreen();
     }
 
     return nullptr;

@@ -8,7 +8,7 @@
 #include "level.h"
 
 Level::Level(const string& id, const string& next)
-    : Object(id), m_next(next), m_done(false)
+    : Object(nullptr, id), m_next(next), m_done(false)
 {
 }
 

@@ -73,3 +73,9 @@ Rect::set_dimensions(double w, double h)
     m_w = w;
     m_h = h;
 }
+
+bool
+Rect::contains(double x, double y) const
+{
+    return x >= m_x and x <= m_x + m_w and y >= m_y and y <= m_y + m_h;
+}

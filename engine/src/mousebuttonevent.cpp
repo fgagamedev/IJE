@@ -7,8 +7,8 @@
  */
 #include "mousebuttonevent.h"
 
-MouseButtonEvent::MouseButtonEvent(State state, Button button, int x, int y)
-    : m_state(state), m_button(button), m_x(x), m_y(y)
+MouseButtonEvent::MouseButtonEvent(State state, Button button,
+    double x, double y) : m_state(state), m_button(button), m_x(x), m_y(y)
 {
 }
 
@@ -24,13 +24,13 @@ MouseButtonEvent::button() const
     return m_button;
 }
 
-int
+double
 MouseButtonEvent::x() const
 {
     return m_x;
 }
 
-int
+double
 MouseButtonEvent::y() const
 {
     return m_y;

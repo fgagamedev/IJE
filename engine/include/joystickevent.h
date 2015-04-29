@@ -13,7 +13,7 @@
 class JoyStickEvent
 {
 public:
-    typedef enum {PRESSED, RELEASED} JoyStickState;
+    typedef enum {PRESSED, RELEASED} State;
 
     typedef
     enum {
@@ -21,18 +21,18 @@ public:
         START, OPTIONS,
         L1, L2, R1, R2,
         CIRCLE, SQUARE, TRIANGLE, X
-         } JoyStickButton;
+         } Button;
 
-    JoyStickEvent(JoyStickState state, JoyStickButton button);
+    JoyStickEvent(State state, Button button);
 
-    JoyStickState state() const;
-    JoyStickButton button() const;
+    State state() const;
+    Button button() const;
 
     static JoyStickEvent from_SDL(const SDL_Event& event);
 
 private:
-    JoyStickState m_state;
-    JoyStickButton m_button;
+    State m_state;
+    Button m_button;
 };
 
 #endif

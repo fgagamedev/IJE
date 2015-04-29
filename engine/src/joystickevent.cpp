@@ -16,7 +16,7 @@ using std::map;
 using namespace std;
 
 static bool joystick_was_init = false;
-static map<int, JoyStickEvent::JoyStickButton> m_joystick_table;
+static map<int, JoyStickEvent::Button> m_joystick_table;
 
 void init_table_joystick()
 {
@@ -26,18 +26,18 @@ void init_table_joystick()
     m_joystick_table[SDL_CONTROLLER_BUTTON_DPAD_RIGHT ] = JoyStickEvent::RIGHT;
 }
 
-JoyStickEvent::JoyStickEvent(JoyStickState state, JoyStickButton button)
+JoyStickEvent::JoyStickEvent(State state, Button button)
     : m_state(state), m_button(button)
 {
 }
 
-JoyStickEvent::JoyStickState
+JoyStickEvent::State
 JoyStickEvent::state() const
 {
     return m_state;
 }
 
-JoyStickEvent::JoyStickButton
+JoyStickEvent::Button
 JoyStickEvent::button() const
 {
     return m_button;
@@ -52,12 +52,10 @@ JoyStickEvent::from_SDL(const SDL_Event& event)
         joystick_was_init = true;
     }
 
-    JoyStickEvent::JoyStickState state = 
-        (event.type == SDL_CONTROLLERBUTTONDOWN ?
+    JoyStickEvent::State state = (event.type == SDL_CONTROLLERBUTTONDOWN ?
         JoyStickEvent::PRESSED : JoyStickEvent::RELEASED);
 
-    JoyStickEvent::JoyStickButton button = 
-        m_joystick_table[event.cbutton.button];
+    JoyStickEvent::Button button = m_joystick_table[event.cbutton.button];
 
     return JoyStickEvent(state, button);
 }

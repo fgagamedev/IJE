@@ -10,12 +10,13 @@
 
 #include "level.h"
 #include "mousebuttoneventlistener.h"
-#include "mousemotioneventlistener.h"
 #include "joystickeventlistener.h"
+#include "keyboardeventlistener.h"
 
 class Image;
 
-class FrontEnd : public Level, MouseButtonEventListener, JoyStickEventListener, MouseMotionEventListener
+class FrontEnd : public Level, MouseButtonEventListener, JoyStickEventListener,
+    KeyboardEventListener
 {
 public:
     FrontEnd(const string& next, const string& image,
@@ -23,7 +24,7 @@ public:
     virtual ~FrontEnd();
 
     bool onMouseButtonEvent(const MouseButtonEvent& event);
-    bool onMouseMotionEvent(const MouseMotionEvent& event);
+    bool onKeyboardEvent(const KeyboardEvent& event);
     bool onJoyStickEvent(const JoyStickEvent& event);
 
 private:

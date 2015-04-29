@@ -7,15 +7,15 @@
  */
 #include "mousebuttonevent.h"
 
-MouseButtonEvent::MouseButtonEvent(Action action, Button button, int x, int y)
-    : m_action(action), m_button(button), m_x(x), m_y(y)
+MouseButtonEvent::MouseButtonEvent(State state, Button button, int x, int y)
+    : m_state(state), m_button(button), m_x(x), m_y(y)
 {
 }
 
-MouseButtonEvent::Action
-MouseButtonEvent::action() const
+MouseButtonEvent::State
+MouseButtonEvent::state() const
 {
-    return m_action;
+    return m_state;
 }
 
 MouseButtonEvent::Button
@@ -39,8 +39,8 @@ MouseButtonEvent::y() const
 MouseButtonEvent
 MouseButtonEvent::from_SDL(const SDL_Event& event)
 {
-    MouseButtonEvent::Action action = (event.type == SDL_MOUSEBUTTONDOWN ?
-        MouseButtonEvent::DOWN : MouseButtonEvent::UP);
+    MouseButtonEvent::State state = (event.type == SDL_MOUSEBUTTONDOWN ?
+        MouseButtonEvent::PRESSED : MouseButtonEvent::RELEASED);
 
     MouseButtonEvent::Button button;
 
@@ -59,5 +59,5 @@ MouseButtonEvent::from_SDL(const SDL_Event& event)
         break;
     }
 
-    return MouseButtonEvent(action, button, event.button.x, event.button.y);
+    return MouseButtonEvent(state, button, event.button.x, event.button.y);
 }

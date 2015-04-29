@@ -10,11 +10,7 @@
 #include "image.h"
 #include "mousebuttonevent.h"
 #include "joystickevent.h"
-#include "mousemotionevent.h"
-
-
-#include <iostream>
-using namespace std;
+#include "keyboardevent.h"
 
 FrontEnd::FrontEnd(const string& next, const string& image,
     unsigned long duration)
@@ -22,7 +18,7 @@ FrontEnd::FrontEnd(const string& next, const string& image,
 {
     Environment *env = Environment::get_instance();
     env->events_manager->register_mouse_button_event_listener(this);
-    env->events_manager->register_mouse_motion_event_listener(this);
+    env->events_manager->register_keyboard_event_listener(this);
     env->events_manager->register_joystick_event_listener(this);
 
     shared_ptr<Resource> r = env->resources_manager->get(Resource::IMAGE,
@@ -37,7 +33,7 @@ FrontEnd::~FrontEnd()
 {
     Environment *env = Environment::get_instance();
     env->events_manager->unregister_mouse_button_event_listener(this);
-    env->events_manager->unregister_mouse_motion_event_listener(this);
+    env->events_manager->unregister_keyboard_event_listener(this);
     env->events_manager->unregister_joystick_event_listener(this);
 }
 
@@ -63,31 +59,14 @@ FrontEnd::update_self(unsigned long elapsed)
     }
 }
 
-bool 
+bool
 FrontEnd::onMouseButtonEvent(const MouseButtonEvent& event)
 {
-    cout << "x = "<< event.x() << endl;
-    cout << "y = "<< event.y() << endl;
-    cout << "Button: "<<event.button()<<endl;
-    cout << "Action: "<<event.action()<<endl;
-
-	return false;
-}
-
-bool
-FrontEnd::onMouseMotionEvent(const MouseMotionEvent& event)
-{
-    cout << "x = " << event.x() << endl;
-    cout << "y = " << event.y() << endl;
-
-    cout << "left = " << (event.state(MouseMotionEvent::LEFT) ==
-        MouseMotionEvent::UP ? "nao" : "sim") << endl;
-
-    cout << "right = " << (event.state(MouseMotionEvent::RIGHT) ==
-        MouseMotionEvent::UP ? "nao" : "sim") << endl;
-
-    cout << "middle = " << (event.state(MouseMotionEvent::MIDDLE) ==
-        MouseMotionEvent::UP ? "nao" : "sim") << endl;
+    if (event.state() == MouseButtonEvent::PRESSED)
+    {
+        m_done = true;
+        return true;
+    }
 
     return false;
 }
@@ -95,10 +74,21 @@ FrontEnd::onMouseMotionEvent(const MouseMotionEvent& event)
 bool
 FrontEnd::onJoyStickEvent(const JoyStickEvent& event)
 {
-    if (event.button() == JoyStickEvent::DOWN and
-        event.state() == JoyStickEvent::PRESSED)
+    if (event.state() == JoyStickEvent::PRESSED)
     {
-        cout << "JoyStick Down!" << endl;
+        m_done = true;
+        return true;
+    }
+
+    return false;
+}
+
+bool
+FrontEnd::onKeyboardEvent(const KeyboardEvent& event)
+{
+    if (event.state() == KeyboardEvent::PRESSED)
+    {
+        m_done = true;
         return true;
     }
 

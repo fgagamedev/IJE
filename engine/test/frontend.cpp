@@ -12,6 +12,9 @@
 #include "mousebuttoneventlistener.h"
 #include "joystickevent.h"
 #include "joystickeventlistener.h"
+#include "mousemotionevent.h"
+#include "mousemotioneventlistener.h"
+
 
 #include <iostream>
 using namespace std;
@@ -59,6 +62,17 @@ FrontEnd::update_self(unsigned long elapsed)
     {
         m_done = true;
     }
+}
+
+bool 
+FrontEnd::onMouseButtonEvent(const MouseButtonEvent& event)
+{
+    cout << "x = "<< event.x() << endl;
+    cout << "y = "<< event.y() << endl;
+    cout << "Button: "<<event.button()<<endl;
+    cout << "Action: "<<event.action()<<endl;
+
+	return false;
 }
 
 bool

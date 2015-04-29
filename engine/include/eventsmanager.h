@@ -10,13 +10,13 @@
 
 #include <SDL2/SDL.h>
 #include <list>
+#include "mousemotioneventlistener.h"
 
 using std::list;
 
 class SystemEventListener;
 class KeyboardEventListener;
 class MouseButtonEventListener;
-class MouseMotionEventListener;
 class JoyStickEventListener;
 
 class EventsManager

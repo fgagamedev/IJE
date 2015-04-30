@@ -8,6 +8,7 @@
 #include "test.h"
 #include "frontend.h"
 #include "titlescreen.h"
+#include "stage.h"
 
 Test::Test()
     : Game("a")
@@ -31,6 +32,9 @@ Test::load_level(const string& id)
     } else if (id == "title")
     {
         return new TitleScreen();
+    } else if (id == "stage1")
+    {
+        return new Stage("stage1");
     }
 
     return nullptr;

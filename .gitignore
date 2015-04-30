@@ -1,9 +1,11 @@
 *.bak
 *~
 *.o
-prog
 *.swp
 *.d
-lib
-engine/test/test
 *.komodoproject
+*.exe
+*.dll
+lib
+engine/test/res
+engine/test/test

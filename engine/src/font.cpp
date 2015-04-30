@@ -59,10 +59,10 @@ Font_Manager::close_font()
 void
 Font_Manager::make_message(SDL_Renderer *renderer, string message, Color color) throw (Exception)
 {
-    SDL_Surface* surfaceMessage  = nullptr;
-    SDL_Color m_color = {color.r(), color.g(), color.b(), color.a() };
-    surfaceMessage = TTF_RenderText_Solid(m_font, message.c_str(), m_color );
-    
+    SDL_Surface* surfaceMessage = nullptr;
+    SDL_Color m_color = {color.r(), color.g(), color.b(), color.a()};
+    surfaceMessage = TTF_RenderText_Solid(m_font, message.c_str(), m_color);
+
     if (surfaceMessage == nullptr)
     {
         throw Exception(TTF_GetError());

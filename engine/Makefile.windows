@@ -9,12 +9,12 @@ RES_DIR = res
 
 CC = x86_64-w64-mingw32-g++
 AR = ar
-SDL_MINGW_ROOT = /usr/x86_64-w64-mingw32
+MINGW_ROOT = /usr/x86_64-w64-mingw32
 
 ARFLAGS = rcs
 CFLAGS = -W -Wall -pedantic -ansi -std=c++11 -MMD
-INCLUDES = -Iinclude `$(SDL_MINGW_ROOT)/bin/sdl2-config --cflags`
-LIBS = lib/ijengine.a `$(SDL_MINGW_ROOT)/bin/sdl2-config --libs` -lSDL2 -lSDL2_image -lSDL2_ttf -lmingw32
+INCLUDES = -Iinclude -Itest `$(MINGW_ROOT)/bin/sdl2-config --cflags`
+LIBS = lib/ijengine.a `$(MINGW_ROOT)/bin/sdl2-config --libs` -lSDL2 -lSDL2_image -lSDL2_ttf -lmingw32
 
 TARGET = $(LIB_DIR)/$(NAME)
 

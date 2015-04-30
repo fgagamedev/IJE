@@ -65,7 +65,7 @@ TitleScreen::on_message(Object *object, MessageID id, Parameters)
 
     if (button->id() == "ok")
     {
-        m_next = "a";
+        m_next = "stage1";
     }
 
     m_done = true;

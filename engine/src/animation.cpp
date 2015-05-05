@@ -99,3 +99,16 @@ Animation::h() const
 {
     return m_impl->h;
 }
+
+void
+Animation::set_row(int row)
+{
+    int y = row*m_impl->h;
+
+    if (m_impl->y != y)
+    {
+        m_impl->frame = 0;
+    }
+
+    m_impl->y = y;
+}

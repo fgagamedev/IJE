@@ -30,6 +30,8 @@ public:
     double w() const;
     double h() const;
 
+    void set_row(int row);
+
 private:
     class Impl;
     unique_ptr<Impl> m_impl;

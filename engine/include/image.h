@@ -13,11 +13,10 @@
 #include <string>
 
 #include "exception.h"
-#include "resource.h"
 
 using std::string;
 
-class Image : public Resource
+class Image
 {
 public:
     ~Image();
@@ -32,7 +31,7 @@ public:
     SDL_Texture * texture() const;
 
 private:
-    Image(SDL_Texture *texture, const string& id, int w, int h);
+    Image(SDL_Texture *texture, int w, int h);
 
     SDL_Texture *m_texture;
     int m_w, m_h;

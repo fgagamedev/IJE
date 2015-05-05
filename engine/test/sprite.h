@@ -19,18 +19,48 @@ using std::unique_ptr;
 class Sprite : public Object, KeyboardEventListener
 {
 public:
-    typedef enum { IDLE, RUNNING_LEFT, RUNNING_RIGHT, NONE } State;
-
     Sprite(Object *parent, ObjectID id);
     ~Sprite();
 
     bool onKeyboardEvent(const KeyboardEvent& event);
 
-private:
-    double m_speed;
+    class SpriteState;
+
+    typedef enum _State
+    {
+        NONE,
+        IDLE,
+        RUNNING,
+        JUMPING,
+        FAINTING,
+        DIZZYING,
+        SLIDING,
+        STATE_TOTAL,
+    } State;
+
+    typedef enum _Event
+    {
+        STOPPED,
+        MOVED,
+        JUMPED,
+        SLIDED,
+        HITTED,
+        FAINTED,
+        EVENT_TOTAL,
+    } Event;
+
+    short direction() const;
+
+    void report_event(Event event);
+    void change_state(State to, State from);
+
+protected:
+    short m_left, m_right;
     unsigned long m_last;
+
     State m_state;
-    Animation *m_states[NONE];
+    State m_fst[STATE_TOTAL][EVENT_TOTAL];
+    SpriteState * m_states[STATE_TOTAL];
 
     void draw_self();
     void update_self(unsigned long elapsed);

@@ -37,6 +37,17 @@ ResourcesManager::get(Resource::Type type, const string& id) throw (Exception)
     return acquire(type, id);
 }
 
+shared_ptr<Image>
+ResourcesManager::get_image(const string& id)
+{
+    if (m_images.find(id) != m_images.end())
+    {
+        return m_images[id];
+    }
+
+    return acquire_image(id);
+}
+
 shared_ptr<Resource>
 ResourcesManager::acquire(Resource::Type type, const string& id)
     throw (Exception)
@@ -61,6 +72,22 @@ ResourcesManager::acquire(Resource::Type type, const string& id)
     shared_ptr<Resource> ptr(resource);
 
     m_resources[type][id] = ptr;
+
+    return ptr;
+}
+
+shared_ptr<Image>
+ResourcesManager::acquire_image(const string& id)
+{
+    Image * image = Image::from_file(id);
+
+    if (not image)
+    {
+        throw Exception("Can't load image " + id);
+    }
+
+    shared_ptr<Image> ptr(image);
+    m_images[id] = ptr;
 
     return ptr;
 }

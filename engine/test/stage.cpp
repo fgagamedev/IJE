@@ -7,6 +7,7 @@
  */
 #include "stage.h"
 #include "square.h"
+#include "sprite.h"
 #include "environment.h"
 
 Stage::Stage(ObjectID id)
@@ -22,8 +23,13 @@ Stage::Stage(ObjectID id)
     m_floor.set(x, y);
     m_floor.set_dimensions(w, h);
 
-    Square *square = new Square(this, "square", 50);
-    add_child(square);
+    Sprite *sprite = new Sprite(this, "sprite");
+
+    y -= sprite->h();
+
+    sprite->set_position(x, y);
+
+    add_child(sprite);
 }
 
 void

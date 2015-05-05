@@ -251,22 +251,24 @@ Canvas::fill_circle_points(int cx, int cy, int x, int y) const
 }
 
 void
-Canvas::draw(const Image *image, Rect rect_clip, int x, int y) const
+Canvas::draw(const Image *image, Rect rect_clip, double x, double y) const
 {
-    int dest_w = rect_clip.w() * m_scale;
-    int dest_h = rect_clip.h() * m_scale;
-    SDL_Rect clip {(int)rect_clip.x(), (int)rect_clip.y(), (int)rect_clip.w(), (int)rect_clip.h() };
-    SDL_Rect dest {x, y, dest_w, dest_h };
+    double dest_w = rect_clip.w() * m_scale;
+    double dest_h = rect_clip.h() * m_scale;
+    SDL_Rect clip { (int) rect_clip.x(), (int) rect_clip.y(),
+        (int) rect_clip.w(), (int) rect_clip.h()
+                  };
+    SDL_Rect dest { (int) x,  (int) y,  (int) dest_w,  (int) dest_h };
 
     SDL_RenderCopy(m_renderer, image->texture(), &clip, &dest);
 }
 
 void
-Canvas::draw(const Image *image, int x, int y) const
+Canvas::draw(const Image *image, double x, double y) const
 {
-    int dest_w = image->w() * m_scale;
-    int dest_h = image->h() * m_scale;
-    SDL_Rect dest {x, y, dest_w, dest_h };
+    double dest_w = image->w() * m_scale;
+    double dest_h = image->h() * m_scale;
+    SDL_Rect dest { (int) x, (int) y, (int) dest_w, (int) dest_h };
 
     SDL_RenderCopy(m_renderer, image->texture(), nullptr, &dest);
 }

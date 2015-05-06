@@ -1,4 +1,4 @@
-NAME = ijengine_windows.a
+NAME = ijengine_win.a
 
 SRC_DIR = src
 INC_DIR = include
@@ -6,6 +6,7 @@ OBJ_DIR = obj
 LIB_DIR = lib
 TST_DIR = test
 RES_DIR = res
+DLL_DIR = res/dll
 
 CC = x86_64-w64-mingw32-g++
 AR = ar
@@ -30,21 +31,21 @@ OBJ = ${addprefix $(OBJ_DIR)/, ${notdir ${SRC:.cpp=.o}}}
 all:
 	@mkdir -p $(OBJ_DIR) $(LIB_DIR)
 	@cp -r $(RES_DIR) $(TST_DIR)
-	@unzip -j windows.zip -d $(TST_DIR)
-	$(MAKE) $(TARGET)
-	$(MAKE) $(TEST)
+	@unzip -j $(DLL_DIR)/windows.zip -d $(TST_DIR)
+	@make -f Makefile.win $(TARGET)
+	@make -f Makefile.win $(TEST)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
 
 $(TST_DIR)/%.o: $(TST_DIR)/%.cpp
-	$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
+	@$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
 
 $(TARGET): $(OBJ)
-	$(AR) $(ARFLAGS) $@ $(OBJ)
+	@$(AR) $(ARFLAGS) $@ $(OBJ)
 
 $(TEST): $(TST_OBJ) $(TARGET)
-	$(CC) $(CFLAGS) $(INCLUDES) $(TST_OBJ) $(TARGET) -o $@.exe $(LIBS)
+	@$(CC) $(CFLAGS) $(INCLUDES) $(TST_OBJ) $(TARGET) -o $@.exe $(LIBS)
 
 clean:
 	@find . -name *.o -exec rm {} \;
@@ -54,6 +55,6 @@ clean:
 
 dist-clean: clean
 	@find . -name *.a -exec rm {} \;
-	@rm test/test.exe
+	@rm -f test/test.exe
 
 -include $(OBJ:.o=.d)

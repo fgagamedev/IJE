@@ -16,7 +16,7 @@ int main(int, char *[])
     try
     {
         Test test;
-        test.init("Test Game", 640, 480);
+        test.init("Test Game", 1200, 800);
         test.run();
     } catch (Exception ex)
     {

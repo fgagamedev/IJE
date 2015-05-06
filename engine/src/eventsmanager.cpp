@@ -147,6 +147,11 @@ EventsManager::dispatch_pending_events()
         case SDL_KEYDOWN:
         case SDL_KEYUP:
         {
+            if (e.key.repeat != 0)
+            {
+                break;
+            }
+
             KeyboardEvent ke = KeyboardEvent::from_SDL(e);
 
             for (auto ls : m_keyboard_event_listeners)

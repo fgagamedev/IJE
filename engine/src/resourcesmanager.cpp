@@ -9,58 +9,29 @@
 #include "image.h"
 #include "resourcesmanager.h"
 
-ostream&
-operator<<(ostream& os, const ResourcesManager& rm)
+shared_ptr<Image>
+ResourcesManager::get_image(const string& id) throw (Exception)
 {
-    os << "[ResourcesManager]\n";
-
-    os << "-- Images:\n";
-
-    for (auto it = rm.m_resources[Resource::IMAGE].begin();
-        it != rm.m_resources[Resource::IMAGE].end(); ++it)
+    if (m_images.find(id) != m_images.end())
     {
-        os << "        " << it->first << ": " << it->second.use_count()
-            << " refs\n";
+        return m_images[id];
     }
 
-    return os;
+    return acquire_image(id);
 }
 
-shared_ptr<Resource>
-ResourcesManager::get(Resource::Type type, const string& id) throw (Exception)
+shared_ptr<Image>
+ResourcesManager::acquire_image(const string& id) throw (Exception)
 {
-    if (m_resources[type].find(id) != m_resources[type].end())
+    Image * image = Image::from_file(id);
+
+    if (not image)
     {
-        return m_resources[type][id];
+        throw Exception("Can't load image " + id);
     }
 
-    return acquire(type, id);
-}
-
-shared_ptr<Resource>
-ResourcesManager::acquire(Resource::Type type, const string& id)
-    throw (Exception)
-{
-    Resource *resource = nullptr;
-
-    switch (type)
-    {
-        case Resource::IMAGE:
-            resource = Image::from_file(id);
-            break;
-
-        default:
-            throw Exception("Unsupported Resource Type");
-    }
-
-    if (not resource)
-    {
-        throw Exception("Can't load resource " + id);
-    }
-
-    shared_ptr<Resource> ptr(resource);
-
-    m_resources[type][id] = ptr;
+    shared_ptr<Image> ptr(image);
+    m_images[id] = ptr;
 
     return ptr;
 }

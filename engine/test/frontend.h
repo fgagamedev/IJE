@@ -13,6 +13,10 @@
 #include "joystickeventlistener.h"
 #include "keyboardeventlistener.h"
 
+#include <memory>
+
+using std::shared_ptr;
+
 class Image;
 
 class FrontEnd : public Level, MouseButtonEventListener, JoyStickEventListener,
@@ -28,7 +32,7 @@ public:
     bool onJoyStickEvent(const JoyStickEvent& event);
 
 private:
-    Image *m_image;
+    shared_ptr<Image> m_image;
     unsigned long m_start;
     unsigned long m_duration;
     int m_x, m_y;

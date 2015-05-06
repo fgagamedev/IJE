@@ -1,0 +1,228 @@
+/*
+ * Implementação da classe Sprite.
+ *
+ * Autor: Edson Alves
+ * Data: 05/05/2015
+ * Licença: LGPL. Sem copyright.
+ */
+#include "rect.h"
+#include "sprite.h"
+#include "keyboardevent.h"
+#include "environment.h"
+
+constexpr double SPEED { 160.5 };
+
+class Sprite::SpriteState
+{
+public:
+    virtual ~SpriteState() {}
+    virtual void draw_self() {}
+    virtual void update_self(unsigned long) {}
+    virtual bool onKeyboardEvent(const KeyboardEvent&) { return false; }
+};
+
+class Idle : public Sprite::SpriteState
+{
+public:
+    Idle(Sprite *parent) : m_parent(parent),
+        m_animation(new Animation("res/images/idle.png", 0, 0, 304, 410, 2,
+        500, true))
+    {
+        parent->set_dimensions(m_animation->w(), m_animation->h());
+    }
+
+    ~Idle() {}
+
+    void draw_self()
+    {
+        m_animation->draw(m_parent->x(), m_parent->y());
+    }
+
+    void update_self(unsigned long elapsed)
+    {
+        m_animation->update(elapsed);
+
+        if (m_parent->direction() != 0)
+        {
+            m_parent->report_event(Sprite::MOVED);
+        }
+    }
+
+private:
+    Sprite *m_parent;
+    unique_ptr<Animation> m_animation;
+};
+
+class Running : public Sprite::SpriteState
+{
+public:
+    Running(Sprite *parent) : m_parent(parent),
+        m_animation(new Animation("res/images/running.png", 0, 0, 307,
+        409, 4, 300, true))
+    {
+        parent->set_dimensions(m_animation->w(), m_animation->h());
+    }
+
+    ~Running() {}
+
+    void draw_self()
+    {
+        m_animation->draw(m_parent->x(), m_parent->y());
+    }
+
+    void update_self(unsigned long elapsed)
+    {
+        m_animation->update(elapsed);
+
+        short dir = m_parent->direction();
+
+        if (dir == 0)
+        {
+           m_parent->report_event(Sprite::STOPPED);
+        } else if (dir < 0)
+        {
+            m_animation->set_row(0);
+        } else
+        {
+            m_animation->set_row(1);
+        }
+    }
+
+private:
+    Sprite *m_parent;
+    unique_ptr<Animation> m_animation;
+};
+
+
+Sprite::Sprite(Object *parent, ObjectID id)
+    : Object(parent, id), m_left(0), m_right(0), m_last(0), m_state(IDLE)
+{
+    Environment *env = Environment::get_instance();
+    env->events_manager->register_keyboard_event_listener(this);
+
+    for (int state = IDLE; state < STATE_TOTAL; ++state)
+    {
+        m_states[state] = nullptr;
+
+        for (int event = STOPPED; event < EVENT_TOTAL; ++event)
+        {
+            m_fst[state][event] = NONE;
+        }
+    }
+
+    m_states[IDLE] = new Idle(this);
+    m_states[RUNNING] = new Running(this);
+
+    m_fst[IDLE][MOVED] = RUNNING;
+    m_fst[RUNNING][STOPPED] = IDLE;
+}
+
+Sprite::~Sprite()
+{
+    Environment *env = Environment::get_instance();
+    env->events_manager->unregister_keyboard_event_listener(this);
+
+    for (int state = IDLE; state < STATE_TOTAL; ++state)
+    {
+        delete m_states[state];
+    }
+}
+
+bool
+Sprite::onKeyboardEvent(const KeyboardEvent& event)
+{
+    switch (event.state())
+    {
+        case KeyboardEvent::PRESSED:
+        switch (event.key())
+        {
+        case KeyboardEvent::LEFT:
+                m_left = 1;
+                return true;
+
+            case KeyboardEvent::RIGHT:
+                m_right = 1;
+                return true;
+            default:
+                return false;
+        }
+
+        case KeyboardEvent::RELEASED:
+        switch (event.key())
+        {
+            case KeyboardEvent::LEFT:
+                m_left = 0;
+                return true;
+
+            case KeyboardEvent::RIGHT:
+                m_right = 0;
+                return true;
+            default:
+                return false;
+        }
+
+        default:
+            break;
+    }
+
+    return false;
+}
+
+void
+Sprite::draw_self()
+{
+    m_states[m_state]->draw_self();
+}
+
+void
+Sprite::update_self(unsigned long elapsed)
+{
+    m_states[m_state]->update_self(elapsed);
+
+    if (not m_last)
+    {
+        m_last = elapsed;
+    }
+
+    double dx = m_left*(-SPEED) + m_right*SPEED;
+    double x = this->x() + dx*((elapsed - m_last)/1000.0);
+
+    m_last = elapsed;
+
+    if (x < 0)
+    {
+        x = 0;
+    }
+
+    Environment *env = Environment::get_instance();
+    if (x + w() > env->canvas->w())
+    {
+        x = env->canvas->w() - w();
+    }
+
+    set_x(x);
+}
+
+void
+Sprite::report_event(Event event)
+{
+    State next = m_fst[m_state][event];
+
+    if (next != m_state and next != NONE)
+    {
+        change_state(next, m_state);
+        m_last = 0;
+    }
+}
+
+void
+Sprite::change_state(State to, State)
+{
+    m_state = to;
+}
+
+short
+Sprite::direction() const
+{
+    return m_right - m_left;
+}

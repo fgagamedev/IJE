@@ -42,9 +42,19 @@ public:
     {
         m_animation->update(elapsed);
 
-        if (m_parent->direction() != 0)
+        short dir = m_parent->direction();
+
+        if (dir != 0)
         {
             m_parent->report_event(Sprite::MOVED);
+
+            if (dir < 0)
+            {
+                m_animation->set_row(1);
+            } else
+            {
+                m_animation->set_row(0);
+            }
         }
     }
 
@@ -78,7 +88,7 @@ public:
 
         if (dir == 0)
         {
-           m_parent->report_event(Sprite::STOPPED);
+            m_parent->report_event(Sprite::STOPPED);
         } else if (dir < 0)
         {
             m_animation->set_row(0);
@@ -198,6 +208,12 @@ Sprite::update_self(unsigned long elapsed)
     if (x + w() > env->canvas->w())
     {
         x = env->canvas->w() - w();
+    }
+
+    if ((x == env->canvas->w() - w() and dx > 0) or 
+        (x == 0 and dx < 0))
+    {
+        change_state(Sprite::IDLE, m_state);
     }
 
     set_x(x);

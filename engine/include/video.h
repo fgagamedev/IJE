@@ -30,6 +30,7 @@ public:
     void set_fullscreen(bool fullscreen = true) throw (Exception);
     void set_window_name(const string& name);
 
+    bool fullscreen() const ;
     pair<int, int> resolution() const;
     Canvas * canvas() const;
 

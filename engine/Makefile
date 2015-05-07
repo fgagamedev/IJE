@@ -27,22 +27,28 @@ OBJ = ${addprefix $(OBJ_DIR)/, ${notdir ${SRC:.cpp=.o}}}
 
 all:
 	@mkdir -p $(OBJ_DIR) $(LIB_DIR)
-	$(MAKE) $(TARGET)
-	$(MAKE) $(TEST)
+	@make $(TARGET)
+	@make $(TEST)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
+	@echo Building $^
+	@$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
 
 $(TST_DIR)/%.o: $(TST_DIR)/%.cpp
-	$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
+	@echo Building $^
+	@$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
 
 $(TARGET): $(OBJ)
-	$(AR) $(ARFLAGS) $@ $(OBJ)
+	@echo Creating objects...
+	@$(AR) $(ARFLAGS) $@ $(OBJ)
 
 $(TEST): $(TST_OBJ) $(TARGET)
-	$(CC) $(CFLAGS) $(INCLUDES) $(TST_OBJ) $(TARGET) -o $@ $(LIBS)
+	@echo Building executable...
+	@$(CC) $(CFLAGS) $(INCLUDES) $(TST_OBJ) $(TARGET) -o $@ $(LIBS)
+	@echo Done!
 
 clean:
+	@echo Cleaning...
 	@find . -name *.o -exec rm {} \;
 	@find . -name *.d -exec rm {} \;
 	@rm -rf *~ *.o prog out.txt

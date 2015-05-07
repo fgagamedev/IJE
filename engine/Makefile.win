@@ -36,16 +36,21 @@ all:
 	@make -f Makefile.win $(TEST)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@echo Building $^
 	@$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
 
 $(TST_DIR)/%.o: $(TST_DIR)/%.cpp
+	@echo Building $^
 	@$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
 
 $(TARGET): $(OBJ)
+	@echo Creating objects...
 	@$(AR) $(ARFLAGS) $@ $(OBJ)
 
 $(TEST): $(TST_OBJ) $(TARGET)
+	@echo "Building executable..."
 	@$(CC) $(CFLAGS) $(INCLUDES) $(TST_OBJ) $(TARGET) -o $@.exe $(LIBS)
+	@echo "Done!"
 
 clean:
 	@find . -name *.o -exec rm {} \;

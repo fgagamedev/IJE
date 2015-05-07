@@ -210,6 +210,12 @@ Sprite::update_self(unsigned long elapsed)
         x = env->canvas->w() - w();
     }
 
+    if ((x == env->canvas->w() - w() and dx > 0) or 
+        (x == 0 and dx < 0))
+    {
+        change_state(Sprite::IDLE, m_state);
+    }
+
     set_x(x);
 }
 

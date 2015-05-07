@@ -35,7 +35,7 @@ Stage::Stage(ObjectID id)
 void
 Stage::draw_self()
 {
-    const Color color {0, 200, 60 };
+    const Color color {0, 200, 60};
 
     Environment *env = Environment::get_instance();
     env->canvas->clear(Color::WHITE);

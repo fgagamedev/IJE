@@ -45,7 +45,7 @@ $(TARGET): $(OBJ)
 $(TEST): $(TST_OBJ) $(TARGET)
 	@echo Building executable...
 	@$(CC) $(CFLAGS) $(INCLUDES) $(TST_OBJ) $(TARGET) -o $@ $(LIBS)
-	@echo --- Done
+	@echo Done!
 
 clean:
 	@echo Cleaning...

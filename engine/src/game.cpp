@@ -59,7 +59,6 @@ Game::run()
     while (m_level and not m_done)
     {
         unsigned long now = update_timestep();
-        env->events_manager->dispatch_pending_events();
 
         m_level->update(now);
         m_level->draw();
@@ -73,6 +72,8 @@ Game::run()
             delete m_level;
             m_level = load_level(next);
         }
+        
+        env->events_manager->dispatch_pending_events();
     }
 }
 

@@ -50,7 +50,7 @@ $(TARGET): $(OBJ)
 $(TEST): $(TST_OBJ) $(TARGET)
 	@echo "Building executable..."
 	@$(CC) $(CFLAGS) $(INCLUDES) $(TST_OBJ) $(TARGET) -o $@.exe $(LIBS)
-	@echo "--- Done"
+	@echo "Done!"
 
 clean:
 	@find . -name *.o -exec rm {} \;

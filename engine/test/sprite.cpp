@@ -24,9 +24,8 @@ public:
 class Idle : public Sprite::SpriteState
 {
 public:
-    Idle(Sprite *parent) : m_parent(parent),
-        m_animation(new Animation("res/images/idle.png", 0, 0, 304, 410, 2,
-        500, true))
+    Idle(Sprite *parent,Animation* animation_idle) : m_parent(parent),
+        m_animation(animation_idle)
     {
         parent->set_dimensions(m_animation->w(), m_animation->h());
     }
@@ -66,9 +65,8 @@ private:
 class Running : public Sprite::SpriteState
 {
 public:
-    Running(Sprite *parent) : m_parent(parent),
-        m_animation(new Animation("res/images/running.png", 0, 0, 307,
-        409, 4, 300, true))
+    Running(Sprite *parent,Animation* animation_running) : m_parent(parent),
+        m_animation(animation_running )
     {
         parent->set_dimensions(m_animation->w(), m_animation->h());
     }
@@ -104,7 +102,7 @@ private:
 };
 
 
-Sprite::Sprite(Object *parent, ObjectID id)
+Sprite::Sprite(Object *parent, ObjectID id,std::map<int,Animation*>actions)
     : Object(parent, id), m_left(0), m_right(0), m_last(0), m_state(IDLE)
 {
     Environment *env = Environment::get_instance();
@@ -120,8 +118,8 @@ Sprite::Sprite(Object *parent, ObjectID id)
         }
     }
 
-    m_states[IDLE] = new Idle(this);
-    m_states[RUNNING] = new Running(this);
+    m_states[IDLE] = new Idle(this,actions[IDLE]);
+    m_states[RUNNING] = new Running(this,actions[RUNNING]);
 
     m_fst[IDLE][MOVED] = RUNNING;
     m_fst[RUNNING][STOPPED] = IDLE;

@@ -8,14 +8,12 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include "object.h"
+#include "color.h"
 #include "mousebuttoneventlistener.h"
-
+#include "object.h"
 #include <memory>
 
 using std::unique_ptr;
-
-class Color;
 
 class Button : public Object, public MouseButtonEventListener
 {

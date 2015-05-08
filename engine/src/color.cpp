@@ -83,3 +83,4 @@ Color Color::BLUE {0, 0, 255};
 Color Color::YELLOW {255, 255, 0};
 Color Color::CYAN {0, 255, 255};
 Color Color::MAGENTA {255, 0, 255};
+Color Color::TRANSPARENT {255, 255, 255, 0};

@@ -16,6 +16,7 @@
 Canvas::Canvas(SDL_Renderer *renderer, int w, int h)
     : m_renderer(renderer), m_w(w), m_h(h), m_scale(1)
 {
+    SDL_SetRenderDrawBlendMode(m_renderer, SDL_BLENDMODE_BLEND);
     set_color(Color::WHITE);
 }
 
@@ -294,10 +295,10 @@ Canvas::draw_message(const string message, const Rect rect, const Color& color)
     m_font->make_message(m_renderer, message, color);
 
     SDL_Rect frame;
-    frame.x = rect.x();
-    frame.y = rect.y();
-    frame.w = rect.w();
-    frame.h = rect.h();
+    frame.x = rect.x() * m_scale;
+    frame.y = rect.y() * m_scale;
+    frame.w = rect.w() * m_scale;
+    frame.h = rect.h() * m_scale;
 
     int rc = SDL_RenderCopy(m_renderer, m_font->message(), nullptr, &frame);
 
@@ -310,7 +311,7 @@ Canvas::draw_message(const string message, const Rect rect, const Color& color)
 void
 Canvas::set_scale(const double scale)
 {
-    m_scale *= scale;
+    m_scale = scale;
 }
 
 double

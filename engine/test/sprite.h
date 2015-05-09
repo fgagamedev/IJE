@@ -13,13 +13,14 @@
 #include "animation.h"
 
 #include <memory>
+#include <map>
 
 using std::unique_ptr;
 
 class Sprite : public Object, KeyboardEventListener
 {
 public:
-    Sprite(Object *parent, ObjectID id);
+    Sprite(Object *parent, ObjectID id,std::map<int,Animation*> actions);
     ~Sprite();
 
     bool onKeyboardEvent(const KeyboardEvent& event);
@@ -48,6 +49,7 @@ public:
         FAINTED,
         EVENT_TOTAL,
     } Event;
+
 
     short direction() const;
 

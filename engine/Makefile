@@ -27,19 +27,19 @@ OBJ = ${addprefix $(OBJ_DIR)/, ${notdir ${SRC:.cpp=.o}}}
 
 all:
 	@mkdir -p $(OBJ_DIR) $(LIB_DIR)
-	@make $(TARGET)
-	@make $(TEST)
+	$(MAKE) $(TARGET)
+	$(MAKE) $(TEST)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	@echo Building $^
+	@echo Building $@
 	@$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
 
 $(TST_DIR)/%.o: $(TST_DIR)/%.cpp
-	@echo Building $^
+	@echo Building $@
 	@$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
 
 $(TARGET): $(OBJ)
-	@echo Creating objects...
+	@echo Creating $@...
 	@$(AR) $(ARFLAGS) $@ $(OBJ)
 
 $(TEST): $(TST_OBJ) $(TARGET)

@@ -36,14 +36,19 @@ Stage::Stage(ObjectID id)
     sprite->set_position(x, y);
 
     add_child(sprite);
+
+    shared_ptr<Font> font = env->resources_manager->get_font("res/fonts/FLATS.ttf");
+    env->canvas->set_font(font);
 }
 
 void
 Stage::draw_self()
 {
-    const Color color {0, 200, 60};
+    const Color color { 0, 200, 60 }, gray { 20, 20, 20 };
 
     Environment *env = Environment::get_instance();
     env->canvas->clear(Color::WHITE);
     env->canvas->fill(m_floor, color);
+
+    env->canvas->draw("Text render sample", 550, 400, gray);
 }

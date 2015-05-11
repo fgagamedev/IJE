@@ -1,83 +1,73 @@
+/*
+ * Implementação da classe que representa uma fonte.
+ *
+ * Autor: Carlos Oliveira
+ * Data: 18/04/2015
+ * Licença: LGPL. Sem copyright.
+ */
 #include "font.h"
 
-Font_Manager*
-Font_Manager::instance = NULL;
-
-Font_Manager*
-Font_Manager::Instance()
+class Font::Impl
 {
-    if (not instance)
+public:
+    Impl(TTF_Font *font, int size)
+        : m_font(font), m_size(size)
     {
-        instance = new Font_Manager;
-        init();
     }
 
-    return instance;
-}
-
-
-Font_Manager::Font_Manager()
-{
-}
-
-void
-Font_Manager::init() throw (Exception)
-{
-    int rc = TTF_Init();
-
-    if (rc < 0)
+    ~Impl()
     {
-        throw Exception(SDL_GetError());
+        if (m_font)
+        {
+            TTF_CloseFont(m_font);
+        }
     }
-}
 
-Font_Manager::~Font_Manager()
-{
-    delete instance;
-    TTF_Quit();
-}
-
-void
-Font_Manager::load_font( string path, unsigned int font_size) throw (Exception)
-{
-    m_font = TTF_OpenFont(path.c_str(), font_size);
-
-    if (m_font == nullptr)
+    TTF_Font * font() const
     {
-        throw Exception(TTF_GetError());
+        return m_font;
     }
+
+    int size() const
+    {
+        return m_size;
+    }
+
+private:
+    TTF_Font *m_font;
+    int m_size;
+};
+
+Font::Font(TTF_Font *font, int size)
+    : m_impl(new Font::Impl(font, size))
+{
 }
 
-void
-Font_Manager::close_font()
+Font::~Font()
 {
-    TTF_CloseFont(m_font);
-    m_font = NULL;
 }
 
-
-void
-Font_Manager::make_message(SDL_Renderer *renderer, string message, Color color) throw (Exception)
+Font *
+Font::from_file(const string& path) throw (Exception)
 {
-    SDL_Surface* surfaceMessage = nullptr;
-    SDL_Color m_color = {color.r(), color.g(), color.b(), color.a()};
-    surfaceMessage = TTF_RenderText_Solid(m_font, message.c_str(), m_color);
+    TTF_Font *font = TTF_OpenFont(path.c_str(), 20);
 
-    if (surfaceMessage == nullptr)
+    if (not font)
     {
         throw Exception(TTF_GetError());
     }
 
-    m_message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
-
-    if (m_message == nullptr)
-    {
-        throw Exception(TTF_GetError());
-    }
+    return new Font(font);
 }
 
-SDL_Texture*
-Font_Manager::message() const
+TTF_Font *
+Font::font() const
 {
-    return m_message;
+    return m_impl->font();
+}
+
+int
+Font::size() const
+{
+    return m_impl->size();
 }

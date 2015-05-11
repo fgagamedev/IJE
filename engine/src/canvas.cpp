@@ -12,6 +12,7 @@
 #include "rect.h"
 #include "circle.h"
 #include "image.h"
+#include "font.h"
 
 Canvas::Canvas(SDL_Renderer *renderer, int w, int h)
     : m_renderer(renderer), m_w(w), m_h(h), m_scale(1)
@@ -38,6 +39,12 @@ Canvas::color() const
     return m_color;
 }
 
+shared_ptr<Font>
+Canvas::font() const
+{
+    return m_font;
+}
+
 void
 Canvas::set_color(const Color& color)
 {
@@ -50,6 +57,12 @@ Canvas::set_resolution(int w, int h)
 {
     m_w = w;
     m_h = h;
+}
+
+void
+Canvas::set_font(shared_ptr<Font>& font)
+{
+    m_font = font;
 }
 
 void
@@ -282,30 +295,39 @@ Canvas::renderer() const
 }
 
 void
-Canvas::load_font(const string path, unsigned int font_size) throw (Exception)
+Canvas::draw(const string& text, double x, double y, const Color& color) const
 {
-    m_font = Font_Manager::Instance();
-    m_font->load_font(path, font_size);
-}
-
-void
-Canvas::draw_message(const string message, const Rect rect, const Color& color)
-    const throw (Exception)
-{
-    m_font->make_message(m_renderer, message, color);
-
-    SDL_Rect frame;
-    frame.x = rect.x() * m_scale;
-    frame.y = rect.y() * m_scale;
-    frame.w = rect.w() * m_scale;
-    frame.h = rect.h() * m_scale;
-
-    int rc = SDL_RenderCopy(m_renderer, m_font->message(), nullptr, &frame);
-
-    if (rc)
+    if (not m_font.get())
     {
-        throw Exception(SDL_GetError());
+        return;
     }
+
+    SDL_Color text_color { color.r(), color.g(), color.b(), color.a() };
+
+    SDL_Surface *surface = TTF_RenderUTF8_Blended(m_font->font(), text.c_str(),
+        text_color);
+
+    if (not surface)
+    {
+        return;
+    }
+
+    int w = surface->w;
+    int h = surface->h;
+
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(m_renderer, surface);
+    SDL_FreeSurface(surface);
+
+    if (not texture)
+    {
+        return;
+    }
+
+    SDL_Rect dest { (int) x, (int) y, w, h };
+
+    SDL_RenderCopy(m_renderer, texture, NULL, &dest);
+
+    SDL_DestroyTexture(texture);
 }
 
 void

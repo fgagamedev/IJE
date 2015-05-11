@@ -9,18 +9,20 @@
 #define CANVAS_H
 
 #include <SDL2/SDL.h>
+#include <memory>
 
 #include "exception.h"
 #include "color.h"
-#include "font.h"
 
 using std::string;
+using std::shared_ptr;
 
 class Point;
 class Line;
 class Rect;
 class Circle;
 class Image;
+class Font;
 
 class Canvas
 {
@@ -29,10 +31,14 @@ public:
 
     int w() const;
     int h() const;
+    double scale() const;
     const Color& color() const;
+    shared_ptr<Font> font() const;
 
-    void set_color(const Color& color);
     void set_resolution(int w, int h);
+    void set_scale(const double scale);
+    void set_color(const Color& color);
+    void set_font(shared_ptr<Font>& font);
 
     void clear(const Color& color = Color::BLACK);
     void update();
@@ -53,29 +59,31 @@ public:
     void draw(const Image *image, Rect rect_clip, double x = 0, double y = 0)
         const;
 
+    void draw(const string& text, double x = 0, double y = 0,
+        const Color& color = Color::WHITE) const;
+
     void fill(const Rect& rect) const;
     void fill(const Rect& rect, const Color& color);
 
     void fill(const Circle& circle) const;
     void fill(const Circle& circle, const Color& color);
 
-    void load_image(const string path, const Rect rect) const throw (Exception);
+/*    void load_image(const string path, const Rect rect) const throw (Exception);
 
     void load_font(const string path, unsigned int font_size = 28) throw (Exception);
     void draw_message(const string message, const Rect rect,
         const Color& color = Color::YELLOW) const throw (Exception);
+*/
 
     SDL_Renderer * renderer() const;
 
-    void set_scale(const double scale);
-    double scale() const;
 
 private:
     SDL_Renderer *m_renderer;
     int m_w, m_h;
     double m_scale;
-    Font_Manager *m_font;
     Color m_color;
+    shared_ptr<Font> m_font;
 
     void draw_circle_points(int cx, int cy, int x, int y) const;
     void fill_circle_points(int cx, int cy, int x, int y) const;

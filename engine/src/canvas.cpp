@@ -15,7 +15,7 @@
 #include "font.h"
 
 Canvas::Canvas(SDL_Renderer *renderer, int w, int h)
-    : m_renderer(renderer), m_w(w), m_h(h), m_scale(1)
+    : m_renderer(renderer), m_w(w), m_h(h), m_scale(1), m_blend_mode(NONE)
 {
     SDL_SetRenderDrawBlendMode(m_renderer, SDL_BLENDMODE_BLEND);
     set_color(Color::WHITE);
@@ -45,6 +45,12 @@ Canvas::font() const
     return m_font;
 }
 
+Canvas::BlendMode
+Canvas::blend_mode() const
+{
+    return m_blend_mode;
+}
+
 void
 Canvas::set_color(const Color& color)
 {
@@ -63,6 +69,23 @@ void
 Canvas::set_font(shared_ptr<Font>& font)
 {
     m_font = font;
+}
+
+void
+Canvas::set_blend_mode(BlendMode mode)
+{
+    switch (mode)
+    {
+    case NONE:
+        SDL_SetRenderDrawBlendMode(m_renderer, SDL_BLENDMODE_NONE);
+        break;
+
+    case BLEND:
+        SDL_SetRenderDrawBlendMode(m_renderer, SDL_BLENDMODE_BLEND);
+        break;
+    }
+
+    m_blend_mode = mode;
 }
 
 void

@@ -7,20 +7,27 @@
  */
 #include "util/frontend.h"
 
-#include "environment.h"
+#include "rect.h"
 #include "image.h"
-#include "mousebuttonevent.h"
+#include "environment.h"
+
 #include "joystickevent.h"
 #include "keyboardevent.h"
+#include "mousebuttonevent.h"
 
 class FrontEnd::Impl
 {
 public:
-    Impl(Level *parent, const string& image, unsigned long duration)
-        : m_parent(parent), m_image(nullptr), m_start(0), m_duration(duration)
+    Impl(Level *parent, const string& image, unsigned long duration,
+        const Color& background)
+        : m_parent(parent), m_image(nullptr), m_background(background),
+        m_fad(), m_start(0), m_duration(duration)
     {
         Environment *env = Environment::get_instance();
         m_image = env->resources_manager->get_image(image);
+
+        m_in = m_duration / 3;
+        m_out = m_duration - m_in;
 
         m_x = (env->canvas->w() - m_image->w())/2;
         m_y = (env->canvas->h() - m_image->h())/2;
@@ -68,7 +75,22 @@ public:
             m_start = elapsed;
         }
 
-        if (elapsed - m_start > m_duration)
+        unsigned long now = elapsed - m_start;
+
+        if (now <= m_in)
+        {
+            unsigned char a = (255 * (100 - (100*now)/m_in))/100;
+            m_fad.set_a(a);
+        } else if (now >= m_out)
+        {
+            unsigned char a = (255 * (100*(now - m_out))/m_in)/100;
+            m_fad.set_a(a);
+        } else
+        {
+            m_fad.set_a(0);
+        }
+
+        if (now > m_duration)
         {
             m_parent->finish();
         }
@@ -77,21 +99,29 @@ public:
     void draw_self()
     {
         Environment *env = Environment::get_instance();
-        env->canvas->clear();
+
+        env->canvas->clear(m_background);
         env->canvas->draw(m_image.get(), m_x, m_y);
+
+        env->canvas->set_blend_mode(Canvas::BLEND);
+        Rect r { 0, 0, (double) env->canvas->w(), (double) env->canvas->h() };
+//        m_image.get()->set_alpha(32);
+        env->canvas->fill(r, m_fad);
+        env->canvas->set_blend_mode(Canvas::NONE);
     }
 
 private:
     Level *m_parent;
     shared_ptr<Image> m_image;
-    unsigned long m_start;
-    unsigned long m_duration;
+    Color m_background, m_fad;
+    unsigned long m_start, m_duration;
+    unsigned long m_in, m_out;
     int m_x, m_y;
 };
 
 FrontEnd::FrontEnd(const string& next, const string& image,
-    unsigned long duration) : Level("", next), m_impl(new Impl(this, image,
-    duration))
+    unsigned long duration, const Color& bg)
+        : Level("", next), m_impl(new Impl(this, image, duration, bg))
 {
     Environment *env = Environment::get_instance();
     env->events_manager->register_mouse_button_event_listener(this);

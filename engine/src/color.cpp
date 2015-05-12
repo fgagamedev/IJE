@@ -63,7 +63,7 @@ Color::set_b(unsigned char b)
 void
 Color::set_a(unsigned char a)
 {
-    m_b = a;
+    m_a = a;
 }
 
 void

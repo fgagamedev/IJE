@@ -24,7 +24,7 @@ class FrontEnd : public Level, MouseButtonEventListener, JoyStickEventListener,
 {
 public:
     FrontEnd(const string& next, const string& image,
-        unsigned long duration = 3000);
+        unsigned long duration = 3000, const Color& background = Color::BLACK);
     ~FrontEnd();
 
     bool onMouseButtonEvent(const MouseButtonEvent& event);

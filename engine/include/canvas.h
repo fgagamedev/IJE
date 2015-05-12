@@ -27,6 +27,8 @@ class Font;
 class Canvas
 {
 public:
+    typedef enum { NONE, BLEND } BlendMode;
+
     Canvas(SDL_Renderer *renderer, int w, int h);
 
     int w() const;
@@ -34,11 +36,13 @@ public:
     double scale() const;
     const Color& color() const;
     shared_ptr<Font> font() const;
+    BlendMode blend_mode() const;
 
     void set_resolution(int w, int h);
     void set_scale(const double scale);
     void set_color(const Color& color);
     void set_font(shared_ptr<Font>& font);
+    void set_blend_mode(BlendMode mode);
 
     void clear(const Color& color = Color::BLACK);
     void update();
@@ -84,6 +88,7 @@ private:
     double m_scale;
     Color m_color;
     shared_ptr<Font> m_font;
+    BlendMode m_blend_mode;
 
     void draw_circle_points(int cx, int cy, int x, int y) const;
     void fill_circle_points(int cx, int cy, int x, int y) const;

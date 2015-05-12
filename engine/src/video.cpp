@@ -8,6 +8,8 @@
 #include "video.h"
 #include "canvas.h"
 
+#include <SDL2/SDL_ttf.h>
+
 using namespace std;
 
 Video::Video()
@@ -33,6 +35,11 @@ Video::~Video()
         SDL_DestroyWindow(m_window);
     }
 
+    if (TTF_WasInit())
+    {
+        TTF_Quit();
+    }
+
     if (SDL_WasInit(SDL_INIT_EVERYTHING))
     {
         SDL_Quit();
@@ -47,6 +54,13 @@ Video::init() throw (Exception)
     if (rc)
     {
         throw Exception(SDL_GetError());
+    }
+
+    rc = TTF_Init();
+
+    if (rc)
+    {
+        throw Exception(TTF_GetError());
     }
 
     rc = SDL_CreateWindowAndRenderer(m_w, m_h, 0, &m_window, &m_renderer);
@@ -109,8 +123,11 @@ Video::fullscreen() const
     int flag = SDL_GetWindowFlags(m_window);
 
     if (flag & SDL_WINDOW_FULLSCREEN)
+    {
         return true;
-    return false; 
+    }
+
+    return false;
 }
 
 void

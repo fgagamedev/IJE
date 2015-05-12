@@ -1,6 +1,14 @@
+/*
+ * Classe que representa uma fonte.
+ *
+ * Autor: Carlos Oliveira
+ * Data: 18/04/2015
+ * Licença: LGPL. Sem copyright.
+ */
 #ifndef FONT_H
 #define FONT_H
 
+#include <memory>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
@@ -8,26 +16,28 @@
 #include "color.h"
 
 using std::string;
+using std::unique_ptr;
 
-class Font_Manager
+class Font
 {
 public:
-    static Font_Manager *Instance();
-    static void init() throw (Exception);
-    void load_font(string path, unsigned int font_size) throw (Exception);
-    void close_font();
+    typedef enum { NORMAL, BOLD, ITALIC } Style;
+    ~Font();
 
-    SDL_Texture* message()const;
-    void make_message(SDL_Renderer *renderer, string message, Color color) throw (Exception);
+    static Font * from_file(const string& path) throw (Exception);
 
-protected:
-    Font_Manager();
-    ~Font_Manager();
+    TTF_Font * font() const;
+    int size() const;
+    Style style() const;
 
+    void set_size(int size);
+    void set_style(Style style);
+    
 private:
-    static Font_Manager *instance;
-    SDL_Texture *m_message;
-    TTF_Font *m_font;
+    class Impl;
+    unique_ptr<Impl> m_impl;
+
+    Font(TTF_Font *font, const string& path, int size = 20);
 };
 
 #endif

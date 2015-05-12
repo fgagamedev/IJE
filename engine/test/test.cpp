@@ -6,7 +6,7 @@
  * Licença: LGPL. Sem copyright.
  */
 #include "test.h"
-#include "frontend.h"
+#include "util/frontend.h"
 #include "titlescreen.h"
 #include "stage.h"
 

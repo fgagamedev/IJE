@@ -21,9 +21,12 @@ public:
     Level(const string& id, const string& next = "");
 
     string next() const;
-    bool is_done() const;
+    bool finished() const;
 
-protected:
+    void finish();
+    void set_next(const string& next);
+
+private:
     string m_next;
     bool m_done;
     Environment * env;

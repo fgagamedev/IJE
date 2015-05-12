@@ -18,7 +18,7 @@ CFLAGS = -W -Wall -pedantic -std=c++11 -MMD -g3
 INCLUDES = -Iinclude -Itest `sdl2-config --cflags`
 LIBS = `sdl2-config --libs` -lSDL2_image -lSDL2_ttf
 
-TARGET = $(LIB_DIR)/$(NAME).a
+TARGET = $(LIB_DIR)/lib$(NAME).a
 
 TEST = $(TST_DIR)/test
 TST_SRC = ${wildcard $(TST_DIR)/*.cpp}
@@ -63,7 +63,8 @@ dist:
 
 dist-clean: clean
 	@find . -name *.a -exec rm {} \;
-	@rm test/test $(NAME).tar.gz
+	@rm -f test/test $(TARGET)
+	@rm -rf *.tar.gz
 
 install: $(TARGET)
 	@mkdir -p $(INSTALL_DIR)/lib $(INSTALL_DIR)/include

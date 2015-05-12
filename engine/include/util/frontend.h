@@ -25,17 +25,15 @@ class FrontEnd : public Level, MouseButtonEventListener, JoyStickEventListener,
 public:
     FrontEnd(const string& next, const string& image,
         unsigned long duration = 3000);
-    virtual ~FrontEnd();
+    ~FrontEnd();
 
     bool onMouseButtonEvent(const MouseButtonEvent& event);
     bool onKeyboardEvent(const KeyboardEvent& event);
     bool onJoyStickEvent(const JoyStickEvent& event);
 
 private:
-    shared_ptr<Image> m_image;
-    unsigned long m_start;
-    unsigned long m_duration;
-    int m_x, m_y;
+    class Impl;
+    shared_ptr<Impl> m_impl;
 
     void update_self(unsigned long elapsed);
     void draw_self();

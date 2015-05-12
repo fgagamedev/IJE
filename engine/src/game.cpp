@@ -66,7 +66,7 @@ Game::run()
         update_screen();
         delay(1);
 
-        if (m_level->is_done())
+        if (m_level->finished())
         {
             string next = m_level->next();
             delete m_level;

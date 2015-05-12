@@ -19,7 +19,19 @@ Level::next() const
 }
 
 bool
-Level::is_done() const
+Level::finished() const
 {
     return m_done;
+}
+
+void
+Level::finish()
+{
+    m_done = true;
+}
+
+void
+Level::set_next(const string& next)
+{
+    m_next = next;
 }

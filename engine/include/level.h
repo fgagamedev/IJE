@@ -26,7 +26,7 @@ public:
     void finish();
     void set_next(const string& next);
 
-private:
+protected:
     string m_next;
     bool m_done;
     Environment * env;

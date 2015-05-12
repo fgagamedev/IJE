@@ -10,8 +10,8 @@
 class Font::Impl
 {
 public:
-    Impl(TTF_Font *font, int size)
-        : m_font(font), m_size(size)
+    Impl(TTF_Font *font, const string& path, int size)
+        : m_font(font), m_path(path), m_size(size), m_style(NORMAL)
     {
     }
 
@@ -33,13 +33,62 @@ public:
         return m_size;
     }
 
+    Style style() const
+    {
+        return m_style;
+    }
+
+    void set_size(int size)
+    {
+        change_size(size);
+    }
+
+    void set_style(Style style)
+    {
+        switch (style)
+        {
+        case BOLD:
+            TTF_SetFontStyle(m_font, TTF_STYLE_BOLD);
+            break;
+
+        case ITALIC:
+            TTF_SetFontStyle(m_font, TTF_STYLE_ITALIC);
+            break;
+
+        default:
+            TTF_SetFontStyle(m_font, TTF_STYLE_NORMAL);
+            break;
+        }
+    }
+
 private:
     TTF_Font *m_font;
+    string m_path;
     int m_size;
+    Style m_style;
+
+    void change_size(int size)
+    {
+        if (m_size == size)
+        {
+            return;
+        }
+
+        TTF_Font *font = TTF_OpenFont(m_path.c_str(), size);
+
+        if (not font)
+        {
+            return;
+        }
+
+        TTF_CloseFont(m_font);
+        m_font = font;
+        m_size = size;
+    }
 };
 
-Font::Font(TTF_Font *font, int size)
-    : m_impl(new Font::Impl(font, size))
+Font::Font(TTF_Font *font, const string& path, int size)
+    : m_impl(new Font::Impl(font, path, size))
 {
 }
 
@@ -57,7 +106,7 @@ Font::from_file(const string& path) throw (Exception)
         throw Exception(TTF_GetError());
     }
 
-    return new Font(font);
+    return new Font(font, path);
 }
 
 TTF_Font *
@@ -70,4 +119,22 @@ int
 Font::size() const
 {
     return m_impl->size();
+}
+
+Font::Style
+Font::style() const
+{
+    return m_impl->style();
+}
+
+void
+Font::set_size(int size)
+{
+    m_impl->set_size(size);
+}
+
+void
+Font::set_style(Style style)
+{
+    m_impl->set_style(style);
 }

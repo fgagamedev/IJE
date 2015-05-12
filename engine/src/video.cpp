@@ -123,8 +123,11 @@ Video::fullscreen() const
     int flag = SDL_GetWindowFlags(m_window);
 
     if (flag & SDL_WINDOW_FULLSCREEN)
+    {
         return true;
-    return false; 
+    }
+
+    return false;
 }
 
 void

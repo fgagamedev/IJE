@@ -21,18 +21,23 @@ using std::unique_ptr;
 class Font
 {
 public:
+    typedef enum { NORMAL, BOLD, ITALIC } Style;
     ~Font();
 
     static Font * from_file(const string& path) throw (Exception);
 
     TTF_Font * font() const;
     int size() const;
+    Style style() const;
 
+    void set_size(int size);
+    void set_style(Style style);
+    
 private:
     class Impl;
     unique_ptr<Impl> m_impl;
 
-    Font(TTF_Font *font, int size = 20);
+    Font(TTF_Font *font, const string& path, int size = 20);
 };
 
 #endif

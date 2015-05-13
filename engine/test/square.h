@@ -8,8 +8,8 @@
 #ifndef SQUARE_H
 #define SQUARE_H
 
-#include "object.h"
-#include "keyboardeventlistener.h"
+#include "core/object.h"
+#include "core/keyboardeventlistener.h"
 
 class Square : public Object, KeyboardEventListener
 {

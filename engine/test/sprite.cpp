@@ -5,10 +5,10 @@
  * Data: 05/05/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "rect.h"
+#include "core/rect.h"
 #include "sprite.h"
-#include "keyboardevent.h"
-#include "environment.h"
+#include "core/keyboardevent.h"
+#include "core/environment.h"
 
 constexpr double SPEED { 160.5 };
 

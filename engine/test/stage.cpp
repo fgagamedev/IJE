@@ -6,10 +6,10 @@
  * Licença: LGPL. Sem copyright.
  */
 #include "stage.h"
-#include "font.h"
+#include "core/font.h"
 #include "square.h"
 #include "sprite.h"
-#include "environment.h"
+#include "core/environment.h"
 
 #include <map>
 

@@ -6,7 +6,7 @@
  * Licença: LGPL. Sem copyright.
  */
 #include "titlescreen.h"
-#include "environment.h"
+#include "core/environment.h"
 #include "button.h"
 
 #include <iostream>

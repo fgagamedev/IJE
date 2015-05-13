@@ -5,7 +5,7 @@
  * Data: 25/04/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "mousemotionevent.h"
+#include "core/mousemotionevent.h"
 
 MouseMotionEvent::MouseMotionEvent(int x, int y, int x_rel, int y_rel,
     State left, State right, State middle)

@@ -5,11 +5,11 @@
  * Data: 29/04/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "color.h"
-#include "rect.h"
+#include "core/color.h"
+#include "core/rect.h"
 #include "button.h"
-#include "environment.h"
-#include "mousebuttonevent.h"
+#include "core/environment.h"
+#include "core/mousebuttonevent.h"
 
 #include <cstdio>
 

@@ -5,7 +5,7 @@
  * Data: 13/04/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "line.h"
+#include "core/line.h"
 
 Line::Line(const Point& a, const Point& b)
     : m_a(a), m_b(b)

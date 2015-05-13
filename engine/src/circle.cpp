@@ -5,7 +5,7 @@
  * Data: 13/04/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "circle.h"
+#include "core/circle.h"
 
 Circle::Circle(const Point& center, double radius)
     : m_center(center), m_r(radius)

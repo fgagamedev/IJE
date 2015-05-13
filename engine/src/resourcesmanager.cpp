@@ -6,10 +6,10 @@
  * Data: 20/04/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "resourcesmanager.h"
+#include "core/resourcesmanager.h"
 
-#include "image.h"
-#include "font.h"
+#include "core/image.h"
+#include "core/font.h"
 
 shared_ptr<Image>
 ResourcesManager::get_image(const string& id) throw (Exception)

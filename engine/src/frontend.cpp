@@ -7,13 +7,13 @@
  */
 #include "util/frontend.h"
 
-#include "rect.h"
-#include "image.h"
-#include "environment.h"
+#include "core/rect.h"
+#include "core/image.h"
+#include "core/environment.h"
 
-#include "joystickevent.h"
-#include "keyboardevent.h"
-#include "mousebuttonevent.h"
+#include "core/joystickevent.h"
+#include "core/keyboardevent.h"
+#include "core/mousebuttonevent.h"
 
 class FrontEnd::Impl
 {

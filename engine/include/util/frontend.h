@@ -8,10 +8,10 @@
 #ifndef FRONT_END_H
 #define FRONT_END_H
 
-#include "level.h"
-#include "mousebuttoneventlistener.h"
-#include "joystickeventlistener.h"
-#include "keyboardeventlistener.h"
+#include "core/level.h"
+#include "core/mousebuttoneventlistener.h"
+#include "core/joystickeventlistener.h"
+#include "core/keyboardeventlistener.h"
 
 #include <memory>
 

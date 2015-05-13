@@ -5,9 +5,9 @@
  * Data: 16/04/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "image.h"
-#include "exception.h"
-#include "environment.h"
+#include "core/image.h"
+#include "core/exception.h"
+#include "core/environment.h"
 
 Image::Image(SDL_Texture *texture, int w, int h)
     : m_texture(texture), m_w(w), m_h(h)

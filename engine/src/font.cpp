@@ -5,7 +5,7 @@
  * Data: 18/04/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "font.h"
+#include "core/font.h"
 
 class Font::Impl
 {

@@ -8,9 +8,10 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include "color.h"
-#include "mousebuttoneventlistener.h"
-#include "object.h"
+#include "core/color.h"
+#include "core/mousebuttoneventlistener.h"
+#include "core/object.h"
+
 #include <memory>
 
 using std::unique_ptr;

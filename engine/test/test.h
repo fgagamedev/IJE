@@ -8,7 +8,7 @@
 #ifndef TEST_H
 #define TEST_H
 
-#include "game.h"
+#include "core/game.h"
 
 class Test : public Game
 {

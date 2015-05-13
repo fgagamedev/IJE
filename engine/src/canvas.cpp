@@ -5,14 +5,14 @@
  * Data: 13/04/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "canvas.h"
+#include "core/canvas.h"
 
-#include "point.h"
-#include "line.h"
-#include "rect.h"
-#include "circle.h"
-#include "image.h"
-#include "font.h"
+#include "core/point.h"
+#include "core/line.h"
+#include "core/rect.h"
+#include "core/circle.h"
+#include "core/image.h"
+#include "core/font.h"
 
 Canvas::Canvas(SDL_Renderer *renderer, int w, int h)
     : m_renderer(renderer), m_w(w), m_h(h), m_scale(1), m_blend_mode(NONE)

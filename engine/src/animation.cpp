@@ -5,11 +5,11 @@
  * Data: 05/05/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "animation.h"
+#include "core/animation.h"
 
-#include "rect.h"
-#include "image.h"
-#include "environment.h"
+#include "core/rect.h"
+#include "core/image.h"
+#include "core/environment.h"
 
 class Animation::Impl
 {

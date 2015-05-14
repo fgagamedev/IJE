@@ -5,11 +5,11 @@
  * Data: 26/03/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "game.h"
-#include "video.h"
-#include "environment.h"
-#include "systemevent.h"
-#include "keyboardevent.h"
+#include "core/game.h"
+#include "core/video.h"
+#include "core/environment.h"
+#include "core/systemevent.h"
+#include "core/keyboardevent.h"
 
 #include <SDL2/SDL.h>
 

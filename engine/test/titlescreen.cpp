@@ -6,8 +6,9 @@
  * Licença: LGPL. Sem copyright.
  */
 #include "titlescreen.h"
-#include "environment.h"
-#include "button.h"
+#include "core/environment.h"
+#include "core/font.h"
+#include "util/button.h"
 
 #include <iostream>
 using namespace std;
@@ -17,18 +18,32 @@ TitleScreen::TitleScreen()
 {
     Environment *env = Environment::get_instance();
 
+    shared_ptr<Font> font = env->resources_manager->get_font("res/fonts/FLATS.ttf");
+
+    font->set_size(40);
+    font->set_style(Font::BOLD);
+    env->canvas->set_font(font);
+
     double w = env->canvas->w();
     double h = env->canvas->h();
 
-    double bw = 100;
-    double bh = 50;
+    set_dimensions(w, h);
 
-    double bx = (w - bw)/2;
-    double by = h/2;
+    double bw = 250;
+    double bh = 100;
 
-    Button *ok = new Button(this, "ok", bx, by, bw, bh);
-    Button *exit = new Button(this, "exit", bx, by + bh + 20, bw, bh,
-        Color::RED);
+    Button *ok = new Button(this, "ok", bw, bh);
+    ok->set_text("Start", Color::WHITE);
+    ok->set_color(Color::BLUE, Color::GREEN);
+    ok->align_to(this, Object::CENTER, Object::NONE);
+    ok->set_y(h*0.4);
+    ok->set_border(5);
+
+    Button *exit = new Button(this, "exit", bw, bh);
+    exit->set_text("Quit", Color(0, 0, 0, 32));
+    exit->set_color(Color(255, 255, 0, 128), Color::RED);
+    exit->align_to(this, Object::CENTER, Object::NONE);
+    exit->set_y(ok->y() + ok->h() + 20);
 
     ok->add_observer(this);
     exit->add_observer(this);

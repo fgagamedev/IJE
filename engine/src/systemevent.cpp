@@ -5,7 +5,7 @@
  * Data: 22/04/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "systemevent.h"
+#include "core/systemevent.h"
 
 SystemEvent::SystemEvent(SystemEvent::Type type)
     : m_type(type)

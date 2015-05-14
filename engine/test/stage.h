@@ -8,8 +8,8 @@
 #ifndef STAGE_H
 #define STAGE_H
 
-#include "level.h"
-#include "rect.h"
+#include "core/level.h"
+#include "core/rect.h"
 
 class Stage : public Level
 {

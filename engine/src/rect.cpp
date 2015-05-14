@@ -5,7 +5,7 @@
  * Data: 13/04/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "rect.h"
+#include "core/rect.h"
 
 Rect::Rect(double x, double y, double w, double h)
     : m_x(x), m_y(y), m_w(w), m_h(h)
@@ -61,7 +61,7 @@ Rect::set_h(double h)
 }
 
 void
-Rect::set(double x, double y)
+Rect::set_position(double x, double y)
 {
     m_x = x;
     m_y = y;

@@ -8,9 +8,9 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
-#include "object.h"
-#include "keyboardeventlistener.h"
-#include "animation.h"
+#include "core/object.h"
+#include "core/keyboardeventlistener.h"
+#include "core/animation.h"
 
 #include <memory>
 #include <map>

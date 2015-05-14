@@ -5,7 +5,7 @@
  * Data: 22/04/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "keyboardevent.h"
+#include "core/keyboardevent.h"
 
 #include <SDL2/SDL.h>
 #include <map>

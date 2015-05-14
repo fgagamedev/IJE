@@ -1,5 +1,5 @@
 NAME = ijengine
-VERSION = 0.0.1
+VERSION = 0.0.2
 
 SRC_DIR = src
 INC_DIR = include
@@ -7,7 +7,10 @@ OBJ_DIR = obj
 LIB_DIR = lib
 TST_DIR = test
 
-INSTALL_DIR = /usr/share/$(NAME)
+INSTALL_DIR = /usr/local
+INCLUDES_INSTALL_DIR = $(INSTALL_DIR)/include/$(NAME)
+LIB_INSTALL_DIR = $(INSTALL_DIR)/lib
+
 PACKAGE = $(NAME)-$(VERSION).tar.gz
 
 CC = g++
@@ -32,7 +35,6 @@ OBJ = ${addprefix $(OBJ_DIR)/, ${notdir ${SRC:.cpp=.o}}}
 all:
 	@mkdir -p $(OBJ_DIR) $(LIB_DIR)
 	$(MAKE) $(TARGET)
-	$(MAKE) $(TEST)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@echo Building $@
@@ -67,11 +69,11 @@ dist-clean: clean
 	@rm -rf *.tar.gz
 
 install: $(TARGET)
-	@mkdir -p $(INSTALL_DIR)/lib $(INSTALL_DIR)/include
-	@cp -rf include $(INSTALL_DIR)
-	@cp -f $(TARGET) $(INSTALL_DIR)/lib/
+	@mkdir -p $(INCLUDES_INSTALL_DIR) $(LIB_INSTALL_DIR)
+	@cp -rf include/* $(INCLUDES_INSTALL_DIR)
+	@cp -f $(TARGET) $(LIB_INSTALL_DIR)
 
 uninstall:
-	@rm -rf $(INSTALL_DIR)
+	@rm -rf $(INCLUDES_INSTALL_DIR) $(INSTALL_DIR)/$(TARGET)
 
 -include $(OBJ:.o=.d)

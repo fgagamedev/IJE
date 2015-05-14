@@ -5,7 +5,7 @@
  * Data: 26/04/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "joystickevent.h"
+#include "core/joystickevent.h"
 
 #include <SDL2/SDL.h>
 #include <map>

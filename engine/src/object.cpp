@@ -5,8 +5,8 @@
  * Data: 20/04/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "object.h"
-#include "rect.h"
+#include "core/object.h"
+#include "core/rect.h"
 
 #include <list>
 
@@ -15,9 +15,61 @@ using std::list;
 class Object::Impl
 {
 public:
-    Impl(Object *p, ObjectID oid, double x, double y, double w, double h);
+    Impl(Object *b, Object *p, ObjectID oid, double x, double y, double w, double h);
     ~Impl();
 
+    void align_to(const Object* object, Alignment xaxis, Alignment yaxis)
+    {
+        if (not object)
+        {
+            return;
+        }
+
+        double x = box.x();
+
+        switch (xaxis)
+        {
+        case LEFT:
+            x = object->x();
+            break;
+
+        case CENTER:
+            x = (object->w() - box.w())/2 + object->x();
+            break;
+
+        case RIGHT:
+            x = object->w() - box.w();
+            break;
+
+        default:
+            break;
+        }
+
+        double y = box.y();
+
+        switch (yaxis)
+        {
+        case TOP:
+            y = object->y();
+            break;
+
+        case MIDDLE:
+            y = (object->h() - box.h())/2 + object->y();
+            break;
+
+        case BOTTOM:
+            y = object->h() - box.h();
+            break;
+
+        default:
+            break;
+        }
+
+        box.set_position(x, y);
+        base->set_position(x, y);
+    }
+
+    Object *base;
     Object *parent;
     ObjectID id;
     Rect box;
@@ -26,8 +78,8 @@ public:
 };
 
 
-Object::Impl::Impl(Object *p, ObjectID oid, double x, double y, double w,
-    double h) : parent(p), id(oid), box(x, y, w, h)
+Object::Impl::Impl(Object *b, Object *p, ObjectID oid, double x, double y, double w,
+    double h) : base(b), parent(p), id(oid), box(x, y, w, h)
 {
 }
 
@@ -42,7 +94,7 @@ Object::Impl::~Impl()
 }
 
 Object::Object(Object *parent, ObjectID id, double x, double y, double w,
-    double h) : m_impl(new Object::Impl(parent, id, x, y, w, h))
+    double h) : m_impl(new Object::Impl(this, parent, id, x, y, w, h))
 {
 }
 
@@ -123,7 +175,7 @@ Object::set_h(double h)
 void
 Object::set_position(double x, double y)
 {
-    m_impl->box.set(x, y);
+    m_impl->box.set_position(x, y);
 }
 
 void
@@ -230,4 +282,10 @@ Object::update_self(unsigned long)
 void
 Object::draw_self()
 {
+}
+
+void
+Object::align_to(const Object* object, Alignment xaxis, Alignment yaxis)
+{
+    m_impl->align_to(object, xaxis, yaxis);
 }

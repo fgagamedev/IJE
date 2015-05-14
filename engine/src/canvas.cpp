@@ -365,3 +365,34 @@ Canvas::scale() const
 {
     return m_scale;
 }
+
+Texture *
+Canvas::render_text(const string& text, const Color& color)
+{
+    if (not m_font.get())
+    {
+        return nullptr;
+    }
+
+    SDL_Color text_color { color.r(), color.g(), color.b(), color.a() };
+    SDL_Surface *surface = TTF_RenderUTF8_Blended(m_font->font(),
+            text.c_str(), text_color);
+
+    if (not surface)
+    {
+        return nullptr;
+    }
+
+    int w = surface->w;
+    int h = surface->h;
+
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(m_renderer, surface);
+    SDL_FreeSurface(surface);
+
+    if (not texture)
+    {
+        return nullptr;
+    }
+
+    return new Texture(texture, w, h);
+}

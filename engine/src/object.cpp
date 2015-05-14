@@ -15,7 +15,7 @@ using std::list;
 class Object::Impl
 {
 public:
-    Impl(Object *p, ObjectID oid, double x, double y, double w, double h);
+    Impl(Object *b, Object *p, ObjectID oid, double x, double y, double w, double h);
     ~Impl();
 
     void align_to(const Object* object, Alignment xaxis, Alignment yaxis)
@@ -66,9 +66,10 @@ public:
         }
 
         box.set_position(x, y);
-        parent->set_position(x, y);
+        base->set_position(x, y);
     }
 
+    Object *base;
     Object *parent;
     ObjectID id;
     Rect box;
@@ -77,8 +78,8 @@ public:
 };
 
 
-Object::Impl::Impl(Object *p, ObjectID oid, double x, double y, double w,
-    double h) : parent(p), id(oid), box(x, y, w, h)
+Object::Impl::Impl(Object *b, Object *p, ObjectID oid, double x, double y, double w,
+    double h) : base(b), parent(p), id(oid), box(x, y, w, h)
 {
 }
 
@@ -93,7 +94,7 @@ Object::Impl::~Impl()
 }
 
 Object::Object(Object *parent, ObjectID id, double x, double y, double w,
-    double h) : m_impl(new Object::Impl(parent, id, x, y, w, h))
+    double h) : m_impl(new Object::Impl(this, parent, id, x, y, w, h))
 {
 }
 

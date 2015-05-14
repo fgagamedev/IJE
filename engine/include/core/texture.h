@@ -19,6 +19,7 @@ using std::unique_ptr;
 class Texture
 {
 public:
+    Texture(void *data, int w, int h);
     ~Texture();
 
     int w() const;
@@ -30,8 +31,6 @@ public:
 private:
     class Impl;
     unique_ptr<Impl> m_impl;
-
-    Texture(void *data, int w, int h);
 };
 
 #endif

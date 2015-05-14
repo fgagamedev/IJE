@@ -7,6 +7,7 @@
  */
 #include "core/color.h"
 #include "core/rect.h"
+#include "core/text.h"
 #include "util/button.h"
 #include "core/environment.h"
 #include "core/mousebuttonevent.h"
@@ -21,9 +22,19 @@ public:
 
     Impl(Button *parent, const string& text, const Color& idle,
         const Color& active, const Color& border)
-        : m_parent(parent), m_text(text), m_idle(idle), m_active(active),
+        : m_parent(parent), m_text(nullptr), m_idle(idle), m_active(active),
         m_border(border), m_state(IDLE)
     {
+        if (text.size() > 1)
+        {
+            m_text = new Text(nullptr, text);
+            m_text->align_to(parent, Object::CENTER, Object::MIDDLE);
+        }
+    }
+
+    ~Impl()
+    {
+        delete m_text;
     }
 
     bool onMouseButtonEvent(const MouseButtonEvent& event)
@@ -64,11 +75,16 @@ public:
 
         env->canvas->fill(m_parent->bounding_box(), color);
         env->canvas->draw(m_parent->bounding_box(), m_border);
+
+        if (m_text)
+        {
+            m_text->draw();
+        }
     }
 
 private:
     Button *m_parent;
-    string m_text;
+    Text *m_text;
     Color m_idle, m_active, m_border;
     State m_state;
 };

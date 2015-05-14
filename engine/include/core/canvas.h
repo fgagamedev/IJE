@@ -72,6 +72,8 @@ public:
     void fill(const Circle& circle) const;
     void fill(const Circle& circle, const Color& color);
 
+    Texture * render_text(const string& text, const Color& color);
+
     SDL_Renderer * renderer() const;
 
 private:

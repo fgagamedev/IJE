@@ -7,6 +7,7 @@
  */
 #include "titlescreen.h"
 #include "core/environment.h"
+#include "core/font.h"
 #include "util/button.h"
 
 #include <iostream>
@@ -17,19 +18,25 @@ TitleScreen::TitleScreen()
 {
     Environment *env = Environment::get_instance();
 
+    shared_ptr<Font> font = env->resources_manager->get_font("res/fonts/FLATS.ttf");
+
+    font->set_size(40);
+    font->set_style(Font::BOLD);
+    env->canvas->set_font(font);
+
     double w = env->canvas->w();
     double h = env->canvas->h();
 
-    double bw = 100;
-    double bh = 50;
+    double bw = 250;
+    double bh = 100;
 
     double bx = (w - bw)/2;
     double by = h/2;
 
-    Button *ok = new Button(this, "ok", bx, by, bw, bh, "", Color::BLUE,
+    Button *ok = new Button(this, "ok", bx, by, bw, bh, "Start", Color::BLUE,
         Color::GREEN);
     Button *exit = new Button(this, "exit", bx, by + bh + 20, bw, bh,
-        "", Color::YELLOW, Color::RED);
+        "Quit", Color::YELLOW, Color::RED);
 
     ok->add_observer(this);
     exit->add_observer(this);

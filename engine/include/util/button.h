@@ -10,24 +10,27 @@
 
 #include "core/color.h"
 #include "core/mousebuttoneventlistener.h"
+#include "core/mousemotioneventlistener.h"
 #include "core/object.h"
 
 #include <memory>
 
 using std::unique_ptr;
 
-class Button : public Object, public MouseButtonEventListener
+class Button : public Object, public MouseButtonEventListener,
+    MouseMotionEventListener
 {
 public:
     Button(Object *parent = nullptr, ObjectID id = "",
         double x = 0, double y = 0, double w = 100, double h = 100,
-        const Color& background = Color::BLUE);
+        const string& text = "", const Color& idle = Color::BLUE,
+        const Color& active = Color::RED, const Color& border = Color::BLACK);
 
     ~Button();
 
-    bool onMouseButtonEvent(const MouseButtonEvent& event);
-
     static ActionID clickedID;
+    bool onMouseButtonEvent(const MouseButtonEvent& event);
+    bool onMouseMotionEvent(const MouseMotionEvent& event);
 
 private:
     class Impl;

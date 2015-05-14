@@ -26,9 +26,10 @@ TitleScreen::TitleScreen()
     double bx = (w - bw)/2;
     double by = h/2;
 
-    Button *ok = new Button(this, "ok", bx, by, bw, bh);
+    Button *ok = new Button(this, "ok", bx, by, bw, bh, "", Color::BLUE,
+        Color::GREEN);
     Button *exit = new Button(this, "exit", bx, by + bh + 20, bw, bh,
-        Color::RED);
+        "", Color::YELLOW, Color::RED);
 
     ok->add_observer(this);
     exit->add_observer(this);

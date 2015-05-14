@@ -5,16 +5,16 @@
  * Data: 17/04/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "eventsmanager.h"
-#include "systemevent.h"
-#include "keyboardevent.h"
-#include "mousebuttonevent.h"
-#include "mousemotionevent.h"
-#include "joystickevent.h"
-#include "systemeventlistener.h"
-#include "keyboardeventlistener.h"
-#include "mousebuttoneventlistener.h"
-#include "joystickeventlistener.h"
+#include "core/eventsmanager.h"
+#include "core/systemevent.h"
+#include "core/keyboardevent.h"
+#include "core/mousebuttonevent.h"
+#include "core/mousemotionevent.h"
+#include "core/joystickevent.h"
+#include "core/systemeventlistener.h"
+#include "core/keyboardeventlistener.h"
+#include "core/mousebuttoneventlistener.h"
+#include "core/joystickeventlistener.h"
 
 #include <list>
 

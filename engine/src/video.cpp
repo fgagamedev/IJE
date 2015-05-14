@@ -5,8 +5,8 @@
  * Data: 06/04/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "video.h"
-#include "canvas.h"
+#include "core/video.h"
+#include "core/canvas.h"
 
 #include <SDL2/SDL_ttf.h>
 

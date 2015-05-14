@@ -5,14 +5,14 @@
  * Data: 13/04/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "canvas.h"
+#include "core/canvas.h"
 
-#include "point.h"
-#include "line.h"
-#include "rect.h"
-#include "circle.h"
-#include "image.h"
-#include "font.h"
+#include "core/point.h"
+#include "core/line.h"
+#include "core/rect.h"
+#include "core/circle.h"
+#include "core/texture.h"
+#include "core/font.h"
 
 Canvas::Canvas(SDL_Renderer *renderer, int w, int h)
     : m_renderer(renderer), m_w(w), m_h(h), m_scale(1), m_blend_mode(NONE)
@@ -287,7 +287,7 @@ Canvas::fill_circle_points(int cx, int cy, int x, int y) const
 }
 
 void
-Canvas::draw(const Image *image, Rect rect_clip, double x, double y) const
+Canvas::draw(const Texture *texture, Rect rect_clip, double x, double y) const
 {
     double dest_w = rect_clip.w() * m_scale;
     double dest_h = rect_clip.h() * m_scale;
@@ -296,17 +296,19 @@ Canvas::draw(const Image *image, Rect rect_clip, double x, double y) const
                   };
     SDL_Rect dest { (int) x,  (int) y,  (int) dest_w,  (int) dest_h };
 
-    SDL_RenderCopy(m_renderer, image->texture(), &clip, &dest);
+    SDL_Texture *image = static_cast<SDL_Texture *>(texture->data());
+    SDL_RenderCopy(m_renderer, image, &clip, &dest);
 }
 
 void
-Canvas::draw(const Image *image, double x, double y) const
+Canvas::draw(const Texture *texture, double x, double y) const
 {
-    double dest_w = image->w() * m_scale;
-    double dest_h = image->h() * m_scale;
+    double dest_w = texture->w() * m_scale;
+    double dest_h = texture->h() * m_scale;
     SDL_Rect dest { (int) x, (int) y, (int) dest_w, (int) dest_h };
 
-    SDL_RenderCopy(m_renderer, image->texture(), nullptr, &dest);
+    SDL_Texture *image = static_cast<SDL_Texture *>(texture->data());
+    SDL_RenderCopy(m_renderer, image, nullptr, &dest);
 }
 
 
@@ -362,4 +364,40 @@ double
 Canvas::scale() const
 {
     return m_scale;
+}
+
+Texture *
+Canvas::render_text(const string& text, const Color& color)
+{
+    if (not m_font.get())
+    {
+        return nullptr;
+    }
+
+    SDL_Color text_color { color.r(), color.g(), color.b(), color.a() };
+    SDL_Surface *surface = TTF_RenderUTF8_Blended(m_font->font(),
+            text.c_str(), text_color);
+
+    if (not surface)
+    {
+        return nullptr;
+    }
+
+    int w = surface->w;
+    int h = surface->h;
+
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(m_renderer, surface);
+    SDL_FreeSurface(surface);
+
+    if (not texture)
+    {
+        return nullptr;
+    }
+
+    if (color.a() != 255)
+    {
+        SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
+    }
+
+    return new Texture(texture, w, h);
 }

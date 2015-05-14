@@ -16,20 +16,20 @@
 using std::map;
 using std::shared_ptr;
 
-class Image;
+class Texture;
 class Font;
 
 class ResourcesManager
 {
 public:
-    shared_ptr<Image> get_image(const string& id) throw (Exception);
+    shared_ptr<Texture> get_texture(const string& id) throw (Exception);
     shared_ptr<Font> get_font(const string& id) throw (Exception);
 
 private:
-    map < string, shared_ptr<Image> > m_images;
+    map < string, shared_ptr<Texture> > m_textures;
     map < string, shared_ptr<Font> > m_fonts;
 
-    shared_ptr<Image> acquire_image(const string& id) throw (Exception);
+    shared_ptr<Texture> acquire_texture(const string& id) throw (Exception);
     shared_ptr<Font> acquire_font(const string& id) throw (Exception);
 };
 

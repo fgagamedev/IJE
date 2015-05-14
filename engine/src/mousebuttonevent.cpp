@@ -5,7 +5,7 @@
  * Data: 22/04/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "mousebuttonevent.h"
+#include "core/mousebuttonevent.h"
 
 MouseButtonEvent::MouseButtonEvent(State state, Button button,
     double x, double y) : m_state(state), m_button(button), m_x(x), m_y(y)

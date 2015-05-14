@@ -27,16 +27,23 @@ TitleScreen::TitleScreen()
     double w = env->canvas->w();
     double h = env->canvas->h();
 
+    set_dimensions(w, h);
+
     double bw = 250;
     double bh = 100;
 
-    double bx = (w - bw)/2;
-    double by = h/2;
+    Button *ok = new Button(this, "ok", bw, bh);
+    ok->set_text("Start", Color::WHITE);
+    ok->set_color(Color::BLUE, Color::GREEN);
+    ok->align_to(this, Object::CENTER, Object::NONE);
+    ok->set_y(h*0.4);
+    ok->set_border(5);
 
-    Button *ok = new Button(this, "ok", bx, by, bw, bh, "Start", Color::BLUE,
-        Color::GREEN);
-    Button *exit = new Button(this, "exit", bx, by + bh + 20, bw, bh,
-        "Quit", Color::YELLOW, Color::RED);
+    Button *exit = new Button(this, "exit", bw, bh);
+    exit->set_text("Quit", Color(0, 0, 0, 32));
+    exit->set_color(Color(255, 255, 0, 128), Color::RED);
+    exit->align_to(this, Object::CENTER, Object::NONE);
+    exit->set_y(ok->y() + ok->h() + 20);
 
     ok->add_observer(this);
     exit->add_observer(this);

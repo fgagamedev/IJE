@@ -394,5 +394,10 @@ Canvas::render_text(const string& text, const Color& color)
         return nullptr;
     }
 
+    if (color.a() != 255)
+    {
+        SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
+    }
+
     return new Texture(texture, w, h);
 }

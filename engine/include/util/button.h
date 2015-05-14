@@ -21,16 +21,17 @@ class Button : public Object, public MouseButtonEventListener,
     MouseMotionEventListener
 {
 public:
-    Button(Object *parent = nullptr, ObjectID id = "",
-        double x = 0, double y = 0, double w = 100, double h = 100,
-        const string& text = "", const Color& idle = Color::BLUE,
-        const Color& active = Color::RED, const Color& border = Color::BLACK);
-
+    Button(Object *parent, ObjectID id, double w, double h);
     ~Button();
 
     static ActionID clickedID;
+
     bool onMouseButtonEvent(const MouseButtonEvent& event);
     bool onMouseMotionEvent(const MouseMotionEvent& event);
+
+    void set_text(const string& text, const Color& color = Color::BLACK);
+    void set_color(const Color& idle, const Color& active);
+    void set_border(int thickness = 1, const Color& color = Color::BLACK);
 
 private:
     class Impl;

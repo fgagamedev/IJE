@@ -57,7 +57,7 @@ public:
     void change_state(State to, State from);
 
 protected:
-    short m_left, m_right;
+    short m_left, m_right,m_up,m_down;
     unsigned long m_last;
 
     State m_state;

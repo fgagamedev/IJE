@@ -21,7 +21,7 @@ class Point;
 class Line;
 class Rect;
 class Circle;
-class Image;
+class Texture;
 class Font;
 
 class Canvas
@@ -59,9 +59,9 @@ public:
     void draw(const Circle& circle) const;
     void draw(const Circle& circle, const Color& color);
 
-    void draw(const Image *image, double x = 0, double y = 0) const;
-    void draw(const Image *image, Rect rect_clip, double x = 0, double y = 0)
-        const;
+    void draw(const Texture *texture, double x = 0, double y = 0) const;
+    void draw(const Texture *texture, Rect rect_clip, double x = 0,
+        double y = 0) const;
 
     void draw(const string& text, double x = 0, double y = 0,
         const Color& color = Color::WHITE) const;
@@ -72,15 +72,7 @@ public:
     void fill(const Circle& circle) const;
     void fill(const Circle& circle, const Color& color);
 
-/*    void load_image(const string path, const Rect rect) const throw (Exception);
-
-    void load_font(const string path, unsigned int font_size = 28) throw (Exception);
-    void draw_message(const string message, const Rect rect,
-        const Color& color = Color::YELLOW) const throw (Exception);
-*/
-
     SDL_Renderer * renderer() const;
-
 
 private:
     SDL_Renderer *m_renderer;

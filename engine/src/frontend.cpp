@@ -8,7 +8,7 @@
 #include "util/frontend.h"
 
 #include "core/rect.h"
-#include "core/image.h"
+#include "core/texture.h"
 #include "core/environment.h"
 
 #include "core/joystickevent.h"
@@ -18,19 +18,19 @@
 class FrontEnd::Impl
 {
 public:
-    Impl(Level *parent, const string& image, unsigned long duration,
+    Impl(Level *parent, const string& texture, unsigned long duration,
         const Color& background)
-        : m_parent(parent), m_image(nullptr), m_background(background),
+        : m_parent(parent), m_texture(nullptr), m_background(background),
         m_fad(), m_start(0), m_duration(duration)
     {
         Environment *env = Environment::get_instance();
-        m_image = env->resources_manager->get_image(image);
+        m_texture = env->resources_manager->get_texture(texture);
 
         m_in = m_duration / 3;
         m_out = m_duration - m_in;
 
-        m_x = (env->canvas->w() - m_image->w())/2;
-        m_y = (env->canvas->h() - m_image->h())/2;
+        m_x = (env->canvas->w() - m_texture->w())/2;
+        m_y = (env->canvas->h() - m_texture->h())/2;
     }
 
     ~Impl() {}
@@ -101,27 +101,26 @@ public:
         Environment *env = Environment::get_instance();
 
         env->canvas->clear(m_background);
-        env->canvas->draw(m_image.get(), m_x, m_y);
+        env->canvas->draw(m_texture.get(), m_x, m_y);
 
         env->canvas->set_blend_mode(Canvas::BLEND);
         Rect r { 0, 0, (double) env->canvas->w(), (double) env->canvas->h() };
-//        m_image.get()->set_alpha(32);
         env->canvas->fill(r, m_fad);
         env->canvas->set_blend_mode(Canvas::NONE);
     }
 
 private:
     Level *m_parent;
-    shared_ptr<Image> m_image;
+    shared_ptr<Texture> m_texture;
     Color m_background, m_fad;
     unsigned long m_start, m_duration;
     unsigned long m_in, m_out;
     int m_x, m_y;
 };
 
-FrontEnd::FrontEnd(const string& next, const string& image,
+FrontEnd::FrontEnd(const string& next, const string& texture,
     unsigned long duration, const Color& bg)
-        : Level("", next), m_impl(new Impl(this, image, duration, bg))
+        : Level("", next), m_impl(new Impl(this, texture, duration, bg))
 {
     Environment *env = Environment::get_instance();
     env->events_manager->register_mouse_button_event_listener(this);

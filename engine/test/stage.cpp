@@ -25,7 +25,7 @@ Stage::Stage(ObjectID id)
     double w = env->canvas->w();
     double h = env->canvas->h();
 
-    m_floor.set(x, y);
+    m_floor.set_position(x, y);
     m_floor.set_dimensions(w, h);
 
     map<int, Animation*> actions;

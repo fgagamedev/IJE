@@ -8,7 +8,7 @@
 #include "core/animation.h"
 
 #include "core/rect.h"
-#include "core/image.h"
+#include "core/texture.h"
 #include "core/environment.h"
 
 class Animation::Impl
@@ -20,7 +20,7 @@ public:
         done(false), last(0), frame(0)
     {
         Environment *env = Environment::get_instance();
-        image = env->resources_manager->get_image(id);
+        texture = env->resources_manager->get_texture(id);
     }
 
     double x, y, w, h;
@@ -29,12 +29,12 @@ public:
     bool loop, done;
     unsigned long last;
     int frame;
-    shared_ptr<Image> image;
+    shared_ptr<Texture> texture;
 };
 
-Animation::Animation(const string& image, double x, double y, double w,
+Animation::Animation(const string& texture, double x, double y, double w,
     double h, int frames, unsigned long speed_in_ms, bool loop)
-    : m_impl(new Animation::Impl(image, x, y, w, h, frames, speed_in_ms, loop))
+    : m_impl(new Animation::Impl(texture, x, y, w, h, frames, speed_in_ms, loop))
 {
 }
 
@@ -85,7 +85,7 @@ Animation::draw(double x, double y)
               };
 
     Environment *env = Environment::get_instance();
-    env->canvas->draw(m_impl->image.get(), clip, x, y);
+    env->canvas->draw(m_impl->texture.get(), clip, x, y);
 }
 
 double

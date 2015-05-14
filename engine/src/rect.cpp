@@ -61,7 +61,7 @@ Rect::set_h(double h)
 }
 
 void
-Rect::set(double x, double y)
+Rect::set_position(double x, double y)
 {
     m_x = x;
     m_y = y;

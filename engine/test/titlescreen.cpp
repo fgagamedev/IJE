@@ -7,7 +7,7 @@
  */
 #include "titlescreen.h"
 #include "core/environment.h"
-#include "button.h"
+#include "util/button.h"
 
 #include <iostream>
 using namespace std;

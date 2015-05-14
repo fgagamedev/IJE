@@ -8,34 +8,23 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <string>
+#include "core/object.h"
 
-#include "exception.h"
+#include <memory>
 
-using std::string;
+using std::unique_ptr;
 
-class Image
+class Image : public Object
 {
 public:
+    Image(Object *parent, const string& image);
     ~Image();
 
-    int w() const;
-    int h() const;
-    Uint8 alpha() const;
-    void set_alpha(const Uint8 alpha);
-
-    static Image * from_file(const string& path) throw (Exception);
-
-    SDL_Texture * texture() const;
-
 private:
-    Image(SDL_Texture *texture, int w, int h);
+    class Impl;
+    unique_ptr<Impl> m_impl;
 
-    SDL_Texture *m_texture;
-    int m_w, m_h;
-    Uint8 m_alpha;
+    void draw_self();
 };
 
 #endif

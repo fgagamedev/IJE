@@ -11,7 +11,7 @@
 #include "core/line.h"
 #include "core/rect.h"
 #include "core/circle.h"
-#include "core/image.h"
+#include "core/texture.h"
 #include "core/font.h"
 
 Canvas::Canvas(SDL_Renderer *renderer, int w, int h)
@@ -287,7 +287,7 @@ Canvas::fill_circle_points(int cx, int cy, int x, int y) const
 }
 
 void
-Canvas::draw(const Image *image, Rect rect_clip, double x, double y) const
+Canvas::draw(const Texture *texture, Rect rect_clip, double x, double y) const
 {
     double dest_w = rect_clip.w() * m_scale;
     double dest_h = rect_clip.h() * m_scale;
@@ -296,17 +296,19 @@ Canvas::draw(const Image *image, Rect rect_clip, double x, double y) const
                   };
     SDL_Rect dest { (int) x,  (int) y,  (int) dest_w,  (int) dest_h };
 
-    SDL_RenderCopy(m_renderer, image->texture(), &clip, &dest);
+    SDL_Texture *image = static_cast<SDL_Texture *>(texture->data());
+    SDL_RenderCopy(m_renderer, image, &clip, &dest);
 }
 
 void
-Canvas::draw(const Image *image, double x, double y) const
+Canvas::draw(const Texture *texture, double x, double y) const
 {
-    double dest_w = image->w() * m_scale;
-    double dest_h = image->h() * m_scale;
+    double dest_w = texture->w() * m_scale;
+    double dest_h = texture->h() * m_scale;
     SDL_Rect dest { (int) x, (int) y, (int) dest_w, (int) dest_h };
 
-    SDL_RenderCopy(m_renderer, image->texture(), nullptr, &dest);
+    SDL_Texture *image = static_cast<SDL_Texture *>(texture->data());
+    SDL_RenderCopy(m_renderer, image, nullptr, &dest);
 }
 
 

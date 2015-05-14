@@ -8,32 +8,32 @@
  */
 #include "core/resourcesmanager.h"
 
-#include "core/image.h"
+#include "core/texture.h"
 #include "core/font.h"
 
-shared_ptr<Image>
-ResourcesManager::get_image(const string& id) throw (Exception)
+shared_ptr<Texture>
+ResourcesManager::get_texture(const string& id) throw (Exception)
 {
-    if (m_images.find(id) != m_images.end())
+    if (m_textures.find(id) != m_textures.end())
     {
-        return m_images[id];
+        return m_textures[id];
     }
 
-    return acquire_image(id);
+    return acquire_texture(id);
 }
 
-shared_ptr<Image>
-ResourcesManager::acquire_image(const string& id) throw (Exception)
+shared_ptr<Texture>
+ResourcesManager::acquire_texture(const string& id) throw (Exception)
 {
-    Image *image = Image::from_file(id);
+    Texture *texture = Texture::from_file(id);
 
-    if (not image)
+    if (not texture)
     {
-        throw Exception("Can't load image " + id);
+        throw Exception("Can't load texture " + id);
     }
 
-    shared_ptr<Image> ptr(image);
-    m_images[id] = ptr;
+    shared_ptr<Texture> ptr(texture);
+    m_textures[id] = ptr;
 
     return ptr;
 }

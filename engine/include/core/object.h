@@ -47,6 +47,11 @@ public:
     void set_dimensions(double w, double h);
     void set_parent(Object *parent);
 
+    typedef enum { NONE, LEFT, CENTER, RIGHT, TOP, MIDDLE, BOTTOM }
+        Alignment;
+
+    void align_to(const Object* object, Alignment xaxis, Alignment yaxis);
+
     void add_child(Object *child);
     void remove_child(Object *child);
 

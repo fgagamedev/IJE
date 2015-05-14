@@ -7,7 +7,7 @@
  */
 #include "core/color.h"
 #include "core/rect.h"
-#include "button.h"
+#include "util/button.h"
 #include "core/environment.h"
 #include "core/mousebuttonevent.h"
 

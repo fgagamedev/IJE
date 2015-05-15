@@ -15,15 +15,13 @@
 
 #include <memory>
 
-using std::shared_ptr;
-
-class Image;
+using std::unique_ptr;
 
 class FrontEnd : public Level, MouseButtonEventListener, JoyStickEventListener,
     KeyboardEventListener
 {
 public:
-    FrontEnd(const string& next, const string& image,
+    FrontEnd(const string& id, const string& next, const string& image,
         unsigned long duration = 3000, const Color& background = Color::BLACK);
     ~FrontEnd();
 
@@ -33,7 +31,7 @@ public:
 
 private:
     class Impl;
-    shared_ptr<Impl> m_impl;
+    unique_ptr<Impl> m_impl;
 
     void update_self(unsigned long elapsed);
     void draw_self();

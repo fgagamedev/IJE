@@ -118,9 +118,9 @@ private:
     int m_x, m_y;
 };
 
-FrontEnd::FrontEnd(const string& next, const string& texture,
+FrontEnd::FrontEnd(const string& id, const string& next, const string& texture,
     unsigned long duration, const Color& bg)
-        : Level("", next), m_impl(new Impl(this, texture, duration, bg))
+        : Level(id, next), m_impl(new Impl(this, texture, duration, bg))
 {
     Environment *env = Environment::get_instance();
     env->events_manager->register_mouse_button_event_listener(this);

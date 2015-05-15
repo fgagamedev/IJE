@@ -8,7 +8,7 @@
 #include "stage.h"
 #include "core/font.h"
 #include "square.h"
-#include "sprite.h"
+#include "dinoman.h"
 #include "core/environment.h"
 
 #include <map>
@@ -28,18 +28,20 @@ Stage::Stage(ObjectID id)
     m_floor.set_position(x, y);
     m_floor.set_dimensions(w, h);
 
-    map<int, Animation*> actions;
+/*    map<int, Animation*> actions;
     actions[Sprite::IDLE] = new Animation("res/images/idle.png", 0, 0, 304,
         410, 2, 500, true);
     actions[Sprite::RUNNING] = new Animation("res/images/running.png", 0, 0,
         307,  409, 4, 300, true);
     Sprite *sprite = new Sprite(this, "sprite", actions);
+*/
+    Dinoman *dinoman = new Dinoman(this, "dinoman");
 
-    y -= sprite->h();
+    y -= dinoman->h();
 
-    sprite->set_position(x, y);
+    dinoman->set_position(x, y);
 
-    add_child(sprite);
+    add_child(dinoman);
 
     shared_ptr<Font> font = env->resources_manager->get_font("res/fonts/FLATS.ttf");
 

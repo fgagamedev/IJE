@@ -66,12 +66,17 @@ public:
     void update(unsigned long elapsed);
     void draw();
 
+    void set_proxy(Object *proxy);
+
 private:
     class Impl;
     unique_ptr<Impl> m_impl;
+    Impl *m_proxy;
 
     virtual void update_self(unsigned long elapsed);
     virtual void draw_self();
+
+    Impl *proxy() const;
 };
 
 #endif

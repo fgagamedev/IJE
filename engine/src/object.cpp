@@ -66,7 +66,7 @@ public:
             break;
 
         case RIGHT:
-            x = object->w() - m_box.w();
+            x = object->w() - m_box.w() + object->x();
             break;
 
         default:
@@ -86,7 +86,7 @@ public:
             break;
 
         case BOTTOM:
-            y = object->h() - m_box.h();
+            y = object->h() - m_box.h() + object->y();
             break;
 
         default:
@@ -238,7 +238,6 @@ private:
 Object::Object(Object *parent, ObjectID id, double x, double y, double w,
     double h) : m_impl(new Object::Impl(this, parent, id, x, y, w, h))
 {
-    m_proxy = m_impl.get();
 }
 
 Object::~Object()
@@ -248,103 +247,103 @@ Object::~Object()
 Object *
 Object::parent() const
 {
-    return m_proxy->parent();
+    return m_impl->parent();
 }
 
 ObjectID
 Object::id() const
 {
-    return m_proxy->id();
+    return m_impl->id();
 }
 
 double
 Object::x() const
 {
-    return m_proxy->x();
+    return m_impl->x();
 }
 
 double
 Object::y() const
 {
-    return m_proxy->y();
+    return m_impl->y();
 }
 
 double
 Object::w() const
 {
-    return m_proxy->w();
+    return m_impl->w();
 }
 
 double
 Object::h() const
 {
-    return m_proxy->h();
+    return m_impl->h();
 }
 
 const Rect&
 Object::bounding_box() const
 {
-    return m_proxy->bounding_box();
+    return m_impl->bounding_box();
 }
 
 void
 Object::set_x(double x)
 {
-    m_proxy->set_x(x);
+    m_impl->set_x(x);
 }
 
 void
 Object::set_y(double y)
 {
-    m_proxy->set_y(y);
+    m_impl->set_y(y);
 }
 
 void
 Object::set_w(double w)
 {
-    m_proxy->set_w(w);
+    m_impl->set_w(w);
 }
 
 void
 Object::set_h(double h)
 {
-    m_proxy->set_h(h);
+    m_impl->set_h(h);
 }
 
 void
 Object::set_position(double x, double y)
 {
-    m_proxy->set_position(x, y);
+    m_impl->set_position(x, y);
 }
 
 void
 Object::set_dimensions(double w, double h)
 {
-    m_proxy->set_dimensions(w, h);
+    m_impl->set_dimensions(w, h);
 }
 
 void
 Object::set_parent(Object *parent)
 {
-    m_proxy->set_parent(parent);
+    m_impl->set_parent(parent);
 }
 
 void
 Object::add_child(Object *child)
 {
-    m_proxy->add_child(child);
+    m_impl->add_child(child);
 }
 
 void
 Object::remove_child(Object *child)
 {
-    m_proxy->remove_child(child);
+    m_impl->remove_child(child);
 }
 
 bool
 Object::send_message(Object *receiver, MessageID id, Parameters parameters)
 {
-    return m_proxy->send_message(receiver, id, parameters);
+    return m_impl->send_message(receiver, id, parameters);
 }
 
 bool
@@ -356,31 +355,31 @@ Object::on_message(Object *, MessageID, Parameters)
 void
 Object::add_observer(Object *observer)
 {
-    m_proxy->add_observer(observer);
+    m_impl->add_observer(observer);
 }
 
 void
 Object::remove_observer(Object *observer)
 {
-    m_proxy->remove_observer(observer);
+    m_impl->remove_observer(observer);
 }
 
 void
 Object::notify(ActionID action, Parameters parameters)
 {
-    m_proxy->notify(action, parameters);
+    m_impl->notify(action, parameters);
 }
 
 void
 Object::update(unsigned long elapsed)
 {
-    m_proxy->update(elapsed);
+    m_impl->update(elapsed);
 }
 
 void
 Object::draw()
 {
-    m_proxy->draw();
+    m_impl->draw();
 }
 
 void
@@ -396,20 +395,5 @@ Object::draw_self()
 void
 Object::align_to(const Object* object, Alignment xaxis, Alignment yaxis)
 {
-    m_proxy->align_to(object, xaxis, yaxis);
-}
-
-void
-Object::set_proxy(Object *object)
-{
-    if (object)
-    {
-        m_proxy = object->proxy();
-    }
-}
-
-Object::Impl *
-Object::proxy() const
-{
-    return m_impl.get();
+    m_impl->align_to(object, xaxis, yaxis);
 }

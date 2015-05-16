@@ -9,14 +9,23 @@
 #define DINOMAN_H
 
 #include "core/sprite.h"
+#include "core/keyboardeventlistener.h"
 
 class Dinoman : public Sprite
 {
 public:
-    typedef enum { IDLE, RUNNING } State;
+    typedef enum { NONE, IDLE, RUNNING } State;
     typedef enum { MOVED, STOPPED } Event;
 
     Dinoman(Object *parent, const string& id);
+    ~Dinoman();
+
+    int direction() const;
+    void set_direction(int direction);
+
+private:
+    class Impl;
+    unique_ptr<Impl> m_impl;
 };
 
 #endif

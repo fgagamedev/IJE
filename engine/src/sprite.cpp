@@ -116,30 +116,36 @@ public:
         }
 
         int next = it->second;
+
         change_state(next, m_state_id);
     }
 
     void change_state(int to, int from)
     {
-        m_sprite->transition(to, from);
-
         auto it = m_states.find(to);
 
-        if (it != m_states.end())
+        if (it == m_states.end())
         {
-            m_state_id = to;
-            m_state = it->second;
+            return;
         }
 
         if (m_state)
         {
-            m_sprite->set_proxy(m_state);
+            m_state->leave(to);
+        }
+
+        m_state_id = to;
+        m_state = it->second;
+
+        if (m_state)
+        {
+            m_state->enter(from);
         }
     }
 
-    void add_state(int state, Object *object)
+    void add_state(int id, SpriteState *state)
     {
-        m_states[state] = object;
+        m_states[id] = state;
     }
 
     void add_transition(int event, int from, int to)
@@ -147,12 +153,73 @@ public:
         m_fsm[make_pair(from, event)] = to;
     }
 
+    void update_self(unsigned long elapsed)
+    {
+        if (m_state)
+        {
+            m_state->update(elapsed);
+        }
+    }
+
+    void draw_self()
+    {
+        if (m_state)
+        {
+            m_state->draw();
+        }
+    }
+
+    SpriteState * state() const
+    {
+        return m_state;
+    }
+
+    bool onKeyboardEvent(const KeyboardEvent& event)
+    {
+        if (m_state)
+        {
+            return m_state->onKeyboardEvent(event);
+        }
+
+        return false;
+    }
+
+    bool onMouseButtonEvent(const MouseButtonEvent& event)
+    {
+        if (m_state)
+        {
+            return m_state->onMouseButtonEvent(event);
+        }
+
+        return false;
+    }
+
+    bool onMouseMotionEvent(const MouseMotionEvent& event)
+    {
+        if (m_state)
+        {
+            return m_state->onMouseMotionEvent(event);
+        }
+
+        return false;
+    }
+
+    bool onJoyStickEvent(const JoyStickEvent& event)
+    {
+        if (m_state)
+        {
+            return m_state->onJoyStickEvent(event);
+        }
+
+        return false;
+    }
+
 private:
     Sprite *m_sprite;
     int m_state_id;
-    Object *m_state;
+    SpriteState *m_state;
     map< pair<int, int>, int > m_fsm;
-    map<int, Object *> m_states;
+    map<int, SpriteState *> m_states;
 };
 
 Sprite::Sprite(Object *parent, ObjectID id)
@@ -218,9 +285,9 @@ Sprite::change_state(int to, int from)
 }
 
 void
-Sprite::add_state(int state, Object *object)
+Sprite::add_state(int id, SpriteState *state)
 {
-    m_impl->add_state(state, object);
+    m_impl->add_state(id, state);
 }
 
 void
@@ -230,6 +297,43 @@ Sprite::add_transition(int event, int from, int to)
 }
 
 void
-Sprite::transition(int, int)
+Sprite::update_self(unsigned long elapsed)
 {
+    m_impl->update_self(elapsed);
+}
+
+void
+Sprite::draw_self()
+{
+    m_impl->draw_self();
+}
+
+SpriteState *
+Sprite::state() const
+{
+    return m_impl->state();
+}
+
+bool
+Sprite::onKeyboardEvent(const KeyboardEvent& event)
+{
+    return m_impl->onKeyboardEvent(event);
+}
+
+bool
+Sprite::onMouseButtonEvent(const MouseButtonEvent& event)
+{
+    return m_impl->onMouseButtonEvent(event);
+}
+
+bool
+Sprite::onMouseMotionEvent(const MouseMotionEvent& event)
+{
+    return m_impl->onMouseMotionEvent(event);
+}
+
+bool
+Sprite::onJoyStickEvent(const JoyStickEvent& event)
+{
+    return m_impl->onJoyStickEvent(event);
 }

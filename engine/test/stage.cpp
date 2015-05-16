@@ -40,7 +40,6 @@ Stage::Stage(ObjectID id)
     y -= dinoman->h();
 
     dinoman->set_position(x, y);
-
     add_child(dinoman);
 
     shared_ptr<Font> font = env->resources_manager->get_font("res/fonts/FLATS.ttf");

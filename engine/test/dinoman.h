@@ -11,17 +11,25 @@
 #include "core/sprite.h"
 #include "core/keyboardeventlistener.h"
 
+#include <iostream>
+
+using std::pair;
+
 class Dinoman : public Sprite
 {
 public:
     typedef enum { NONE, IDLE, RUNNING } State;
     typedef enum { MOVED, STOPPED } Event;
+    typedef enum { LEFT, RIGHT } Direction;
 
     Dinoman(Object *parent, const string& id);
     ~Dinoman();
 
-    int direction() const;
-    void set_direction(int direction);
+    Direction direction() const;
+    void set_direction(Direction direction);
+
+    const pair<double, double>& moviment() const;
+    void set_moviment(double xaxis, double yaxis);
 
 private:
     class Impl;

@@ -22,7 +22,7 @@ MINGW_ROOT = /usr/x86_64-w64-mingw32
 ARFLAGS = rcs
 CFLAGS = -W -Wall -pedantic -ansi -std=c++11 -MMD
 INCLUDES = -Iinclude -Itest `$(MINGW_ROOT)/bin/sdl2-config --cflags`
-LIBS = `$(MINGW_ROOT)/bin/sdl2-config --libs` -lSDL2_image -lSDL2_ttf -lmingw32
+LIBS = `$(MINGW_ROOT)/bin/sdl2-config --libs` -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lmingw32
 
 TARGET = $(LIB_DIR)/lib$(NAME).a
 

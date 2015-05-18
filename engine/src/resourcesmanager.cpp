@@ -10,6 +10,8 @@
 
 #include "core/texture.h"
 #include "core/font.h"
+#include "core/music.h"
+#include "core/soundeffect.h"
 
 shared_ptr<Texture>
 ResourcesManager::get_texture(const string& id) throw (Exception)
@@ -61,6 +63,60 @@ ResourcesManager::acquire_font(const string& id) throw (Exception)
 
     shared_ptr<Font> ptr(font);
     m_fonts[id] = ptr;
+
+    return ptr;
+}
+
+shared_ptr<Music>
+ResourcesManager::get_music(const string& id) throw (Exception)
+{
+    if (m_musics.find(id) != m_musics.end())
+    {
+        return m_musics[id];
+    }
+
+    return acquire_music(id);
+}
+
+shared_ptr<Music>
+ResourcesManager::acquire_music(const string& id) throw (Exception)
+{
+    Music *music = Music::from_file(id);
+
+    if (not music)
+    {
+        throw Exception("Can't load music " + id);
+    }
+
+    shared_ptr<Music> ptr(music);
+    m_musics[id] = ptr;
+
+    return ptr;
+}
+
+shared_ptr<SoundEffect>
+ResourcesManager::get_soundeffect(const string& id) throw (Exception)
+{
+    if (m_soundeffects.find(id) != m_soundeffects.end())
+    {
+        return m_soundeffects[id];
+    }
+
+    return acquire_soundeffect(id);
+}
+
+shared_ptr<SoundEffect>
+ResourcesManager::acquire_soundeffect(const string& id) throw (Exception)
+{
+    SoundEffect *font = SoundEffect::from_file(id);
+
+    if (not font)
+    {
+        throw Exception("Can't load sound effect " + id);
+    }
+
+    shared_ptr<SoundEffect> ptr(font);
+    m_soundeffects[id] = ptr;
 
     return ptr;
 }

@@ -30,6 +30,7 @@ public:
     typedef enum { NONE, BLEND } BlendMode;
 
     Canvas(SDL_Renderer *renderer, int w, int h);
+    ~Canvas();
 
     int w() const;
     int h() const;
@@ -75,6 +76,8 @@ public:
     Texture * render_text(const string& text, const Color& color);
 
     SDL_Renderer * renderer() const;
+    SDL_Surface * bitmap() const;
+    void update_bitmap();
 
 private:
     SDL_Renderer *m_renderer;
@@ -83,6 +86,8 @@ private:
     Color m_color;
     shared_ptr<Font> m_font;
     BlendMode m_blend_mode;
+    SDL_Surface *m_bitmap;
+    SDL_Texture *m_texture;
 
     void draw_circle_points(int cx, int cy, int x, int y) const;
     void fill_circle_points(int cx, int cy, int x, int y) const;

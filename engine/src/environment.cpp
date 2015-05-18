@@ -11,12 +11,14 @@
 static Environment *env = nullptr;
 
 Environment::Environment()
-    : video(nullptr)
+    : video(nullptr), resources_manager(nullptr), events_manager(nullptr),
+    audio_manager(nullptr), canvas(nullptr), music(nullptr), sfx(nullptr)
 {
 }
 
 Environment::~Environment()
 {
+    delete audio_manager;
     delete events_manager;
     delete resources_manager;
     delete video;
@@ -74,4 +76,15 @@ Environment::init() throw (Exception)
         throw Exception("Out of memory for a new EventsManager");
     }
 
+    audio_manager = new AudioManagerWrapper();
+
+    if (not audio_manager)
+    {
+        throw Exception("Out of memory for a new AudioManagerSfx");
+    }
+
+    audio_manager->init();
+
+    music = audio_manager->music();
+    sfx = audio_manager->sfx();
 }

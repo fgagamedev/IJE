@@ -18,6 +18,15 @@ Canvas::Canvas(SDL_Renderer *renderer, int w, int h)
     : m_renderer(renderer), m_w(w), m_h(h), m_scale(1), m_blend_mode(NONE)
 {
     set_color(Color::WHITE);
+    m_bitmap = SDL_CreateRGBSurface(0, w, h, 32, 0, 0, 0, 0);
+    m_texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888,
+        SDL_TEXTUREACCESS_STREAMING, w, h);
+}
+
+Canvas::~Canvas()
+{
+    free(m_bitmap);
+    SDL_DestroyTexture(m_texture);
 }
 
 int
@@ -400,4 +409,17 @@ Canvas::render_text(const string& text, const Color& color)
     }
 
     return new Texture(texture, w, h);
+}
+
+SDL_Surface *
+Canvas::bitmap() const
+{
+    return m_bitmap;
+}
+
+void
+Canvas::update_bitmap()
+{
+    SDL_UpdateTexture(m_texture, NULL, m_bitmap->pixels, m_w * sizeof(Uint32));
+    SDL_RenderCopy(m_renderer, m_texture, NULL, NULL);
 }

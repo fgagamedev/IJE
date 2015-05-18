@@ -19,7 +19,7 @@ AR = ar
 ARFLAGS = rcs
 CFLAGS = -W -Wall -pedantic -std=c++11 -MMD -g3 -g
 INCLUDES = -Iinclude -Itest `sdl2-config --cflags`
-LIBS = `sdl2-config --libs` -lSDL2_image -lSDL2_ttf
+LIBS = `sdl2-config --libs` -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 
 TARGET = $(LIB_DIR)/lib$(NAME).a
 
@@ -45,13 +45,11 @@ $(TST_DIR)/%.o: $(TST_DIR)/%.cpp
 	@$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
 
 $(TARGET): $(OBJ)
-	@echo Creating $@...
 	@$(AR) $(ARFLAGS) $@ $(OBJ)
 
 $(TEST): $(TST_OBJ) $(TARGET)
 	@echo Building executable...
 	@$(CC) $(CFLAGS) $(INCLUDES) $(TST_OBJ) $(TARGET) -o $@ $(LIBS)
-	@echo Done!
 
 clean:
 	@echo Cleaning...

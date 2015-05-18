@@ -1,4 +1,5 @@
-NAME = ijengine_win.a
+NAME = ijengine_win
+VERSION = 0.0.2
 
 SRC_DIR = src
 INC_DIR = include
@@ -8,6 +9,12 @@ TST_DIR = test
 RES_DIR = res
 DLL_DIR = res/dll
 
+INSTALL_DIR = /usr/local
+INCLUDES_INSTALL_DIR = $(INSTALL_DIR)/include/ijengine
+LIB_INSTALL_DIR = $(INSTALL_DIR)/lib
+
+PACKAGE = $(NAME)-$(VERSION).tar.gz
+
 CC = x86_64-w64-mingw32-g++
 AR = ar
 MINGW_ROOT = /usr/x86_64-w64-mingw32
@@ -15,9 +22,9 @@ MINGW_ROOT = /usr/x86_64-w64-mingw32
 ARFLAGS = rcs
 CFLAGS = -W -Wall -pedantic -ansi -std=c++11 -MMD
 INCLUDES = -Iinclude -Itest `$(MINGW_ROOT)/bin/sdl2-config --cflags`
-LIBS = `$(MINGW_ROOT)/bin/sdl2-config --libs` -lSDL2 -lSDL2_image -lSDL2_ttf -lmingw32
+LIBS = `$(MINGW_ROOT)/bin/sdl2-config --libs` -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lmingw32
 
-TARGET = $(LIB_DIR)/$(NAME)
+TARGET = $(LIB_DIR)/lib$(NAME).a
 
 TEST = $(TST_DIR)/test
 TST_SRC = ${wildcard $(TST_DIR)/*.cpp}
@@ -44,22 +51,35 @@ $(TST_DIR)/%.o: $(TST_DIR)/%.cpp
 	@$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
 
 $(TARGET): $(OBJ)
-	@echo Creating objects...
+	@echo Creating $@
 	@$(AR) $(ARFLAGS) $@ $(OBJ)
 
 $(TEST): $(TST_OBJ) $(TARGET)
 	@echo "Building executable..."
 	@$(CC) $(CFLAGS) $(INCLUDES) $(TST_OBJ) $(TARGET) -o $@.exe $(LIBS)
-	@echo "Done!"
 
 clean:
+	@echo Cleaning...
 	@find . -name *.o -exec rm {} \;
 	@find . -name *.d -exec rm {} \;
 	@find . -name *.dll -exec rm {} \;
 	@rm -rf *~ *.o prog out.txt test/res
 
+dist:
+	@rm -rf *~
+	@tar czf $(PACKAGE) include src Makefile
+
 dist-clean: clean
 	@find . -name *.a -exec rm {} \;
-	@rm -f test/test.exe
+	@rm -f test/test.exe $(TARGET)
+	@rm -rf *.tar.gz
+
+install: $(TARGET)
+	@mkdir -p $(INCLUDES_INSTALL_DIR) $(LIB_INSTALL_DIR)
+	@cp -rf include/* $(INCLUDES_INSTALL_DIR)
+	@cp -f $(TARGET) $(LIB_INSTALL_DIR)
+
+uninstall:
+	@rm -rf $(INCLUDES_INSTALL_DIR) $(INSTALL_DIR)/$(TARGET)
 
 -include $(OBJ:.o=.d)

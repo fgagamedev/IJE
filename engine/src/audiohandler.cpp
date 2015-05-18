@@ -108,8 +108,10 @@ AudioHandler<AudioType::SoundEffect>::play(const std::string& path, const int ti
 {
 	assert((times == k_infinite_loop || times >= 1) && "Must be k_infinite_loop or >= 1.");
 
-	const auto k_played_channel = Mix_PlayChannel(k_any_channel,
-		Environment::get_instance()->resources_manager->get_soundeffect(path)->mix_chunk(),
+	const auto soundeffect = Environment::get_instance()->resources_manager->get_soundeffect(path);
+	assert(soundeffect != nullptr && "Shouldn't be playing a null sound effect.");
+
+	const auto k_played_channel = Mix_PlayChannel(k_any_channel, soundeffect->mix_chunk(),
 		(times - 1));
 	if(k_played_channel == -1)
 	{

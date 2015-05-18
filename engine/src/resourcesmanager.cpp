@@ -108,14 +108,14 @@ ResourcesManager::get_soundeffect(const string& id) throw (Exception)
 shared_ptr<SoundEffect>
 ResourcesManager::acquire_soundeffect(const string& id) throw (Exception)
 {
-    SoundEffect *font = SoundEffect::from_file(id);
+    SoundEffect *sfx = SoundEffect::from_file(id);
 
-    if (not font)
+    if (not sfx)
     {
         throw Exception("Can't load sound effect " + id);
     }
 
-    shared_ptr<SoundEffect> ptr(font);
+    shared_ptr<SoundEffect> ptr(sfx);
     m_soundeffects[id] = ptr;
 
     return ptr;

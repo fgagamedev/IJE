@@ -12,6 +12,7 @@
 #include "core/font.h"
 #include "core/music.h"
 #include "core/soundeffect.h"
+#include "core/bitmap.h"
 
 shared_ptr<Texture>
 ResourcesManager::get_texture(const string& id) throw (Exception)
@@ -117,6 +118,33 @@ ResourcesManager::acquire_sound_effect(const string& id) throw (Exception)
 
     shared_ptr<SoundEffect> ptr(sfx);
     m_sound_effects[id] = ptr;
+
+    return ptr;
+}
+
+shared_ptr<Bitmap>
+ResourcesManager::get_bitmap(const string& id) throw (Exception)
+{
+    if (m_bitmaps.find(id) != m_bitmaps.end())
+    {
+        return m_bitmaps[id];
+    }
+
+    return acquire_bitmap(id);
+}
+
+shared_ptr<Bitmap>
+ResourcesManager::acquire_bitmap(const string& id) throw (Exception)
+{
+    Bitmap *bitmap = Bitmap::from_file(id);
+
+    if (not bitmap)
+    {
+        throw Exception("Can't load bitmap " + id);
+    }
+
+    shared_ptr<Bitmap> ptr(bitmap);
+    m_bitmaps[id] = ptr;
 
     return ptr;
 }

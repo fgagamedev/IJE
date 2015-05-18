@@ -1,12 +1,12 @@
 /*
- * Classe que representa a interface para com o sistema de audio.
+ * Classe que representa a interface do sistema de audio.
  *
  * Autor: Caio Nardelli
  * Data: 18/05/2015
  * Licença: LGPL. Sem copyright.
  */
-#ifndef AUDIOMANAGERADAPTER_H
-#define AUDIOMANAGERADAPTER_H
+#ifndef AUDIOMANAGERWRAPPER_H
+#define AUDIOMANAGERWRAPPER_H
 
 #include "core/audiomanager.h"
 #include "core/exception.h"

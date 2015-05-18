@@ -95,4 +95,6 @@ AudioManagerWrapper::close_audio()
 	while(Mix_Init(0)){
 		Mix_Quit();
 	}
+
+	SDL_QuitSubSystem(SDL_INIT_AUDIO);
 }

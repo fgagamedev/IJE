@@ -13,6 +13,7 @@
 #include "canvas.h"
 #include "resourcesmanager.h"
 #include "eventsmanager.h"
+#include "audiomanagerwrapper.h"
 
 class Environment
 {
@@ -26,6 +27,7 @@ public:
     Canvas *canvas;
     ResourcesManager *resources_manager;
     EventsManager *events_manager;
+    AudioManagerWrapper *audio_manager;
 
 private:
     Environment();

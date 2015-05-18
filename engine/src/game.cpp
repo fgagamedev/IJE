@@ -51,10 +51,6 @@ Game::init(const string& title, int w, int h) throw (Exception)
     env->events_manager->register_system_event_listener(this);
     env->events_manager->register_keyboard_event_listener(this);
 
-    SDL_InitSubSystem(SDL_INIT_AUDIO);    
-    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
-    Mix_AllocateChannels(4000);
-
     m_level = load_level(m_id);
 }
 

@@ -24,10 +24,13 @@ public:
     static void release_instance();
 
     Video *video;
-    Canvas *canvas;
     ResourcesManager *resources_manager;
     EventsManager *events_manager;
     AudioManagerWrapper *audio_manager;
+
+    Canvas *canvas;
+    AudioManagerMusic *music;
+    AudioManagerSfx *sfx;
 
 private:
     Environment();

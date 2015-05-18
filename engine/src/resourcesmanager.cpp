@@ -95,18 +95,18 @@ ResourcesManager::acquire_music(const string& id) throw (Exception)
 }
 
 shared_ptr<SoundEffect>
-ResourcesManager::get_soundeffect(const string& id) throw (Exception)
+ResourcesManager::get_sound_effect(const string& id) throw (Exception)
 {
-    if (m_soundeffects.find(id) != m_soundeffects.end())
+    if (m_sound_effects.find(id) != m_sound_effects.end())
     {
-        return m_soundeffects[id];
+        return m_sound_effects[id];
     }
 
-    return acquire_soundeffect(id);
+    return acquire_sound_effect(id);
 }
 
 shared_ptr<SoundEffect>
-ResourcesManager::acquire_soundeffect(const string& id) throw (Exception)
+ResourcesManager::acquire_sound_effect(const string& id) throw (Exception)
 {
     SoundEffect *sfx = SoundEffect::from_file(id);
 
@@ -116,7 +116,7 @@ ResourcesManager::acquire_soundeffect(const string& id) throw (Exception)
     }
 
     shared_ptr<SoundEffect> ptr(sfx);
-    m_soundeffects[id] = ptr;
+    m_sound_effects[id] = ptr;
 
     return ptr;
 }

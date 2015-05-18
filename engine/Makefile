@@ -37,11 +37,11 @@ all:
 	$(MAKE) $(TARGET)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	@echo Building $^
+	@echo Building $@
 	@$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
 
 $(TST_DIR)/%.o: $(TST_DIR)/%.cpp
-	@echo Building $^
+	@echo Building $@
 	@$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
 
 $(TARGET): $(OBJ)

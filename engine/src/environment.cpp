@@ -11,8 +11,8 @@
 static Environment *env = nullptr;
 
 Environment::Environment()
-    : video(nullptr), canvas(nullptr), resources_manager(nullptr),
-      events_manager(nullptr), audio_manager(nullptr)
+    : video(nullptr), resources_manager(nullptr), events_manager(nullptr),
+    audio_manager(nullptr), canvas(nullptr), music(nullptr), sfx(nullptr)
 {
 }
 
@@ -84,4 +84,7 @@ Environment::init() throw (Exception)
     }
 
     audio_manager->init();
+
+    music = audio_manager->music();
+    sfx = audio_manager->sfx();
 }

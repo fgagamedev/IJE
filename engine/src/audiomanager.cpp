@@ -1,11 +1,11 @@
 /*
- * Implementação da classe AudioHandler.
+ * Implementação da classe AudioManager.
  *
  * Autor: Caio Nardelli
  * Data: 17/05/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "core/audiohandler.h"
+#include "core/audiomanager.h"
 #include <cassert>
 #include <iostream>
 #include <SDL2/SDL_mixer.h>
@@ -26,10 +26,17 @@ static constexpr auto k_any_channel = -1;
 // ----------------------------------------------------------- //
 //                       Music Handling
 // ----------------------------------------------------------- //
+template<>
+AudioManager<AudioType::Music>::AudioManager()
+{
+	SDL_InitSubSystem(SDL_INIT_AUDIO);    
+    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
+    Mix_AllocateChannels(4000);
+}
 
 template <>
 void
-AudioHandler<AudioType::Music>::play(const std::string& path, const int times)
+AudioManager<AudioType::Music>::play(const string& path, const int times)
 {
 	assert((times == k_infinite_loop || times >= 1) && "Must be k_infinite_loop or >= 1.");
 
@@ -45,7 +52,7 @@ AudioHandler<AudioType::Music>::play(const std::string& path, const int times)
 
 template <>
 void
-AudioHandler<AudioType::Music>::set_volume(const int percent)
+AudioManager<AudioType::Music>::set_volume(const int percent)
 {
 	/// @todo Decide whether the <= 100 assertion is necessary.
 	// No need to check for percent being above 100, SDL_Mixer already caps the volume to
@@ -59,28 +66,28 @@ AudioHandler<AudioType::Music>::set_volume(const int percent)
 
 template <>
 void
-AudioHandler<AudioType::Music>::pause()
+AudioManager<AudioType::Music>::pause()
 {
 	Mix_PauseMusic();
 }
 
 template <>
 void
-AudioHandler<AudioType::Music>::resume()
+AudioManager<AudioType::Music>::resume()
 {
 	Mix_ResumeMusic();
 }
 
 template <>
 void
-AudioHandler<AudioType::Music>::stop()
+AudioManager<AudioType::Music>::stop()
 {
 	Mix_HaltMusic();
 }
 
 template <>
 void
-AudioHandler<AudioType::Music>::fade_out(const double seconds)
+AudioManager<AudioType::Music>::fade_out(const double seconds)
 {
 	const auto k_milliseconds = static_cast<int>(seconds*1000);
 	const auto k_faded = (Mix_FadeOutMusic(k_milliseconds) == 1);
@@ -91,7 +98,7 @@ AudioHandler<AudioType::Music>::fade_out(const double seconds)
 }
 
 template <>
-bool AudioHandler<AudioType::Music>::faded_out()
+bool AudioManager<AudioType::Music>::faded_out()
 {
 	const auto k_fading = (Mix_FadingMusic() == MIX_FADING_OUT);
 	const auto k_playing = (Mix_PlayingMusic() == 1);
@@ -101,10 +108,14 @@ bool AudioHandler<AudioType::Music>::faded_out()
 // ----------------------------------------------------------- //
 //                    Sound Effects Handling
 // ----------------------------------------------------------- //
+template<>
+AudioManager<AudioType::SoundEffect>::AudioManager()
+{
+}
 
 template <>
 void
-AudioHandler<AudioType::SoundEffect>::play(const std::string& path, const int times)
+AudioManager<AudioType::SoundEffect>::play(const string& path, const int times)
 {
 	assert((times == k_infinite_loop || times >= 1) && "Must be k_infinite_loop or >= 1.");
 
@@ -122,7 +133,7 @@ AudioHandler<AudioType::SoundEffect>::play(const std::string& path, const int ti
 
 template <>
 void
-AudioHandler<AudioType::SoundEffect>::set_volume(const int percent)
+AudioManager<AudioType::SoundEffect>::set_volume(const int percent)
 {
 	/// @todo Decide whether the <= 100 assertion is necessary.
 	// No need to check for percent being above 100, SDL_Mixer already caps the volume to
@@ -136,35 +147,35 @@ AudioHandler<AudioType::SoundEffect>::set_volume(const int percent)
 
 template <>
 void
-AudioHandler<AudioType::SoundEffect>::pause()
+AudioManager<AudioType::SoundEffect>::pause()
 {
 	Mix_Pause(k_all_channels);
 }
 
 template <>
 void
-AudioHandler<AudioType::SoundEffect>::resume()
+AudioManager<AudioType::SoundEffect>::resume()
 {
 	Mix_Resume(k_all_channels);
 }
 
 template <>
 void
-AudioHandler<AudioType::SoundEffect>::stop()
+AudioManager<AudioType::SoundEffect>::stop()
 {
 	Mix_HaltChannel(k_all_channels);
 }
 
 template <>
 void
-AudioHandler<AudioType::SoundEffect>::fade_out(const double seconds)
+AudioManager<AudioType::SoundEffect>::fade_out(const double seconds)
 {
 	const auto k_milliseconds = static_cast<int>(seconds*1000);
 	Mix_FadeOutChannel(k_all_channels, k_milliseconds);
 }
 
 // template <>
-// bool AudioHandler<AudioType::SoundEffect>::faded_out()
+// bool AudioManager<AudioType::SoundEffect>::faded_out()
 // {
 // 	return false;
 // }

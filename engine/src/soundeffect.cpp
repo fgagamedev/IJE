@@ -1,3 +1,10 @@
+/*
+ * Implementação da classe AudioHandler.
+ *
+ * Autor: Caio Nardelli
+ * Data: 17/05/2015
+ * Licença: LGPL. Sem copyright.
+ */
 #include "core/soundeffect.h"
 
 class SoundEffect::Impl

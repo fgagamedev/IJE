@@ -119,10 +119,12 @@ AudioManager<AudioType::SoundEffect>::play(const string& path, const int times)
 {
     assert((times == k_infinite_loop || times >= 1) && "Must be k_infinite_loop or >= 1.");
 
-    const auto soundeffect = Environment::get_instance()->resources_manager->get_soundeffect(path);
-    assert(soundeffect != nullptr && "Shouldn't be playing a null sound effect.");
+    const auto sound_effect =
+        Environment::get_instance()->resources_manager->get_sound_effect(path);
 
-    const auto k_played_channel = Mix_PlayChannel(k_any_channel, soundeffect->mix_chunk(),
+    assert(sound_effect != nullptr && "Shouldn't be playing a null sound effect.");
+
+    const auto k_played_channel = Mix_PlayChannel(k_any_channel, sound_effect->mix_chunk(),
         (times - 1));
     if (k_played_channel == -1)
     {

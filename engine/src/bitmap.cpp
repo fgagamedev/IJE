@@ -75,7 +75,6 @@ Bitmap::h() const
 Bitmap *
 Bitmap::from_file(const string& path) throw (Exception)
 {
-    Environment *env = Environment::get_instance();
     SDL_Surface *bitmap = IMG_Load(path.c_str());
 
     if (bitmap == nullptr)
@@ -83,18 +82,7 @@ Bitmap::from_file(const string& path) throw (Exception)
         throw Exception(SDL_GetError());
     }
 
-    int w = env->canvas->w();
-    int h = env->canvas->h();
-
-
-    // SDL_Surface* rc = SDL_CreateRGBSurface(0, w, h, 32, 0, 0, 0, 0);
-
-    // if (rc == nullptr)
-    // {
-    //     throw Exception(SDL_GetError());
-    // }
-
-    Bitmap *b = new Bitmap(bitmap, w, h);
+    Bitmap *b = new Bitmap(bitmap, bitmap->w, bitmap->h);
 
     if (not b)
     {

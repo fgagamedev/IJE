@@ -33,6 +33,7 @@ public:
     int h() const { return m_h; }
     SDL_Surface * data() const { return m_bitmap; }
     void * pixels() const { return m_bitmap->pixels; }
+    void clear() { SDL_FillRect(m_bitmap, nullptr, 0); }
 
 private:
     int m_w, m_h;
@@ -96,6 +97,12 @@ void *
 Bitmap::pixels() const
 {
     return m_impl->pixels();
+}
+
+void
+Bitmap::clear()
+{
+    m_impl->clear();
 }
 
 Uint32

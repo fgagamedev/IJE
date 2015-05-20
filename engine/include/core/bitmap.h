@@ -28,6 +28,8 @@ public:
     int h() const;
     void * data() const;
     void * pixels() const;
+    void clear();
+
     Uint32 getpixel(SDL_Surface *surface, int x, int y);
     void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
 

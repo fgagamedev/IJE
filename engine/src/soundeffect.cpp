@@ -10,29 +10,30 @@
 class SoundEffect::Impl
 {
 public:
-	Impl(Mix_Chunk* const soundeffect)
-		: m_mix_chunk{soundeffect}, m_channel{-1}
-	{
-	}
+    Impl(Mix_Chunk* const soundeffect)
+        : m_mix_chunk{soundeffect}, m_channel{-1}
+    {
+    }
 
-	~Impl()
-	{
-		if(m_mix_chunk != nullptr) {
-			Mix_FreeChunk(m_mix_chunk);
-		}
-	}
+    ~Impl()
+    {
+        if (m_mix_chunk != nullptr)
+        {
+            Mix_FreeChunk(m_mix_chunk);
+        }
+    }
 
-	Mix_Chunk * mix_chunk() const { return m_mix_chunk; }
-	int channel() const { return m_channel; }
-	void set_channel(const int channel) { m_channel = channel; }
+    Mix_Chunk * mix_chunk() const { return m_mix_chunk; }
+    int channel() const { return m_channel; }
+    void set_channel(const int channel) { m_channel = channel; }
 
 private:
-	Mix_Chunk* const m_mix_chunk;
-	int m_channel;
+    Mix_Chunk* const m_mix_chunk;
+    int m_channel;
 };
 
 SoundEffect::SoundEffect(Mix_Chunk* const soundeffect)
-	: m_impl(new Impl(soundeffect))
+    : m_impl(new Impl(soundeffect))
 {
 }
 
@@ -43,19 +44,19 @@ SoundEffect::~SoundEffect()
 Mix_Chunk*
 SoundEffect::mix_chunk() const
 {
-	return m_impl->mix_chunk();
+    return m_impl->mix_chunk();
 }
 
 int
 SoundEffect::channel() const
 {
-	return m_impl->channel();
+    return m_impl->channel();
 }
 
 void
 SoundEffect::set_channel(const int channel)
 {
-	m_impl->set_channel(channel);
+    m_impl->set_channel(channel);
 }
 
 SoundEffect *

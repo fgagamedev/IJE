@@ -9,11 +9,8 @@
 
 #include <SDL2/SDL.h>
 #include <map>
-#include <iostream>
 
 using std::map;
-
-using namespace std;
 
 static bool joystick_was_init = false;
 static map<int, JoyStickEvent::Button> m_joystick_table;

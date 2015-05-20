@@ -19,18 +19,18 @@ using std::unique_ptr;
 class SoundEffect
 {
 public:
-	explicit SoundEffect(Mix_Chunk* const soundeffect);
-	~SoundEffect();
+    explicit SoundEffect(Mix_Chunk* const soundeffect);
+    ~SoundEffect();
 
-	Mix_Chunk* mix_chunk() const;
-	int channel() const;
-	void set_channel(const int channel);
+    Mix_Chunk* mix_chunk() const;
+    int channel() const;
+    void set_channel(const int channel);
 
     static SoundEffect * from_file(const string& path) throw (Exception);
 
 private:
-	class Impl;
-	unique_ptr<Impl> m_impl;
+    class Impl;
+    unique_ptr<Impl> m_impl;
 };
 
 #endif

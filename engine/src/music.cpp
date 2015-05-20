@@ -10,26 +10,27 @@
 class Music::Impl
 {
 public:
-	Impl(Mix_Music* const music)
-		: m_mix_music{music}
-	{
-	}
+    Impl(Mix_Music* const music)
+        : m_mix_music{music}
+    {
+    }
 
-	~Impl()
-	{
-		if(m_mix_music != nullptr) {
-			Mix_FreeMusic(m_mix_music);
-		}
-	}
+    ~Impl()
+    {
+        if (m_mix_music != nullptr)
+        {
+            Mix_FreeMusic(m_mix_music);
+        }
+    }
 
-	Mix_Music * mix_music() const { return m_mix_music; };
+    Mix_Music * mix_music() const { return m_mix_music; };
 
 private:
-	Mix_Music* const m_mix_music;
+    Mix_Music* const m_mix_music;
 };
 
 Music::Music(Mix_Music* const music)
-	: m_impl{new Impl(music)}
+    : m_impl{new Impl(music)}
 {
 }
 
@@ -40,7 +41,7 @@ Music::~Music()
 Mix_Music*
 Music::mix_music() const
 {
-	return m_impl->mix_music();
+    return m_impl->mix_music();
 }
 
 Music *

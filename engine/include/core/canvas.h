@@ -23,6 +23,7 @@ class Rect;
 class Circle;
 class Texture;
 class Font;
+class Bitmap;
 
 class Canvas
 {
@@ -66,6 +67,8 @@ public:
 
     void draw(const string& text, double x = 0, double y = 0,
         const Color& color = Color::WHITE) const;
+
+    void draw(const Bitmap *bitmap, double x = 0, double y = 0) const;
 
     void fill(const Rect& rect) const;
     void fill(const Rect& rect, const Color& color);

@@ -13,6 +13,7 @@
 #include "core/circle.h"
 #include "core/texture.h"
 #include "core/font.h"
+#include "core/bitmap.h"
 
 Canvas::Canvas(SDL_Renderer *renderer, int w, int h)
     : m_renderer(renderer), m_w(w), m_h(h), m_scale(1), m_blend_mode(NONE)
@@ -418,8 +419,8 @@ Canvas::bitmap() const
 }
 
 void
-Canvas::update_bitmap()
+Canvas::draw(const Bitmap *bitmap, double, double) const
 {
-    SDL_UpdateTexture(m_texture, NULL, m_bitmap->pixels, m_w * sizeof(Uint32));
+    SDL_UpdateTexture(m_texture, NULL, bitmap->pixels(), m_w * sizeof(Uint32));
     SDL_RenderCopy(m_renderer, m_texture, NULL, NULL);
 }

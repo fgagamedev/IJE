@@ -16,23 +16,23 @@ static constexpr int k_infinite_loop = -1;
 
 enum class AudioType
 {
-	Music,
-	SoundEffect
+    Music,
+    SoundEffect
 };
 
 template <AudioType type>
 class AudioManager final
 {
 public:
-	AudioManager();
+    AudioManager();
 
-	void play(const string& path, const int times);
-	void set_volume(const int percent);
-	void pause();
-	void resume();
-	void stop();
-	void fade_out(const double seconds);
-	bool faded_out();
+    void play(const string& path, const int times);
+    void set_volume(const int percent);
+    void pause();
+    void resume();
+    void stop();
+    void fade_out(const double seconds);
+    bool faded_out();
 };
 
 using AudioManagerSfx = AudioManager<AudioType::SoundEffect>;

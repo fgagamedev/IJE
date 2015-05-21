@@ -19,17 +19,17 @@ using std::unique_ptr;
 class Music
 {
 public:
-	explicit Music(Mix_Music* const music);
-	~Music();
+    explicit Music(Mix_Music* const music);
+    ~Music();
 
-	Mix_Music * mix_music() const;
-	string path() const;
+    Mix_Music * mix_music() const;
+    string path() const;
 
     static Music * from_file(const string& path) throw (Exception);
 
 private:
-	class Impl;
-	unique_ptr<Impl> m_impl;
+    class Impl;
+    unique_ptr<Impl> m_impl;
 };
 
 #endif

@@ -14,19 +14,19 @@
 class AudioManagerWrapper
 {
 public:
-	AudioManagerWrapper();
-	~AudioManagerWrapper();
+    AudioManagerWrapper();
+    ~AudioManagerWrapper();
 
-	void init() throw (Exception);
+    void init() throw (Exception);
 
-	AudioManagerSfx * sfx() const;
-	AudioManagerMusic * music() const;
+    AudioManagerSfx * sfx() const;
+    AudioManagerMusic * music() const;
 
 private:
-	void open_audio();
-	void close_audio();
+    void open_audio();
+    void close_audio();
 
-	AudioManagerSfx *sfx_manager;
+    AudioManagerSfx *sfx_manager;
     AudioManagerMusic *music_manager;
 };
 

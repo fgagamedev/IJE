@@ -10,8 +10,6 @@
 #include "core/environment.h"
 #include "core/keyboardevent.h"
 
-#include <iostream>
-
 using std::make_pair;
 
 class Dinoman::Impl

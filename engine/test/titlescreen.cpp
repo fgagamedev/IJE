@@ -10,7 +10,6 @@
 #include "core/font.h"
 #include "util/button.h"
 
-#include <iostream>
 using namespace std;
 
 TitleScreen::TitleScreen()

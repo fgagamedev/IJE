@@ -11,8 +11,6 @@
 #include "core/sprite.h"
 #include "core/keyboardeventlistener.h"
 
-#include <iostream>
-
 using std::pair;
 
 class Dinoman : public Sprite

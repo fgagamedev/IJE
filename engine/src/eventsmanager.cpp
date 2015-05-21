@@ -20,9 +20,6 @@
 
 using std::list;
 
-#include <iostream>
-using namespace std;
-
 void
 EventsManager::register_system_event_listener(SystemEventListener *listener)
 {

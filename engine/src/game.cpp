@@ -29,8 +29,7 @@ Game::~Game()
         delete m_level;
     }
 
-    env->events_manager->unregister_system_event_listener(this);
-    env->events_manager->unregister_keyboard_event_listener(this);
+    env->events_manager->unregister_listener(this);
     Environment::release_instance();
 }
 
@@ -48,8 +47,7 @@ Game::init(const string& title, int w, int h, bool fullscreen) throw (Exception)
         SDL_GameControllerOpen(0);
     }
 
-    env->events_manager->register_system_event_listener(this);
-    env->events_manager->register_keyboard_event_listener(this);
+    env->events_manager->register_listener(this);
 
     m_level = load_level(m_id);
 }
@@ -99,7 +97,7 @@ Game::update_timestep() const
 }
 
 bool
-Game::onSystemEvent(const SystemEvent& event)
+Game::on_event(const SystemEvent& event)
 {
     if (event.type() == SystemEvent::QUIT)
     {
@@ -111,7 +109,7 @@ Game::onSystemEvent(const SystemEvent& event)
 }
 
 bool
-Game::onKeyboardEvent(const KeyboardEvent& event)
+Game::on_event(const KeyboardEvent& event)
 {
     if (event.state() == KeyboardEvent::PRESSED
         and event.key() == KeyboardEvent::ESCAPE)

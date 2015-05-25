@@ -35,7 +35,7 @@ public:
 
     ~Impl() {}
 
-    bool onMouseButtonEvent(const MouseButtonEvent& event)
+    bool on_event(const MouseButtonEvent& event)
     {
         if (event.state() == MouseButtonEvent::PRESSED)
         {
@@ -46,7 +46,7 @@ public:
         return false;
     }
 
-    bool onKeyboardEvent(const KeyboardEvent& event)
+    bool on_event(const KeyboardEvent& event)
     {
         if (event.state() == KeyboardEvent::PRESSED)
         {
@@ -57,7 +57,7 @@ public:
         return false;
     }
 
-    bool onJoyStickEvent(const JoyStickEvent& event)
+    bool on_event(const JoyStickEvent& event)
     {
         if (event.state() == JoyStickEvent::PRESSED)
         {
@@ -123,17 +123,13 @@ FrontEnd::FrontEnd(const string& id, const string& next, const string& texture,
         : Level(id, next), m_impl(new Impl(this, texture, duration, bg))
 {
     Environment *env = Environment::get_instance();
-    env->events_manager->register_mouse_button_event_listener(this);
-    env->events_manager->register_keyboard_event_listener(this);
-    env->events_manager->register_joystick_event_listener(this);
+    env->events_manager->register_listener(this);
 }
 
 FrontEnd::~FrontEnd()
 {
     Environment *env = Environment::get_instance();
-    env->events_manager->unregister_mouse_button_event_listener(this);
-    env->events_manager->unregister_keyboard_event_listener(this);
-    env->events_manager->unregister_joystick_event_listener(this);
+    env->events_manager->unregister_listener(this);
 }
 
 void
@@ -149,19 +145,19 @@ FrontEnd::update_self(unsigned long elapsed)
 }
 
 bool
-FrontEnd::onMouseButtonEvent(const MouseButtonEvent& event)
+FrontEnd::on_event(const MouseButtonEvent& event)
 {
-    return m_impl->onMouseButtonEvent(event);
+    return m_impl->on_event(event);
 }
 
 bool
-FrontEnd::onJoyStickEvent(const JoyStickEvent& event)
+FrontEnd::on_event(const JoyStickEvent& event)
 {
-    return m_impl->onJoyStickEvent(event);
+    return m_impl->on_event(event);
 }
 
 bool
-FrontEnd::onKeyboardEvent(const KeyboardEvent& event)
+FrontEnd::on_event(const KeyboardEvent& event)
 {
-    return m_impl->onKeyboardEvent(event);
+    return m_impl->on_event(event);
 }

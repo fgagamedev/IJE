@@ -17,7 +17,8 @@ class Object::Impl
 public:
     Impl(Object *base, Object *parent, ObjectID id, double x, double y,
         double w, double h)
-        : m_base(base), m_parent(parent), m_id(id), m_box(x, y, w, h)
+        : m_base(base), m_parent(parent), m_id(id), m_box(x, y, w, h),
+        m_visible(true)
     {
     }
 
@@ -157,6 +158,11 @@ public:
 
     void draw()
     {
+        if (not visible())
+        {
+            return;
+        }
+
         m_base->draw_self();
 
         for (auto child : m_children)
@@ -226,11 +232,23 @@ public:
         m_parent = parent;
     }
 
+    bool visible() const
+    {
+        return m_visible;
+    }
+
+    void set_visible(bool visible)
+    {
+        m_visible = visible;
+    }
+
 private:
     Object *m_base;
     Object *m_parent;
     ObjectID m_id;
     Rect m_box;
+    bool m_visible;
+
     list<Object *> m_children;
     list<Object *> m_observers;
 };
@@ -396,4 +414,16 @@ void
 Object::align_to(const Object* object, Alignment xaxis, Alignment yaxis)
 {
     m_impl->align_to(object, xaxis, yaxis);
+}
+
+bool
+Object::visible() const
+{
+    return m_impl->visible();
+}
+
+void
+Object::set_visible(bool visible)
+{
+    m_impl->set_visible(visible);
 }

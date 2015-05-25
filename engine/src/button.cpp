@@ -53,7 +53,7 @@ public:
         m_thickness = thickness;
     }
 
-    bool onMouseButtonEvent(const MouseButtonEvent& event)
+    bool on_event(const MouseButtonEvent& event)
     {
         if (event.state() == MouseButtonEvent::PRESSED and
             event.button() == MouseButtonEvent::LEFT and
@@ -69,7 +69,7 @@ public:
         return false;
     }
 
-    bool onMouseMotionEvent(const MouseMotionEvent& event)
+    bool on_event(const MouseMotionEvent& event)
     {
         if (m_button->bounding_box().contains(event.x(), event.y()))
         {
@@ -125,15 +125,13 @@ Button::Button(Object *parent, ObjectID id, double w, double h)
     : Object(parent, id, 0, 0, w, h), m_impl(new Impl(this))
 {
     Environment *env = Environment::get_instance();
-    env->events_manager->register_mouse_button_event_listener(this);
-    env->events_manager->register_mouse_motion_event_listener(this);
+    env->events_manager->register_listener(this);
 }
 
 Button::~Button()
 {
     Environment *env = Environment::get_instance();
-    env->events_manager->unregister_mouse_button_event_listener(this);
-    env->events_manager->unregister_mouse_motion_event_listener(this);
+    env->events_manager->unregister_listener(this);
 }
 
 void
@@ -143,15 +141,15 @@ Button::draw_self()
 }
 
 bool
-Button::onMouseButtonEvent(const MouseButtonEvent& event)
+Button::on_event(const MouseButtonEvent& event)
 {
-    return m_impl->onMouseButtonEvent(event);
+    return m_impl->on_event(event);
 }
 
 bool
-Button::onMouseMotionEvent(const MouseMotionEvent& event)
+Button::on_event(const MouseMotionEvent& event)
 {
-    return m_impl->onMouseMotionEvent(event);
+    return m_impl->on_event(event);
 }
 
 void

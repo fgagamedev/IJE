@@ -11,12 +11,14 @@
 
 using namespace std;
 
+#include "core/settings.h"
+
 int main(int, char *[])
 {
     try
     {
         Test test;
-        test.init("Test Game", 1200, 800);
+        test.init("temp.ini");
         test.run();
     } catch (Exception ex)
     {

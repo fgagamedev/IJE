@@ -58,7 +58,7 @@ public:
     {
     }
 
-    bool onKeyboardEvent(const KeyboardEvent& event)
+    bool on_event(const KeyboardEvent& event)
     {
         switch (event.state())
         {
@@ -172,7 +172,7 @@ public:
         m_animation->draw(m_dinoman->x(), m_dinoman->y());
     }
 
-    bool onKeyboardEvent(const KeyboardEvent& event)
+    bool on_event(const KeyboardEvent& event)
     {
         switch (event.state())
         {
@@ -266,13 +266,13 @@ Dinoman::Dinoman(Object *parent, const string& id)
     change_state(IDLE, NONE);
 
     Environment *env = Environment::get_instance();
-    env->events_manager->register_keyboard_event_listener(this);
+    env->events_manager->register_listener(this);
 }
 
 Dinoman::~Dinoman()
 {
     Environment *env = Environment::get_instance();
-    env->events_manager->unregister_keyboard_event_listener(this);
+    env->events_manager->unregister_listener(this);
 }
 
 Dinoman::Direction

@@ -10,10 +10,7 @@
 
 #include "core/object.h"
 #include "core/animation.h"
-#include "core/keyboardeventlistener.h"
-#include "core/mousebuttoneventlistener.h"
-#include "core/mousemotioneventlistener.h"
-#include "core/joystickeventlistener.h"
+#include "core/listener.h"
 
 #include <memory>
 #include <map>
@@ -34,15 +31,13 @@ public:
     virtual void enter(int from) = 0;
     virtual void leave(int to) = 0;
 
-    virtual bool onKeyboardEvent(const KeyboardEvent&) { return false; }
-    virtual bool onMouseButtonEvent(const MouseButtonEvent&) { return false; }
-    virtual bool onMouseMotionEvent(const MouseMotionEvent&) { return false; }
-    virtual bool onJoyStickEvent(const JoyStickEvent&) { return false; }
+    virtual bool on_event(const KeyboardEvent&) { return false; }
+    virtual bool on_event(const MouseButtonEvent&) { return false; }
+    virtual bool on_event(const MouseMotionEvent&) { return false; }
+    virtual bool on_event(const JoyStickEvent&) { return false; }
 };
 
-class Sprite : public Object, public KeyboardEventListener,
-    public MouseButtonEventListener, public MouseMotionEventListener,
-    public JoyStickEventListener
+class Sprite : public Object, public Listener
 {
 public:
     Sprite(Object *parent, ObjectID id);
@@ -56,10 +51,10 @@ public:
 
     SpriteState * state() const;
 
-    bool onKeyboardEvent(const KeyboardEvent& event);
-    bool onMouseButtonEvent(const MouseButtonEvent& event);
-    bool onMouseMotionEvent(const MouseMotionEvent& event);
-    bool onJoyStickEvent(const JoyStickEvent& event);
+    bool on_event(const KeyboardEvent& event);
+    bool on_event(const MouseButtonEvent& event);
+    bool on_event(const MouseMotionEvent& event);
+    bool on_event(const JoyStickEvent& event);
 
 private:
     class Impl;

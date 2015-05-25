@@ -13,6 +13,7 @@
 #include "core/music.h"
 #include "core/soundeffect.h"
 #include "core/bitmap.h"
+#include "core/settings.h"
 
 shared_ptr<Texture>
 ResourcesManager::get_texture(const string& id) throw (Exception)
@@ -133,6 +134,17 @@ ResourcesManager::get_bitmap(const string& id) throw (Exception)
     return acquire_bitmap(id);
 }
 
+shared_ptr<Settings>
+ResourcesManager::get_settings(const string& id) throw (Exception)
+{
+    if (m_settings.find(id) != m_settings.end())
+    {
+        return m_settings[id];
+    }
+
+    return acquire_settings(id);
+}
+
 shared_ptr<Bitmap>
 ResourcesManager::acquire_bitmap(const string& id) throw (Exception)
 {
@@ -145,6 +157,22 @@ ResourcesManager::acquire_bitmap(const string& id) throw (Exception)
 
     shared_ptr<Bitmap> ptr(bitmap);
     m_bitmaps[id] = ptr;
+
+    return ptr;
+}
+
+shared_ptr<Settings>
+ResourcesManager::acquire_settings(const string& id) throw (Exception)
+{
+    Settings *settings = Settings::from_file(id);
+
+    if (not settings)
+    {
+        throw Exception("Can't load bitmap " + id);
+    }
+
+    shared_ptr<Settings> ptr(settings);
+    m_settings[id] = ptr;
 
     return ptr;
 }

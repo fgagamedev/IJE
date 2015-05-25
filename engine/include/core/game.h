@@ -8,31 +8,35 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "exception.h"
-#include "level.h"
-#include "systemeventlistener.h"
-#include "keyboardeventlistener.h"
+#include "core/level.h"
+#include "core/listener.h"
+#include "core/exception.h"
 
 #include <string>
 
 using std::string;
 
 class Environment;
+class SystemEvent;
+class KeyboardEvent;
 
-class Game : public SystemEventListener, public KeyboardEventListener
+class Game : public Listener
 {
 public:
     Game(const string& id);
     virtual ~Game();
 
-    void init(const string& title, int w = 800, int h = 600) throw (Exception);
+    void init(const string& title, int w, int h, bool fullscreen = false)
+        throw (Exception);
+
+    void init(const string& settings) throw (Exception);
     void run();
 
-    bool onSystemEvent(const SystemEvent& event);
-    bool onKeyboardEvent(const KeyboardEvent& event);
+    bool on_event(const SystemEvent& event);
+    bool on_event(const KeyboardEvent& event);
 
 protected:
-    string m_id;
+    string m_id, m_settings;
     Level *m_level;
     bool m_done;
     Environment *env;

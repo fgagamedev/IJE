@@ -9,7 +9,6 @@
 #define DINOMAN_H
 
 #include "core/sprite.h"
-#include "core/keyboardeventlistener.h"
 
 using std::pair;
 

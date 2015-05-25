@@ -9,25 +9,22 @@
 #define FRONT_END_H
 
 #include "core/level.h"
-#include "core/mousebuttoneventlistener.h"
-#include "core/joystickeventlistener.h"
-#include "core/keyboardeventlistener.h"
+#include "core/listener.h"
 
 #include <memory>
 
 using std::unique_ptr;
 
-class FrontEnd : public Level, MouseButtonEventListener, JoyStickEventListener,
-    KeyboardEventListener
+class FrontEnd : public Level, public Listener
 {
 public:
     FrontEnd(const string& id, const string& next, const string& image,
         unsigned long duration = 3000, const Color& background = Color::BLACK);
     ~FrontEnd();
 
-    bool onMouseButtonEvent(const MouseButtonEvent& event);
-    bool onKeyboardEvent(const KeyboardEvent& event);
-    bool onJoyStickEvent(const JoyStickEvent& event);
+    bool on_event(const MouseButtonEvent& event);
+    bool on_event(const KeyboardEvent& event);
+    bool on_event(const JoyStickEvent& event);
 
 private:
     class Impl;

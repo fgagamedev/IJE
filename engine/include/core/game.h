@@ -25,14 +25,17 @@ public:
     Game(const string& id);
     virtual ~Game();
 
-    void init(const string& title, int w = 800, int h = 600) throw (Exception);
+    void init(const string& title, int w, int h, bool fullscreen = false)
+        throw (Exception);
+
+    void init(const string& settings) throw (Exception);
     void run();
 
     bool onSystemEvent(const SystemEvent& event);
     bool onKeyboardEvent(const KeyboardEvent& event);
 
 protected:
-    string m_id;
+    string m_id, m_settings;
     Level *m_level;
     bool m_done;
     Environment *env;

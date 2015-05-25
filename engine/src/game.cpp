@@ -10,12 +10,13 @@
 #include "core/environment.h"
 #include "core/systemevent.h"
 #include "core/keyboardevent.h"
+#include "core/settings.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 
 Game::Game(const string& id)
-    : m_id(id), m_level(nullptr), m_done(false)
+    : m_id(id), m_settings(""), m_level(nullptr), m_done(false)
 {
     env = Environment::get_instance();
 
@@ -34,10 +35,11 @@ Game::~Game()
 }
 
 void
-Game::init(const string& title, int w, int h) throw (Exception)
+Game::init(const string& title, int w, int h, bool fullscreen) throw (Exception)
 {
     env->video->set_resolution(w, h);
     env->video->set_window_name(title);
+    env->video->set_fullscreen(fullscreen);
 
     SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER);
 
@@ -50,6 +52,21 @@ Game::init(const string& title, int w, int h) throw (Exception)
     env->events_manager->register_keyboard_event_listener(this);
 
     m_level = load_level(m_id);
+}
+
+void
+Game::init(const string& path) throw (Exception)
+{
+    m_settings = path;
+
+    shared_ptr<Settings> settings = env->resources_manager->get_settings(path);
+
+    string title = settings->read<string>("Game", "title", "Test Game");
+    int w = settings->read<int>("Game", "w", 800);
+    int h = settings->read<int>("Game", "h", 600);
+    bool fullscreen = settings->read<bool>("Game", "fullscreen", false);
+
+    init(title, w, h, fullscreen);
 }
 
 void

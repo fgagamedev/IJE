@@ -21,6 +21,7 @@ class Font;
 class Music;
 class SoundEffect;
 class Bitmap;
+class Settings;
 
 class ResourcesManager
 {
@@ -30,6 +31,7 @@ public:
     shared_ptr<Music> get_music(const string& id) throw (Exception);
     shared_ptr<SoundEffect> get_sound_effect(const string& id) throw (Exception);
     shared_ptr<Bitmap> get_bitmap(const string& id) throw (Exception);
+    shared_ptr<Settings> get_settings(const string& id) throw (Exception);
 
 private:
     map < string, shared_ptr<Texture> > m_textures;
@@ -37,12 +39,14 @@ private:
     map < string, shared_ptr<Music> > m_musics;
     map < string, shared_ptr<SoundEffect> > m_sound_effects;
     map < string, shared_ptr<Bitmap> > m_bitmaps;
+    map < string, shared_ptr<Settings> > m_settings;
 
     shared_ptr<Texture> acquire_texture(const string& id) throw (Exception);
     shared_ptr<Font> acquire_font(const string& id) throw (Exception);
     shared_ptr<Music> acquire_music(const string& id) throw (Exception);
     shared_ptr<SoundEffect> acquire_sound_effect(const string& id) throw (Exception);
     shared_ptr<Bitmap> acquire_bitmap(const string& id) throw (Exception);
+    shared_ptr<Settings> acquire_settings(const string& id) throw (Exception);
 };
 
 #endif

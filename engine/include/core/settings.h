@@ -17,6 +17,7 @@
 
 using std::map;
 using std::ostringstream;
+using std::istringstream;
 
 class Settings
 {
@@ -47,7 +48,12 @@ Settings::read(const string& section, const string& name,
 
         if (jt != it->second.end())
         {
-            return jt->second;
+            istringstream iss(jt->second);
+            T value;
+
+            iss >> value;
+
+            return value;
         }
     }
 

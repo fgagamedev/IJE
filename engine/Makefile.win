@@ -1,5 +1,5 @@
-NAME = ijengine_win
-VERSION = 0.0.2
+NAME = ijengine
+VERSION = 0.0.3
 
 SRC_DIR = src
 INC_DIR = include
@@ -9,15 +9,15 @@ TST_DIR = test
 RES_DIR = res
 DLL_DIR = res/dll
 
-INSTALL_DIR = /usr/local
-INCLUDES_INSTALL_DIR = $(INSTALL_DIR)/include/ijengine
+INSTALL_DIR = /usr/x86_64-w64-mingw32
+INCLUDES_INSTALL_DIR = $(INSTALL_DIR)/include/$(NAME)
 LIB_INSTALL_DIR = $(INSTALL_DIR)/lib
 
 PACKAGE = $(NAME)-$(VERSION).tar.gz
 
 CC = x86_64-w64-mingw32-g++
 AR = ar
-MINGW_ROOT = /usr/x86_64-w64-mingw32
+MINGW_ROOT = $(INSTALL_DIR)
 
 ARFLAGS = rcs
 CFLAGS = -W -Wall -pedantic -ansi -std=c++11 -MMD
@@ -37,10 +37,7 @@ OBJ = ${addprefix $(OBJ_DIR)/, ${notdir ${SRC:.cpp=.o}}}
 
 all:
 	@mkdir -p $(OBJ_DIR) $(LIB_DIR)
-	@cp -r $(RES_DIR) $(TST_DIR)
-	@unzip -j $(DLL_DIR)/windows.zip -d $(TST_DIR)
 	@make -f Makefile.win $(TARGET)
-	@make -f Makefile.win $(TEST)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@echo Building $^
@@ -51,10 +48,11 @@ $(TST_DIR)/%.o: $(TST_DIR)/%.cpp
 	@$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
 
 $(TARGET): $(OBJ)
-	@echo Creating $@
 	@$(AR) $(ARFLAGS) $@ $(OBJ)
 
 $(TEST): $(TST_OBJ) $(TARGET)
+	@cp -r $(RES_DIR) $(TST_DIR)
+	@unzip -j $(DLL_DIR)/windows.zip -d $(TST_DIR)
 	@echo "Building executable..."
 	@$(CC) $(CFLAGS) $(INCLUDES) $(TST_OBJ) $(TARGET) -o $@.exe $(LIBS)
 

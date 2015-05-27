@@ -26,8 +26,8 @@ public:
     Game(const string& id);
     virtual ~Game();
 
-    void init(const string& title, int w, int h, bool fullscreen = false, int volume = 50)
-        throw (Exception);
+    void init(const string& title, int w, int h, double scale, bool fullscreen = false,
+        int volume = 50) throw (Exception);
 
     void init(const string& settings) throw (Exception);
     void run();

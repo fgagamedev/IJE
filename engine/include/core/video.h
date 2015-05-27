@@ -26,7 +26,7 @@ public:
 
     void init() throw (Exception);
 
-    void set_resolution(int w, int h) throw (Exception);
+    void set_resolution(int w, int h, double scale = 1) throw (Exception);
     void set_fullscreen(bool fullscreen = true) throw (Exception);
     void set_window_name(const string& name);
 

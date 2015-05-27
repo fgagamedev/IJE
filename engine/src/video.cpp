@@ -79,7 +79,7 @@ Video::init() throw (Exception)
 }
 
 void
-Video::set_resolution(int w, int h) throw (Exception)
+Video::set_resolution(int w, int h, double scale) throw (Exception)
 {
     if (m_window and w > 0 and h > 0)
     {
@@ -95,6 +95,7 @@ Video::set_resolution(int w, int h) throw (Exception)
         }
 
         m_canvas->set_resolution(w, h);
+        m_canvas->set_scale(scale);
     }
 }
 

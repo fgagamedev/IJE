@@ -34,9 +34,9 @@ Game::~Game()
 }
 
 void
-Game::init(const string& title, int w, int h, bool fullscreen, int volume) throw (Exception)
+Game::init(const string& title, int w, int h, double scale, bool fullscreen, int volume) throw (Exception)
 {
-    env->video->set_resolution(w, h);
+    env->video->set_resolution(w, h, scale);
     env->video->set_window_name(title);
     env->video->set_fullscreen(fullscreen);
     env->music->set_volume(volume);
@@ -64,10 +64,11 @@ Game::init(const string& path) throw (Exception)
     string title = settings->read<string>("Game", "title", "Test Game");
     int w = settings->read<int>("Game", "w", 800);
     int h = settings->read<int>("Game", "h", 600);
+    double scale = settings->read<double>("Game", "scale", 1);
     bool fullscreen = settings->read<bool>("Game", "fullscreen", false);
     int volume = settings->read<int>("Game", "volume", 50);
 
-    init(title, w, h, fullscreen, volume);
+    init(title, w, h, scale, fullscreen, volume);
 }
 
 void

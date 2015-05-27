@@ -156,18 +156,18 @@ public:
         m_base->update_self(elapsed);
     }
 
-    void draw()
+    void draw(double x0, double y0)
     {
         if (not visible())
         {
             return;
         }
 
-        m_base->draw_self();
+        m_base->draw_self(x0, y0);
 
         for (auto child : m_children)
         {
-            child->draw();
+            child->draw(x(), y());
         }
     }
 
@@ -395,9 +395,9 @@ Object::update(unsigned long elapsed)
 }
 
 void
-Object::draw()
+Object::draw(double x0, double y0)
 {
-    m_impl->draw();
+    m_impl->draw(x0, y0);
 }
 
 void
@@ -406,7 +406,7 @@ Object::update_self(unsigned long)
 }
 
 void
-Object::draw_self()
+Object::draw_self(double, double)
 {
 }
 

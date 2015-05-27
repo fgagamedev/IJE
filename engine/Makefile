@@ -1,5 +1,5 @@
 NAME = ijengine
-VERSION = 0.0.3
+VERSION = 0.0.4
 
 SRC_DIR = src
 INC_DIR = include

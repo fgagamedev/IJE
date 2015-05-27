@@ -61,7 +61,7 @@ private:
     unique_ptr<Impl> m_impl;
 
     void update_self(unsigned long elapsed);
-    void draw_self();
+    void draw_self(double x0 = 0, double y0 = 0);
 };
 
 #endif

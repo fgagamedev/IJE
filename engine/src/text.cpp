@@ -59,7 +59,7 @@ Text::~Text()
 }
 
 void
-Text::draw_self()
+Text::draw_self(double, double)
 {
     m_impl->draw_self();
 }

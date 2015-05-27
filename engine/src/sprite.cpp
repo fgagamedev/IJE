@@ -180,7 +180,7 @@ Sprite::update_self(unsigned long elapsed)
 }
 
 void
-Sprite::draw_self()
+Sprite::draw_self(double, double)
 {
     m_impl->draw_self();
 }

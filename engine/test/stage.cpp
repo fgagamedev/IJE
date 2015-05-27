@@ -42,7 +42,7 @@ Stage::Stage(ObjectID id)
 }
 
 void
-Stage::draw_self()
+Stage::draw_self(double, double)
 {
     const Color color { 0, 200, 60 }, gray { 20, 20, 20 };
 

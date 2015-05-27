@@ -42,7 +42,7 @@ Image::~Image()
 }
 
 void
-Image::draw_self()
+Image::draw_self(double, double)
 {
     m_impl->draw_self();
 }

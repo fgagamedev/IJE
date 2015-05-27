@@ -56,7 +56,7 @@ TitleScreen::~TitleScreen()
 }
 
 void
-TitleScreen::draw_self()
+TitleScreen::draw_self(double, double)
 {
     Environment *env = Environment::get_instance();
     env->canvas->clear(Color::WHITE);

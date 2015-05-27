@@ -135,7 +135,7 @@ Button::~Button()
 }
 
 void
-Button::draw_self()
+Button::draw_self(double, double)
 {
     m_impl->draw_self();
 }

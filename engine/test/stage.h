@@ -19,7 +19,7 @@ public:
 private:
     Rect m_floor;
 
-    void draw_self();
+    void draw_self(double x0 = 0, double y0 = 0);
 };
 
 #endif

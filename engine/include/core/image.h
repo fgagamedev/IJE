@@ -24,7 +24,7 @@ private:
     class Impl;
     unique_ptr<Impl> m_impl;
 
-    void draw_self();
+    void draw_self(double x0 = 0, double y0 = 0);
 };
 
 #endif

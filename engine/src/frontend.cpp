@@ -133,7 +133,7 @@ FrontEnd::~FrontEnd()
 }
 
 void
-FrontEnd::draw_self()
+FrontEnd::draw_self(double, double)
 {
     m_impl->draw_self();
 }

@@ -21,7 +21,7 @@ public:
     bool on_message(Object *sender, MessageID id, Parameters parameters);
 
 private:
-    void draw_self();
+    void draw_self(double x0 = 0, double y0 = 0);
 };
 
 #endif

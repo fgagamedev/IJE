@@ -13,12 +13,12 @@
 class MouseButtonEvent
 {
 public:
-    typedef enum {PRESSED, RELEASED} State;
+    typedef enum {PRESSED, RELEASED} ButtonState;
     typedef enum { LEFT, RIGHT, MIDDLE } Button;
 
-    MouseButtonEvent(State state, Button button, double x, double y);
+    MouseButtonEvent(ButtonState state, Button button, double x, double y);
 
-    State state() const;
+    ButtonState state() const;
     Button button() const;
     double x() const;
     double y() const;
@@ -26,7 +26,7 @@ public:
     static MouseButtonEvent from_SDL(const SDL_Event& event);
 
 private:
-    State m_state;
+    ButtonState m_state;
     Button m_button;
     double m_x, m_y;
 };

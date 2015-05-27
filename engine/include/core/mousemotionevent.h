@@ -13,13 +13,13 @@
 class MouseMotionEvent
 {
 public:
-    typedef enum { DOWN, UP } State;
+    typedef enum { DOWN, UP } MotionState;
     typedef enum { LEFT, RIGHT, MIDDLE } Button;
 
-    MouseMotionEvent(int x, int y, int x_rel, int y_rel, State left,
-        State right, State middle);
+    MouseMotionEvent(int x, int y, int x_rel, int y_rel, MotionState left,
+        MotionState right, MotionState middle);
 
-    State state(Button button) const;
+    MotionState state(Button button) const;
     int x() const;
     int y() const;
     int x_rel() const;
@@ -30,7 +30,7 @@ public:
 private:
     int m_x, m_y;
     int m_x_rel, m_y_rel;
-    State m_buttons[3];
+    MotionState m_buttons[3];
 };
 
 #endif

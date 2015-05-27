@@ -8,13 +8,13 @@
 #include "core/mousemotionevent.h"
 
 MouseMotionEvent::MouseMotionEvent(int x, int y, int x_rel, int y_rel,
-    State left, State right, State middle)
+    MotionState left, MotionState right, MotionState middle)
     : m_x(x), m_y(y), m_x_rel(x_rel), m_y_rel(y_rel),
       m_buttons { left, right, middle }
 {
 }
 
-MouseMotionEvent::State
+MouseMotionEvent::MotionState
 MouseMotionEvent::state(MouseMotionEvent::Button button) const
 {
     return m_buttons[button];
@@ -53,7 +53,7 @@ MouseMotionEvent::from_SDL(const SDL_Event& event)
     int yrel = event.motion.yrel;
 
     Uint8 state = event.motion.state;
-    State left = UP, right = UP, middle = UP;
+    MotionState left = UP, right = UP, middle = UP;
 
     if (state & SDL_BUTTON(1))
     {
@@ -64,7 +64,7 @@ MouseMotionEvent::from_SDL(const SDL_Event& event)
     {
         middle = DOWN;
     }
-    
+
     if (state & SDL_BUTTON(3))
     {
         right = DOWN;

@@ -23,6 +23,11 @@ public:
         texture = env->resources_manager->get_texture(id);
     }
 
+    void reset()
+    {
+        last = frame = 0;
+    }
+
     double x, y, w, h;
     int frames;
     unsigned long speed;
@@ -111,4 +116,10 @@ Animation::set_row(int row)
     }
 
     m_impl->y = y;
+}
+
+void
+Animation::reset()
+{
+    m_impl->reset();
 }

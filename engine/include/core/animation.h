@@ -32,6 +32,8 @@ public:
 
     void set_row(int row);
 
+    void reset();
+
 private:
     class Impl;
     unique_ptr<Impl> m_impl;

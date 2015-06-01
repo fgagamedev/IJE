@@ -14,6 +14,7 @@
 #include "resourcesmanager.h"
 #include "eventsmanager.h"
 #include "audiomanagerwrapper.h"
+#include "camera.h"
 
 class Environment
 {
@@ -29,6 +30,7 @@ public:
     AudioManagerWrapper *audio_manager;
 
     Canvas *canvas;
+    Camera *camera;
     AudioManagerMusic *music;
     AudioManagerSfx *sfx;
 

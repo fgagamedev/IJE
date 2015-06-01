@@ -28,9 +28,6 @@ public:
 
         m_in = m_duration / 3;
         m_out = m_duration - m_in;
-
-        m_x = (env->canvas->w() - m_texture->w())/2;
-        m_y = (env->canvas->h() - m_texture->h())/2;
     }
 
     ~Impl() {}
@@ -94,6 +91,11 @@ public:
         {
             m_parent->finish();
         }
+
+        Environment *env = Environment::get_instance();
+
+        m_x = (env->camera->w() - m_texture->w())/2 + env->camera->x();
+        m_y = (env->camera->h() - m_texture->h())/2 + env->camera->y();
     }
 
     void draw_self()

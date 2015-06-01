@@ -6,20 +6,26 @@
  * Licença: LGPL. Sem copyright.
  */
 #include "core/video.h"
+#include "core/camera.h"
 #include "core/canvas.h"
 
 #include <SDL2/SDL_ttf.h>
 
-using namespace std;
+using std::make_pair;
 
 Video::Video()
     : m_window(nullptr), m_renderer(nullptr), m_canvas(nullptr),
-    m_w(800), m_h(600)
+    m_camera(nullptr), m_w(800), m_h(600)
 {
 }
 
 Video::~Video()
 {
+    if (m_camera)
+    {
+        delete m_camera;
+    }
+
     if (m_canvas)
     {
         delete m_canvas;
@@ -76,6 +82,13 @@ Video::init() throw (Exception)
     {
         throw Exception("Out of memory for a new Canvas");
     }
+
+    m_camera = new Camera(0, 0, m_w, m_h);
+
+    if (not m_camera)
+    {
+        throw Exception("Out of memory for a new Camera");
+    }
 }
 
 void
@@ -96,6 +109,7 @@ Video::set_resolution(int w, int h, double scale) throw (Exception)
 
         m_canvas->set_resolution(w, h);
         m_canvas->set_scale(scale);
+        m_camera->set_dimensions(w, h);
     }
 }
 
@@ -150,4 +164,10 @@ Canvas *
 Video::canvas() const
 {
     return m_canvas;
+}
+
+Camera *
+Video::camera() const
+{
+    return m_camera;
 }

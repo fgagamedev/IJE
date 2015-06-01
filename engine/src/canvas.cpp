@@ -14,6 +14,7 @@
 #include "core/texture.h"
 #include "core/font.h"
 #include "core/bitmap.h"
+#include "core/environment.h"
 
 Canvas::Canvas(SDL_Renderer *renderer, int w, int h)
     : m_renderer(renderer), m_w(w), m_h(h), m_scale(1), m_blend_mode(NONE)
@@ -313,14 +314,27 @@ Canvas::draw(const Texture *texture, Rect rect_clip, double x, double y) const
 void
 Canvas::draw(const Texture *texture, double x, double y) const
 {
-    double dest_w = texture->w() * m_scale;
-    double dest_h = texture->h() * m_scale;
-    SDL_Rect dest { (int) x, (int) y, (int) dest_w, (int) dest_h };
+    Environment *env = Environment::get_instance();
+    
+    Rect a = env->camera->bounding_box();
+    Rect b { x, y, (double) texture->w(), (double) texture->h() };
+
+    Rect r = a.intersection(b);
+
+    if (r.w() == 0 or r.h() == 0)
+    {
+        return;
+    }
+
+    int w = (int) r.w();
+    int h = (int) r.h();
+
+    SDL_Rect orig { (int) (r.x() - b.x()), (int) (r.y() - b.y()), w, h };
+    SDL_Rect dest { (int) (r.x() - a.x()), (int) (r.y() - a.y()), w, h };
 
     SDL_Texture *image = static_cast<SDL_Texture *>(texture->data());
-    SDL_RenderCopy(m_renderer, image, nullptr, &dest);
+    SDL_RenderCopy(m_renderer, image, &orig, &dest);
 }
-
 
 SDL_Renderer *
 Canvas::renderer() const

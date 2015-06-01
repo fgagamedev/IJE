@@ -18,6 +18,9 @@ Test::Test()
 Level *
 Test::load_level(const string& id)
 {
+    Environment *env = Environment::get_instance();
+    env->camera->set_position(250, 250);
+
     if (id == "a")
     {
         return new FrontEnd("a", "b", "res/images/hexagon.png");

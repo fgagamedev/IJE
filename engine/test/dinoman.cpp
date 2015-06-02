@@ -7,6 +7,7 @@
  */
 #include "dinoman.h"
 
+#include "core/rect.h"
 #include "core/environment.h"
 #include "core/keyboardevent.h"
 
@@ -143,7 +144,7 @@ public:
 
     ~Running() {}
 
-    const double speed = 160.0;
+    const double speed = 260.0;
 
     void enter(int from)
     {

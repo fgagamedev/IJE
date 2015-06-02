@@ -23,6 +23,8 @@ Canvas::Canvas(SDL_Renderer *renderer, int w, int h)
     m_bitmap = SDL_CreateRGBSurface(0, w, h, 32, 0, 0, 0, 0);
     m_texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888,
         SDL_TEXTUREACCESS_STREAMING, w, h);
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
+    SDL_SetHint(SDL_HINT_RENDER_VSYNC, "1");
 }
 
 Canvas::~Canvas()
@@ -176,9 +178,11 @@ Canvas::draw(const Rect& rect, const Color& color)
 void
 Canvas::fill(const Rect& rect) const
 {
+    Environment *env = Environment::get_instance();
+
     SDL_Rect r;
-    r.x = rect.x();
-    r.y = rect.y();
+    r.x = rect.x() - env->camera->x();
+    r.y = rect.y() - env->camera->y();
     r.w = rect.w();
     r.h = rect.h();
 
@@ -298,39 +302,35 @@ Canvas::fill_circle_points(int cx, int cy, int x, int y) const
 }
 
 void
-Canvas::draw(const Texture *texture, Rect rect_clip, double x, double y) const
-{
-    double dest_w = rect_clip.w() * m_scale;
-    double dest_h = rect_clip.h() * m_scale;
-    SDL_Rect clip { (int) rect_clip.x(), (int) rect_clip.y(),
-        (int) rect_clip.w(), (int) rect_clip.h()
-                  };
-    SDL_Rect dest { (int) x,  (int) y,  (int) dest_w,  (int) dest_h };
-
-    SDL_Texture *image = static_cast<SDL_Texture *>(texture->data());
-    SDL_RenderCopy(m_renderer, image, &clip, &dest);
-}
-
-void
 Canvas::draw(const Texture *texture, double x, double y) const
 {
-    Environment *env = Environment::get_instance();
-    
-    Rect a = env->camera->bounding_box();
-    Rect b { x, y, (double) texture->w(), (double) texture->h() };
-
-    Rect r = a.intersection(b);
-
-    if (r.w() == 0 or r.h() == 0)
+    if (not texture)
     {
         return;
     }
 
-    int w = (int) r.w();
-    int h = (int) r.h();
+    Rect clip { 0, 0, (double) texture->w(), (double) texture->h() };
 
-    SDL_Rect orig { (int) (r.x() - b.x()), (int) (r.y() - b.y()), w, h };
-    SDL_Rect dest { (int) (r.x() - a.x()), (int) (r.y() - a.y()), w, h };
+    draw(texture, clip, x, y);
+}
+
+void
+Canvas::draw(const Texture *texture, Rect clip, double x, double y) const
+{
+    Environment *env = Environment::get_instance();
+
+    int orig_x = (int) clip.x();
+    int orig_y = (int) clip.y();
+    int orig_w = (int) clip.w();
+    int orig_h = (int) clip.h();
+
+    int dest_x = (int) x - env->camera->x();
+    int dest_y = (int) y - env->camera->y();
+    int dest_w = (int) clip.w() * m_scale;
+    int dest_h = (int) clip.h() * m_scale;
+
+    SDL_Rect orig { orig_x, orig_y, orig_w, orig_h };
+    SDL_Rect dest { dest_x, dest_y, dest_w, dest_h };
 
     SDL_Texture *image = static_cast<SDL_Texture *>(texture->data());
     SDL_RenderCopy(m_renderer, image, &orig, &dest);
@@ -371,7 +371,12 @@ Canvas::draw(const string& text, double x, double y, const Color& color) const
         return;
     }
 
-    SDL_Rect dest { (int) x, (int) y, w, h };
+    Environment *env = Environment::get_instance();
+
+    int dest_x = (int) x - env->camera->x();
+    int dest_y = (int) y - env->camera->y();
+
+    SDL_Rect dest { dest_x, dest_y, w, h };
 
     SDL_RenderCopy(m_renderer, texture, NULL, &dest);
 

@@ -17,7 +17,7 @@ using std::unique_ptr;
 class Camera : public Object
 {
 public:
-    typedef enum { STATIC, CENTRALIZED } Mode;
+    typedef enum { STATIC, FOLLOWING } Mode;
 
     Camera(double x = 0, double y = 0, double w = 1, double h = 1,
         Mode mode = STATIC);
@@ -25,6 +25,10 @@ public:
 
     Mode mode() const;
     void set_mode(Mode mode);
+
+    void follow(const Object* object);
+
+    void set_limits(const Rect& limits);
 
 private:
     class Impl;

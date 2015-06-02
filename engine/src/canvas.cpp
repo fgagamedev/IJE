@@ -120,7 +120,11 @@ Canvas::update()
 void
 Canvas::draw(const Point& point) const
 {
-    SDL_RenderDrawPoint(m_renderer, point.x(), point.y());
+    Environment *env = Environment::get_instance();
+    int x = point.x() - env->camera->x();
+    int y = point.y() - env->camera->y();
+
+    SDL_RenderDrawPoint(m_renderer, x, y);
 }
 
 void
@@ -137,8 +141,13 @@ Canvas::draw(const Point& point, const Color& color)
 void
 Canvas::draw(const Line& line) const
 {
-    SDL_RenderDrawLine(m_renderer, line.a().x(), line.a().y(),
-        line.b().x(), line.b().y());
+    Environment *env = Environment::get_instance();
+    int xa = line.a().x() - env->camera->x();
+    int ya = line.a().y() - env->camera->y();
+    int xb = line.b().x() - env->camera->x();
+    int yb = line.b().y() - env->camera->y();
+
+    SDL_RenderDrawLine(m_renderer, xa, ya, xb, yb);
 }
 
 void
@@ -155,9 +164,13 @@ Canvas::draw(const Line& line, const Color& color)
 void
 Canvas::draw(const Rect& rect) const
 {
+    Environment *env = Environment::get_instance();
+    int x = rect.x() - env->camera->x();
+    int y = rect.y() - env->camera->y();
+
     SDL_Rect r;
-    r.x = rect.x();
-    r.y = rect.y();
+    r.x = x;
+    r.y = y;
     r.w = rect.w();
     r.h = rect.h();
 
@@ -203,9 +216,11 @@ Canvas::fill(const Rect& rect, const Color& color)
 void
 Canvas::draw(const Circle& circle) const
 {
+    Environment *env = Environment::get_instance();
+    int cx = circle.center().x() - env->camera->x();
+    int cy = circle.center().y() - env->camera->y();
+
     int r = circle.radius();
-    int cx = circle.center().x();
-    int cy = circle.center().y();
 
     int error = 3 - (r << 1);
     int i = 0, j = r;
@@ -231,9 +246,11 @@ Canvas::draw(const Circle& circle) const
 void
 Canvas::fill(const Circle& circle) const
 {
+    Environment *env = Environment::get_instance();
+
+    int cx = circle.center().x() - env->camera->x();
+    int cy = circle.center().y() - env->camera->y();
     int r = circle.radius();
-    int cx = circle.center().x();
-    int cy = circle.center().y();
 
     int error = 3 - (r << 1);
     int i = 0, j = r;

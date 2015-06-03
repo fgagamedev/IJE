@@ -96,7 +96,7 @@ Settings::from_file(const string& path) throw (Exception)
                 throw Exception("Missing value!");
             }
             
-            if (isalpha(c) || c == '_')
+            if (isalnum(c) || c == '_')
             {
                 os << c;
             }

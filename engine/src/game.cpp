@@ -34,7 +34,8 @@ Game::~Game()
 }
 
 void
-Game::init(const string& title, int w, int h, double scale, bool fullscreen, int volume) throw (Exception)
+Game::init(const string& title, int w, int h, double scale, bool fullscreen,
+    int volume) throw (Exception)
 {
     env->video->set_resolution(w, h, scale);
     env->video->set_window_name(title);
@@ -80,8 +81,9 @@ Game::run()
         env->events_manager->dispatch_pending_events();
 
         m_level->update(now);
-        m_level->draw();
+        env->camera->update(now);
 
+        m_level->draw();
         update_screen();
         delay(1);
 

@@ -27,6 +27,7 @@ public:
     void set_dimensions(double w, double h);
 
     bool contains(double x, double y) const;
+    Rect intersection(const Rect& r) const;
 
 protected:
     double m_x, m_y;

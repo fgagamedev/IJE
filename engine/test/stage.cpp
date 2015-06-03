@@ -19,9 +19,9 @@ Stage::Stage(ObjectID id)
 {
     Environment *env = Environment::get_instance();
 
-    double x = 0;
+    double x = -1000;
     double y = env->canvas->h()*0.6;
-    double w = env->canvas->w();
+    double w = 3500;
     double h = env->canvas->h();
 
     m_floor.set_position(x, y);
@@ -33,6 +33,10 @@ Stage::Stage(ObjectID id)
 
     dinoman->set_position(x, y);
     add_child(dinoman);
+
+    env->camera->set_mode(Camera::FOLLOWING);
+    env->camera->follow(dinoman);
+    env->camera->set_limits(Rect(-1000, -1000, 3500, 2000));
 
     shared_ptr<Font> font = env->resources_manager->get_font("res/fonts/FLATS.ttf");
 
@@ -50,5 +54,5 @@ Stage::draw_self()
     env->canvas->clear(Color::WHITE);
     env->canvas->fill(m_floor, color);
 
-    env->canvas->draw("Text render sample", 150, 500, gray);
+    env->canvas->draw("Scrolling test: 1 2 3 4 5 6 7 8 9 10", 150, 500, gray);
 }

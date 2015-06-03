@@ -8,9 +8,11 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
+#include <list>
 #include <string>
 #include <memory>
 
+using std::list;
 using std::string;
 using std::unique_ptr;
 
@@ -29,6 +31,7 @@ public:
     virtual ~Object();
 
     Object * parent() const;
+    const list<Object *>& children() const;
     ObjectID id() const;
 
     double x() const;
@@ -68,14 +71,14 @@ public:
     void notify(ActionID action, Parameters parameters);
 
     void update(unsigned long elapsed);
-    void draw(double x0 = 0, double y0 = 0);
+    void draw();
 
 private:
     class Impl;
     unique_ptr<Impl> m_impl;
 
     virtual void update_self(unsigned long elapsed);
-    virtual void draw_self(double x0 = 0, double y0 = 0);
+    virtual void draw_self();
 };
 
 #endif

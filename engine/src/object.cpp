@@ -42,6 +42,11 @@ public:
         return m_parent;
     }
 
+    const list<Object *>& children() const
+    {
+        return m_children;
+    }
+
     ObjectID id() const
     {
         return m_id;
@@ -156,18 +161,18 @@ public:
         m_base->update_self(elapsed);
     }
 
-    void draw(double x0, double y0)
+    void draw()
     {
         if (not visible())
         {
             return;
         }
 
-        m_base->draw_self(x0, y0);
+        m_base->draw_self();
 
         for (auto child : m_children)
         {
-            child->draw(x(), y());
+            child->draw();
         }
     }
 
@@ -395,9 +400,9 @@ Object::update(unsigned long elapsed)
 }
 
 void
-Object::draw(double x0, double y0)
+Object::draw()
 {
-    m_impl->draw(x0, y0);
+    m_impl->draw();
 }
 
 void
@@ -406,7 +411,7 @@ Object::update_self(unsigned long)
 }
 
 void
-Object::draw_self(double, double)
+Object::draw_self()
 {
 }
 
@@ -426,4 +431,10 @@ void
 Object::set_visible(bool visible)
 {
     m_impl->set_visible(visible);
+}
+
+const list<Object *>&
+Object::children() const
+{
+    return m_impl->children();
 }

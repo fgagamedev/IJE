@@ -17,6 +17,7 @@ using std::string;
 using std::pair;
 
 class Canvas;
+class Camera;
 
 class Video
 {
@@ -33,11 +34,13 @@ public:
     bool fullscreen() const;
     pair<int, int> resolution() const;
     Canvas * canvas() const;
+    Camera * camera() const;
 
 private:
     SDL_Window *m_window;
     SDL_Renderer *m_renderer;
     Canvas *m_canvas;
+    Camera *m_camera;
 
     int m_w, m_h;
 };

@@ -7,12 +7,14 @@
  */
 #include "core/environment.h"
 #include "core/video.h"
+#include "core/camera.h"
 
 static Environment *env = nullptr;
 
 Environment::Environment()
     : video(nullptr), resources_manager(nullptr), events_manager(nullptr),
-    audio_manager(nullptr), canvas(nullptr), music(nullptr), sfx(nullptr)
+    audio_manager(nullptr), canvas(nullptr), camera(nullptr), music(nullptr),
+    sfx(nullptr)
 {
 }
 
@@ -61,6 +63,7 @@ Environment::init() throw (Exception)
 
     video->init();
     canvas = video->canvas();
+    camera = video->camera();
 
     resources_manager = new ResourcesManager();
 

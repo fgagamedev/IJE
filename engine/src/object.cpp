@@ -42,6 +42,11 @@ public:
         return m_parent;
     }
 
+    const list<Object *>& children() const
+    {
+        return m_children;
+    }
+
     ObjectID id() const
     {
         return m_id;
@@ -426,4 +431,10 @@ void
 Object::set_visible(bool visible)
 {
     m_impl->set_visible(visible);
+}
+
+const list<Object *>&
+Object::children() const
+{
+    return m_impl->children();
 }

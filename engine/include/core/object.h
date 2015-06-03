@@ -8,9 +8,11 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
+#include <list>
 #include <string>
 #include <memory>
 
+using std::list;
 using std::string;
 using std::unique_ptr;
 
@@ -29,6 +31,7 @@ public:
     virtual ~Object();
 
     Object * parent() const;
+    const list<Object *>& children() const;
     ObjectID id() const;
 
     double x() const;

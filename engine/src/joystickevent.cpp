@@ -21,6 +21,17 @@ void init_table_joystick()
     m_joystick_table[SDL_CONTROLLER_BUTTON_DPAD_DOWN] = JoyStickEvent::DOWN;
     m_joystick_table[SDL_CONTROLLER_BUTTON_DPAD_LEFT] = JoyStickEvent::LEFT;
     m_joystick_table[SDL_CONTROLLER_BUTTON_DPAD_RIGHT ] = JoyStickEvent::RIGHT;
+    m_joystick_table[SDL_CONTROLLER_BUTTON_A ] = JoyStickEvent::X;
+    m_joystick_table[SDL_CONTROLLER_BUTTON_B ] = JoyStickEvent::CIRCLE;
+    m_joystick_table[SDL_CONTROLLER_BUTTON_Y ] = JoyStickEvent::TRIANGLE;
+    m_joystick_table[SDL_CONTROLLER_BUTTON_X ] = JoyStickEvent::SQUARE;
+    m_joystick_table[SDL_CONTROLLER_BUTTON_START ] = JoyStickEvent::START;
+    m_joystick_table[SDL_CONTROLLER_BUTTON_GUIDE ] = JoyStickEvent::HOME;
+    m_joystick_table[SDL_CONTROLLER_BUTTON_BACK ] = JoyStickEvent::SHARE;
+    m_joystick_table[SDL_CONTROLLER_BUTTON_LEFTSHOULDER ] = JoyStickEvent::L1;
+    m_joystick_table[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER ] = JoyStickEvent::R1;
+    m_joystick_table[SDL_CONTROLLER_BUTTON_LEFTSTICK ] = JoyStickEvent::L3;
+    m_joystick_table[SDL_CONTROLLER_BUTTON_RIGHTSTICK ] = JoyStickEvent::R3;
 }
 
 JoyStickEvent::JoyStickEvent(State state, Button button)

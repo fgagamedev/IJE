@@ -119,6 +119,19 @@ void init_table()
     m_key_table[SDLK_RIGHT] = KeyboardEvent::RIGHT;
     m_key_table[SDLK_UP] = KeyboardEvent::UP;
     m_key_table[SDLK_DOWN] = KeyboardEvent::DOWN;
+
+    m_key_table[SDLK_F1] = KeyboardEvent::F1;
+    m_key_table[SDLK_F2] = KeyboardEvent::F2;
+    m_key_table[SDLK_F3] = KeyboardEvent::F3;
+    m_key_table[SDLK_F4] = KeyboardEvent::F4;
+    m_key_table[SDLK_F5] = KeyboardEvent::F5;
+    m_key_table[SDLK_F6] = KeyboardEvent::F6;
+    m_key_table[SDLK_F7] = KeyboardEvent::F7;
+    m_key_table[SDLK_F8] = KeyboardEvent::F8;
+    m_key_table[SDLK_F9] = KeyboardEvent::F9;
+    m_key_table[SDLK_F10] = KeyboardEvent::F10;
+    m_key_table[SDLK_F11] = KeyboardEvent::F11;
+    m_key_table[SDLK_F12] = KeyboardEvent::F12;
 }
 
 KeyboardEvent::KeyboardEvent(State state, Key key, Modifier modifier)

@@ -15,13 +15,28 @@ class JoyStickEvent
 public:
     typedef enum {PRESSED, RELEASED} State;
 
-    typedef
-    enum {
-        LEFT, RIGHT, UP, DOWN,
-        START, OPTIONS,
-        L1, L2, R1, R2,
-        CIRCLE, SQUARE, TRIANGLE, X
-         } Button;
+    typedef enum
+    {
+        X, // X no controle de PS4 - 0
+        CIRCLE, // Bola no controle de PS4 - 1
+        SQUARE, // Quadrado no controle de PS4 - 2
+        TRIANGLE, // Triângulo no controle de PS4 - 3
+
+        SHARE, // SHARE no controle de PS4 - 4
+        HOME, // Botão PS no controle de PS4 - 5
+        START, // Options no controle de PS4 - 6
+
+        L3, // Botão do analógico esquerdo - 7
+        R3, // Botão do analógico direito - 8
+
+        L1, // L1 (PS4) - 9
+        R1, // R1 (PS4)- 10
+
+        UP, // D-Pad up - 11
+        DOWN, // D-Pad down - 12
+        LEFT, // D-Pad down - 13
+        RIGHT, // D-Pad Rigth - 14
+    } Button;
 
     JoyStickEvent(State state, Button button);
 

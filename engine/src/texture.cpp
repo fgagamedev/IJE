@@ -33,6 +33,12 @@ public:
     int h() const { return m_h; }
     void * data() const { return m_texture; }
 
+    void scale(double k)
+    {
+        m_w *= k;
+        m_h *= k;
+    }
+
 private:
     int m_w, m_h;
     SDL_Texture *m_texture;
@@ -95,4 +101,10 @@ Texture::from_file(const string& path) throw (Exception)
     }
 
     return t;
+}
+
+void
+Texture::scale(double k)
+{
+    m_impl->scale(k);    
 }

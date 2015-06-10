@@ -33,6 +33,8 @@ public:
     shared_ptr<Bitmap> get_bitmap(const string& id) throw (Exception);
     shared_ptr<Settings> get_settings(const string& id) throw (Exception);
 
+    void scale(double k);
+
 private:
     map < string, shared_ptr<Texture> > m_textures;
     map < string, shared_ptr<Font> > m_fonts;

@@ -6,6 +6,7 @@
  * Licença: LGPL. Sem copyright.
  */
 #include "core/bitmap.h"
+#include "core/rect.h"
 #include "core/exception.h"
 #include "core/environment.h"
 
@@ -34,6 +35,13 @@ public:
     SDL_Surface * data() const { return m_bitmap; }
     void * pixels() const { return m_bitmap->pixels; }
     void clear() { SDL_FillRect(m_bitmap, nullptr, 0); }
+
+    void fill(const Rect& r, Uint32 color)
+    {
+        SDL_Rect rect { (int) r.x(), (int) r.y(), (int) r.w(), (int) r.h() };
+
+        SDL_FillRect(m_bitmap, &rect, color);
+    }
 
 private:
     int m_w, m_h;
@@ -177,3 +185,10 @@ Bitmap::putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
         break;
     }
 }
+
+void
+Bitmap::fill(const Rect& r, Uint32 color)
+{
+    m_impl->fill(r, color);
+}
+

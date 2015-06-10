@@ -161,3 +161,9 @@ Settings::save(const string& path) throw (Exception)
 
     outfile.close();
 }
+
+map< string, map<string, string> >
+Settings::sections() const
+{
+    return m_sections;
+}

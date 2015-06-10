@@ -24,6 +24,8 @@ class Settings
 public:
     static Settings * from_file(const string& path) throw (Exception);
     void save(const string& path) throw (Exception);
+
+    map< string, map<string, string> > sections() const;
     
     template<typename T>
     T read(const string& section, const string& name, const T& default_value)

@@ -73,6 +73,16 @@ Canvas::set_color(const Color& color)
 void
 Canvas::set_resolution(int w, int h)
 {
+    if (m_bitmap)
+        SDL_FreeSurface(m_bitmap);
+
+    if (m_texture)
+        SDL_DestroyTexture(m_texture);
+
+    m_bitmap = SDL_CreateRGBSurface(0, w, h, 32, 0, 0, 0, 0);
+    m_texture = SDL_CreateTexture(m_renderer, SDL_PIXELFORMAT_ARGB8888,
+        SDL_TEXTUREACCESS_STREAMING, w, h);
+
     m_w = w;
     m_h = h;
 }
@@ -343,8 +353,8 @@ Canvas::draw(const Texture *texture, Rect clip, double x, double y) const
 
     int dest_x = (int) x - env->camera->x();
     int dest_y = (int) y - env->camera->y();
-    int dest_w = (int) clip.w() * m_scale;
-    int dest_h = (int) clip.h() * m_scale;
+    int dest_w = (int) clip.w();
+    int dest_h = (int) clip.h();
 
     SDL_Rect orig { orig_x, orig_y, orig_w, orig_h };
     SDL_Rect dest { dest_x, dest_y, dest_w, dest_h };

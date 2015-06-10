@@ -8,6 +8,7 @@
 #include "core/video.h"
 #include "core/camera.h"
 #include "core/canvas.h"
+#include "core/environment.h"
 
 #include <SDL2/SDL_ttf.h>
 
@@ -108,8 +109,11 @@ Video::set_resolution(int w, int h, double scale) throw (Exception)
         }
 
         m_canvas->set_resolution(w, h);
-        m_canvas->set_scale(scale);
+//        m_canvas->set_scale(scale);
         m_camera->set_dimensions(w, h);
+
+        Environment *env = Environment::get_instance();
+        env->resources_manager->scale(scale);
     }
 }
 

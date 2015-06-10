@@ -35,6 +35,8 @@ public:
 
     static Bitmap * from_file(const string& path) throw (Exception);
 
+    void fill(const Rect& r, Uint32 color);
+
 private:
     class Impl;
     unique_ptr<Impl> m_impl;

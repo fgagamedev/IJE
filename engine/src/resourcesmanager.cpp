@@ -176,3 +176,13 @@ ResourcesManager::acquire_settings(const string& id) throw (Exception)
 
     return ptr;
 }
+
+void
+ResourcesManager::scale(double k)
+{
+    for (auto t : m_textures)
+    {
+        shared_ptr<Texture> texture = t.second;
+        texture->scale(k);
+    }
+}

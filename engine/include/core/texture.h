@@ -28,6 +28,8 @@ public:
 
     static Texture * from_file(const string& path) throw (Exception);
 
+    void scale(double k);
+
 private:
     class Impl;
     unique_ptr<Impl> m_impl;

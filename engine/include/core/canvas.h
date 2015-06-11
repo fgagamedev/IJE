@@ -61,7 +61,7 @@ public:
 
     void draw(const Texture *texture, double x = 0, double y = 0) const;
     void draw(const Texture *texture, Rect clip, double x = 0,
-        double y = 0) const;
+        double y = 0, double w = 0, double h = 0) const;
 
     void draw(const string& text, double x = 0, double y = 0,
         const Color& color = Color::WHITE) const;

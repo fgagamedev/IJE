@@ -13,8 +13,8 @@
 #include <string>
 #include <memory>
 
-using std::string;
 using std::pair;
+using std::string;
 using std::unique_ptr;
 
 class Texture
@@ -30,7 +30,7 @@ public:
     static Texture * from_file(const string& path) throw (Exception);
 
     void scale(double k);
-	pair<int, int> size() const;    
+    pair<int, int> size() const;
 
 private:
     class Impl;

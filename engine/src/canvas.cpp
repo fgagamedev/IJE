@@ -29,7 +29,7 @@ Canvas::Canvas(SDL_Renderer *renderer, int w, int h)
 
 Canvas::~Canvas()
 {
-    free(m_bitmap);
+    SDL_FreeSurface(m_bitmap);
     SDL_DestroyTexture(m_texture);
 }
 
@@ -74,10 +74,14 @@ void
 Canvas::set_resolution(int w, int h)
 {
     if (m_bitmap)
+    {
         SDL_FreeSurface(m_bitmap);
+    }
 
     if (m_texture)
+    {
         SDL_DestroyTexture(m_texture);
+    }
 
     m_bitmap = SDL_CreateRGBSurface(0, w, h, 32, 0, 0, 0, 0);
     m_texture = SDL_CreateTexture(m_renderer, SDL_PIXELFORMAT_ARGB8888,

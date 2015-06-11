@@ -13,7 +13,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
- using std::make_pair;
+using std::make_pair;
 
 class Texture::Impl
 {
@@ -128,7 +128,7 @@ Texture::from_file(const string& path) throw (Exception)
 void
 Texture::scale(double k)
 {
-    m_impl->scale(k);    
+    m_impl->scale(k);
 }
 
 pair<int, int>

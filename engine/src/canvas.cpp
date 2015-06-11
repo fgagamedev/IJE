@@ -17,7 +17,7 @@
 #include "core/environment.h"
 
 Canvas::Canvas(SDL_Renderer *renderer, int w, int h)
-    : m_renderer(renderer), m_w(w), m_h(h), m_scale(1), m_blend_mode(NONE)
+    : m_renderer(renderer), m_w(w), m_h(h), m_blend_mode(NONE)
 {
     set_color(Color::WHITE);
     m_bitmap = SDL_CreateRGBSurface(0, w, h, 32, 0, 0, 0, 0);
@@ -360,7 +360,11 @@ Canvas::draw(const Texture *texture, Rect clip, double x, double y) const
     SDL_Rect dest { dest_x, dest_y, dest_w, dest_h };
 
     SDL_Texture *image = static_cast<SDL_Texture *>(texture->data());
-    SDL_RenderCopy(m_renderer, image, &orig, &dest);
+
+    if (dest_w == orig_w and dest_h == orig_h)
+        SDL_RenderCopy(m_renderer, image, nullptr, &dest);
+    else
+        SDL_RenderCopy(m_renderer, image, &orig, &dest);
 }
 
 SDL_Renderer *
@@ -408,18 +412,6 @@ Canvas::draw(const string& text, double x, double y, const Color& color) const
     SDL_RenderCopy(m_renderer, texture, NULL, &dest);
 
     SDL_DestroyTexture(texture);
-}
-
-void
-Canvas::set_scale(const double scale)
-{
-    m_scale = scale;
-}
-
-double
-Canvas::scale() const
-{
-    return m_scale;
 }
 
 Texture *

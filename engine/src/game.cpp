@@ -16,7 +16,7 @@
 #include <SDL2/SDL_mixer.h>
 
 Game::Game(const string& id)
-    : m_id(id), m_settings(""), m_level(nullptr), m_done(false)
+    : m_id(id), m_level(nullptr), m_done(false)
 {
     env = Environment::get_instance();
 
@@ -58,7 +58,7 @@ Game::init(const string& title, int w, int h, double scale, bool fullscreen,
 void
 Game::init(const string& path) throw (Exception)
 {
-    m_settings = path;
+    env->m_settings_path = path;
 
     shared_ptr<Settings> settings = env->resources_manager->get_settings(path);
 

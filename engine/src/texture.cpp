@@ -8,6 +8,7 @@
 #include "core/texture.h"
 #include "core/exception.h"
 #include "core/environment.h"
+#include "core/settings.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -21,6 +22,12 @@ public:
         : m_w(w), m_h(h)
     {
         m_texture = static_cast<SDL_Texture *>(data);
+
+        Environment *env = Environment::get_instance();
+        shared_ptr<Settings> settings = env->resources_manager->get_settings(env->m_settings_path);
+        double k = settings->read<double>("Game", "scale", 1);
+
+        scale(k);
     }
 
     ~Impl()

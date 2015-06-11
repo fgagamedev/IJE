@@ -11,6 +11,8 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <iostream>
+using namespace std;
 
 class Texture::Impl
 {
@@ -35,8 +37,21 @@ public:
 
     void scale(double k)
     {
-        m_w *= k;
-        m_h *= k;
+        m_w = resolution().first * k;
+        m_h = resolution().second * k;
+    }
+
+    pair<int, int> resolution() const
+    {
+        int w, h;
+        int rc = SDL_QueryTexture(m_texture, nullptr, nullptr, &w, &h);
+
+        if (rc)
+        {
+            throw Exception(SDL_GetError());
+        }
+
+        return make_pair(w, h);
     }
 
 private:

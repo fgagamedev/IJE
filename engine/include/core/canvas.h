@@ -35,13 +35,11 @@ public:
 
     int w() const;
     int h() const;
-    double scale() const;
     const Color& color() const;
     shared_ptr<Font> font() const;
     BlendMode blend_mode() const;
 
     void set_resolution(int w, int h);
-    void set_scale(const double scale);
     void set_color(const Color& color);
     void set_font(shared_ptr<Font>& font);
     void set_blend_mode(BlendMode mode);
@@ -85,7 +83,6 @@ public:
 private:
     SDL_Renderer *m_renderer;
     int m_w, m_h;
-    double m_scale;
     Color m_color;
     shared_ptr<Font> m_font;
     BlendMode m_blend_mode;

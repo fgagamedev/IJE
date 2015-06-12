@@ -8,11 +8,12 @@
 #include "core/texture.h"
 #include "core/exception.h"
 #include "core/environment.h"
+#include "core/settings.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include <iostream>
-using namespace std;
+
+using std::make_pair;
 
 class Texture::Impl
 {
@@ -21,6 +22,12 @@ public:
         : m_w(w), m_h(h)
     {
         m_texture = static_cast<SDL_Texture *>(data);
+
+        Environment *env = Environment::get_instance();
+        shared_ptr<Settings> settings = env->resources_manager->get_settings(env->m_settings_path);
+        double k = settings->read<double>("Game", "scale", 1);
+
+        scale(k);
     }
 
     ~Impl()
@@ -37,11 +44,11 @@ public:
 
     void scale(double k)
     {
-        m_w = resolution().first * k;
-        m_h = resolution().second * k;
+        m_w = size().first * k;
+        m_h = size().second * k;
     }
 
-    pair<int, int> resolution() const
+    pair<int, int> size() const
     {
         int w, h;
         int rc = SDL_QueryTexture(m_texture, nullptr, nullptr, &w, &h);
@@ -121,5 +128,11 @@ Texture::from_file(const string& path) throw (Exception)
 void
 Texture::scale(double k)
 {
-    m_impl->scale(k);    
+    m_impl->scale(k);
+}
+
+pair<int, int>
+Texture::size() const
+{
+    return m_impl->size();
 }

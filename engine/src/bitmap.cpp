@@ -191,4 +191,3 @@ Bitmap::fill(const Rect& r, Uint32 color)
 {
     m_impl->fill(r, color);
 }
-

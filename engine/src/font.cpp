@@ -6,6 +6,8 @@
  * Licença: LGPL. Sem copyright.
  */
 #include "core/font.h"
+#include "core/environment.h"
+#include "core/settings.h"
 
 class Font::Impl
 {
@@ -40,7 +42,11 @@ public:
 
     void set_size(int size)
     {
-        change_size(size);
+        Environment *env = Environment::get_instance();
+        shared_ptr<Settings> settings = env->resources_manager->get_settings(env->m_settings_path);
+        double k = settings->read<double>("Game", "scale", 1);
+
+        change_size(size * k);
     }
 
     void set_style(Style style)

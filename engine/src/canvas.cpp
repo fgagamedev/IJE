@@ -29,7 +29,7 @@ Canvas::Canvas(SDL_Renderer *renderer, int w, int h)
 
 Canvas::~Canvas()
 {
-    free(m_bitmap);
+    SDL_FreeSurface(m_bitmap);
     SDL_DestroyTexture(m_texture);
 }
 
@@ -74,10 +74,14 @@ void
 Canvas::set_resolution(int w, int h)
 {
     if (m_bitmap)
+    {
         SDL_FreeSurface(m_bitmap);
+    }
 
     if (m_texture)
+    {
         SDL_DestroyTexture(m_texture);
+    }
 
     m_bitmap = SDL_CreateRGBSurface(0, w, h, 32, 0, 0, 0, 0);
     m_texture = SDL_CreateTexture(m_renderer, SDL_PIXELFORMAT_ARGB8888,
@@ -336,13 +340,13 @@ Canvas::draw(const Texture *texture, double x, double y) const
         return;
     }
 
-    Rect clip { 0, 0, (double) texture->w(), (double) texture->h() };
+    Rect clip { 0, 0, (double) texture->size().first, (double) texture->size().second };
 
     draw(texture, clip, x, y);
 }
 
 void
-Canvas::draw(const Texture *texture, Rect clip, double x, double y) const
+Canvas::draw(const Texture *texture, Rect clip, double x, double y, double w, double h) const
 {
     Environment *env = Environment::get_instance();
 
@@ -353,18 +357,15 @@ Canvas::draw(const Texture *texture, Rect clip, double x, double y) const
 
     int dest_x = (int) x - env->camera->x();
     int dest_y = (int) y - env->camera->y();
-    int dest_w = (int) clip.w();
-    int dest_h = (int) clip.h();
+    int dest_w = (w ? (int) w : (int) texture->w());
+    int dest_h = (h ? (int) h : (int) texture->h());
 
     SDL_Rect orig { orig_x, orig_y, orig_w, orig_h };
     SDL_Rect dest { dest_x, dest_y, dest_w, dest_h };
 
     SDL_Texture *image = static_cast<SDL_Texture *>(texture->data());
 
-    if (dest_w == orig_w and dest_h == orig_h)
-        SDL_RenderCopy(m_renderer, image, nullptr, &dest);
-    else
-        SDL_RenderCopy(m_renderer, image, &orig, &dest);
+    SDL_RenderCopy(m_renderer, image, &orig, &dest);
 }
 
 SDL_Renderer *

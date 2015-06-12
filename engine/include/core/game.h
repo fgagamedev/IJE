@@ -36,7 +36,7 @@ public:
     bool on_event(const KeyboardEvent& event);
 
 protected:
-    string m_id, m_settings;
+    string m_id;
     Level *m_level;
     bool m_done;
     Environment *env;

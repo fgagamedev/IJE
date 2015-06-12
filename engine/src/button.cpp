@@ -51,7 +51,7 @@ public:
 
     void set_text(const string& text, const Color& color)
     {
-        if (text.size() > 1)
+        if (text.size() > 0)
         {
             delete m_text;
             m_text = new Text(m_button, text, color);

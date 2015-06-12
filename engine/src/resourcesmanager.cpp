@@ -168,7 +168,7 @@ ResourcesManager::acquire_settings(const string& id) throw (Exception)
 
     if (not settings)
     {
-        throw Exception("Can't load settings " + id);
+        settings = new Settings();
     }
 
     shared_ptr<Settings> ptr(settings);

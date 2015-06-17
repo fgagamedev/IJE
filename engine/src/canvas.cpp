@@ -333,7 +333,7 @@ Canvas::fill_circle_points(int cx, int cy, int x, int y) const
 }
 
 void
-Canvas::draw(const Texture *texture, double x, double y) const
+Canvas::draw(const Texture *texture, double x, double y, double w, double h) const
 {
     if (not texture)
     {
@@ -342,7 +342,7 @@ Canvas::draw(const Texture *texture, double x, double y) const
 
     Rect clip { 0, 0, (double) texture->size().first, (double) texture->size().second };
 
-    draw(texture, clip, x, y);
+    draw(texture, clip, x, y, w, h);
 }
 
 void

@@ -19,7 +19,6 @@ Game::Game(const string& id)
     : m_id(id), m_level(nullptr), m_done(false)
 {
     env = Environment::get_instance();
-
 }
 
 Game::~Game()

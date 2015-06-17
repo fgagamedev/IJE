@@ -42,6 +42,7 @@ public:
     const Rect& bounding_box() const;
 
     bool visible() const;
+    bool walkable() const;
 
     void set_x(double x);
     void set_y(double y);
@@ -49,6 +50,7 @@ public:
     void set_h(double h);
 
     void set_visible(bool visible = true);
+    void set_walkable(bool walkable = true);
 
     void set_position(double x, double y);
     void set_dimensions(double w, double h);

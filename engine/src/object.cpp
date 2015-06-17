@@ -18,7 +18,7 @@ public:
     Impl(Object *base, Object *parent, ObjectID id, double x, double y,
         double w, double h)
         : m_base(base), m_parent(parent), m_id(id), m_box(x, y, w, h),
-        m_visible(true)
+        m_visible(true), m_walkable(true)
     {
     }
 
@@ -247,12 +247,23 @@ public:
         m_visible = visible;
     }
 
+    void set_walkable(bool walkable)
+    {
+        m_walkable = walkable;
+    }
+
+    bool walkable() const
+    {
+        return m_walkable;
+    }
+
 private:
     Object *m_base;
     Object *m_parent;
     ObjectID m_id;
     Rect m_box;
     bool m_visible;
+    bool m_walkable;
 
     list<Object *> m_children;
     list<Object *> m_observers;
@@ -431,6 +442,18 @@ void
 Object::set_visible(bool visible)
 {
     m_impl->set_visible(visible);
+}
+
+void
+Object::set_walkable(bool walkable)
+{
+    m_impl->set_walkable(walkable);
+}
+
+bool
+Object::walkable()
+{
+    return m_impl->walkable();
 }
 
 const list<Object *>&

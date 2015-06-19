@@ -155,7 +155,7 @@ Settings::save(const string& path) throw (Exception)
 
         for (auto p : it.second)
         {
-            outfile << p.first << " = " << p.second << endl;
+            outfile << p.first << "=" << p.second << endl;
         }
     }
 

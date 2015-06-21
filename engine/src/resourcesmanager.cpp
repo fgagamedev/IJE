@@ -137,12 +137,17 @@ ResourcesManager::get_bitmap(const string& id) throw (Exception)
 shared_ptr<Settings>
 ResourcesManager::get_settings(const string& id) throw (Exception)
 {
-    if (m_settings.find(id) != m_settings.end())
+    Settings *settings = Settings::from_file(id);
+
+    if (not settings)
     {
-        return m_settings[id];
+        settings = new Settings();
     }
 
-    return acquire_settings(id);
+    shared_ptr<Settings> ptr(settings);
+    m_settings[id] = ptr;
+
+    return ptr;
 }
 
 shared_ptr<Bitmap>
@@ -157,22 +162,6 @@ ResourcesManager::acquire_bitmap(const string& id) throw (Exception)
 
     shared_ptr<Bitmap> ptr(bitmap);
     m_bitmaps[id] = ptr;
-
-    return ptr;
-}
-
-shared_ptr<Settings>
-ResourcesManager::acquire_settings(const string& id) throw (Exception)
-{
-    Settings *settings = Settings::from_file(id);
-
-    if (not settings)
-    {
-        settings = new Settings();
-    }
-
-    shared_ptr<Settings> ptr(settings);
-    m_settings[id] = ptr;
 
     return ptr;
 }

@@ -79,10 +79,11 @@ Game::run()
         unsigned long now = update_timestep();
         env->events_manager->dispatch_pending_events();
 
+        m_level->run_physics(now);
         m_level->update(now);
         env->camera->update(now);
-
         m_level->draw();
+
         update_screen();
         delay(1);
 

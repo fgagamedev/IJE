@@ -12,6 +12,8 @@
 
 using std::list;
 
+MessageID Object::hitID = "hitID";
+
 class Object::Impl
 {
 public:
@@ -179,6 +181,14 @@ public:
     const Rect& bounding_box() const
     {
         return m_box;
+    }
+
+    list<Rect *> hit_boxes() const
+    {
+        list<Rect *> boxes;
+        boxes.push_back(const_cast<Rect *>(&m_box));
+
+        return boxes;
     }
 
     double x() const
@@ -459,4 +469,10 @@ void
 Object::set_walkable(bool walkable)
 {
     m_impl->set_walkable(walkable);
+}
+
+list<Rect *> 
+Object::hit_boxes() const
+{
+    return m_impl->hit_boxes();
 }

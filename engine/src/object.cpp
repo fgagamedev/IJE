@@ -12,13 +12,15 @@
 
 using std::list;
 
+MessageID Object::hitID = "hitID";
+
 class Object::Impl
 {
 public:
     Impl(Object *base, Object *parent, ObjectID id, double x, double y,
         double w, double h)
         : m_base(base), m_parent(parent), m_id(id), m_box(x, y, w, h),
-        m_visible(true)
+        m_visible(true), m_walkable(true)
     {
     }
 
@@ -181,6 +183,14 @@ public:
         return m_box;
     }
 
+    list<Rect *> hit_boxes() const
+    {
+        list<Rect *> boxes;
+        boxes.push_back(const_cast<Rect *>(&m_box));
+
+        return boxes;
+    }
+
     double x() const
     {
         return m_box.x();
@@ -242,6 +252,16 @@ public:
         return m_visible;
     }
 
+    bool walkable() const
+    {
+        return m_walkable;
+    }
+
+    void set_walkable(bool walkable)
+    {
+        m_walkable = walkable;
+    }
+
     void set_visible(bool visible)
     {
         m_visible = visible;
@@ -252,7 +272,7 @@ private:
     Object *m_parent;
     ObjectID m_id;
     Rect m_box;
-    bool m_visible;
+    bool m_visible, m_walkable;
 
     list<Object *> m_children;
     list<Object *> m_observers;
@@ -437,4 +457,22 @@ const list<Object *>&
 Object::children() const
 {
     return m_impl->children();
+}
+
+bool
+Object::walkable() const
+{
+    return m_impl->walkable();
+}
+
+void
+Object::set_walkable(bool walkable)
+{
+    m_impl->set_walkable(walkable);
+}
+
+list<Rect *> 
+Object::hit_boxes() const
+{
+    return m_impl->hit_boxes();
 }

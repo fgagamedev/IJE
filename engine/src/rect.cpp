@@ -112,3 +112,21 @@ Rect::intersection(const Rect& r) const
         return Rect(xmin, ymin, xmax - xmin, ymax - ymin);
     }
 }
+
+Parameters
+Rect::to_parameters() const
+{
+    char message[256];
+    sprintf(message, "%.1f,%.1f,%.1f,%.1f", x(), y(), w(), h());
+
+    return message;
+}
+
+Rect
+Rect::from_parameters(const Parameters& parameters)
+{
+    double x, y, w, h;
+    sscanf(parameters.c_str(), "%lf,%lf,%lf,%lf", &x, &y, &w, &h);
+
+    return Rect(x, y, w, h);
+}

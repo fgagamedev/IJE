@@ -90,7 +90,7 @@ Animation::draw(double x, double y)
               };
 
     Environment *env = Environment::get_instance();
-    env->canvas->draw(m_impl->texture.get(), clip, x, y);
+    env->canvas->draw(m_impl->texture.get(), clip, x, y, clip.w(), clip.h());
 }
 
 double

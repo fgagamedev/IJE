@@ -40,8 +40,10 @@ public:
     double h() const;
 
     const Rect& bounding_box() const;
+    virtual list<Rect *> hit_boxes() const;
 
     bool visible() const;
+    bool walkable() const;
 
     void set_x(double x);
     void set_y(double y);
@@ -49,6 +51,7 @@ public:
     void set_h(double h);
 
     void set_visible(bool visible = true);
+    void set_walkable(bool walkable = true);
 
     void set_position(double x, double y);
     void set_dimensions(double w, double h);
@@ -61,6 +64,8 @@ public:
 
     void add_child(Object *child);
     void remove_child(Object *child);
+
+    static MessageID hitID;
 
     bool send_message(Object *receiver, MessageID id, Parameters parameters);
     virtual bool on_message(Object *sender, MessageID id, Parameters p);

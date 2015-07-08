@@ -1,4 +1,5 @@
 /*
+ *
  * Implementação da class FrontEnd.
  *
  * Autor: Edson Alves
@@ -25,7 +26,6 @@ public:
     {
         Environment *env = Environment::get_instance();
         m_texture = env->resources_manager->get_texture(texture);
-
         m_in = m_duration / 3;
         m_out = m_duration - m_in;
     }

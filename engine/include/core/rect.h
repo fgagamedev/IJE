@@ -8,6 +8,8 @@
 #ifndef RECT_H
 #define RECT_H
 
+#include <core/object.h>
+
 class Rect
 {
 public:
@@ -28,6 +30,9 @@ public:
 
     bool contains(double x, double y) const;
     Rect intersection(const Rect& r) const;
+
+    Parameters to_parameters() const;
+    static Rect from_parameters(const Parameters& parameters);
 
 protected:
     double m_x, m_y;

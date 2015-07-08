@@ -14,7 +14,7 @@ static Environment *env = nullptr;
 Environment::Environment()
     : video(nullptr), resources_manager(nullptr), events_manager(nullptr),
     audio_manager(nullptr), canvas(nullptr), camera(nullptr), music(nullptr),
-    sfx(nullptr)
+    sfx(nullptr), m_settings_path("")
 {
 }
 

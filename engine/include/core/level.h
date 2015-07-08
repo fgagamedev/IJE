@@ -26,6 +26,12 @@ public:
     void finish();
     void set_next(const string& next);
 
+    virtual void run_physics(unsigned long elapsed);
+
+protected:
+    void collision_one_to_all(const Object* one, const list<Object *>& all); 
+    void collision_all_to_all(const list<Object *>& all); 
+
 private:
     string m_next;
     bool m_done;

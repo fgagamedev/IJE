@@ -34,6 +34,8 @@ public:
     AudioManagerMusic *music;
     AudioManagerSfx *sfx;
 
+    string m_settings_path;
+
 private:
     Environment();
     void init() throw (Exception);

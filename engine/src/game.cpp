@@ -16,10 +16,9 @@
 #include <SDL2/SDL_mixer.h>
 
 Game::Game(const string& id)
-    : m_id(id), m_settings(""), m_level(nullptr), m_done(false)
+    : m_id(id), m_level(nullptr), m_done(false)
 {
     env = Environment::get_instance();
-
 }
 
 Game::~Game()
@@ -58,7 +57,7 @@ Game::init(const string& title, int w, int h, double scale, bool fullscreen,
 void
 Game::init(const string& path) throw (Exception)
 {
-    m_settings = path;
+    env->m_settings_path = path;
 
     shared_ptr<Settings> settings = env->resources_manager->get_settings(path);
 
@@ -80,10 +79,11 @@ Game::run()
         unsigned long now = update_timestep();
         env->events_manager->dispatch_pending_events();
 
+        m_level->run_physics(now);
         m_level->update(now);
         env->camera->update(now);
-
         m_level->draw();
+
         update_screen();
         delay(1);
 

@@ -92,6 +92,11 @@ public:
         return m_state;
     }
 
+    int state_id () const 
+    {
+        return m_state_id;
+    }
+
     bool on_event(const KeyboardEvent& event)
     {
         if (m_state)
@@ -213,4 +218,10 @@ bool
 Sprite::on_event(const JoyStickEvent& event)
 {
     return m_impl->on_event(event);
+}
+    
+int 
+Sprite::state_id () const
+{
+  return m_impl->state_id();
 }

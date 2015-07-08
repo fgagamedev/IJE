@@ -50,6 +50,7 @@ public:
     void add_transition(int event, int from, int to);
 
     SpriteState * state() const;
+	int state_id() const;
 
     bool on_event(const KeyboardEvent& event);
     bool on_event(const MouseButtonEvent& event);

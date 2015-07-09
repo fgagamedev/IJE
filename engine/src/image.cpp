@@ -32,8 +32,8 @@ private:
     shared_ptr<Texture> m_texture;
 };
 
-Image::Image(Object *parent, const string& texture)
-    : Object(parent, texture), m_impl(new Impl(this, texture))
+Image::Image(Object *parent, const string& id, const string& texture)
+    : Object(parent, id), m_impl(new Impl(this, texture))
 {
 }
 

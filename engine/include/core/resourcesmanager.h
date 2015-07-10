@@ -48,7 +48,6 @@ private:
     shared_ptr<Music> acquire_music(const string& id) throw (Exception);
     shared_ptr<SoundEffect> acquire_sound_effect(const string& id) throw (Exception);
     shared_ptr<Bitmap> acquire_bitmap(const string& id) throw (Exception);
-    shared_ptr<Settings> acquire_settings(const string& id) throw (Exception);
 };
 
 #endif

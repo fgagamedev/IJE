@@ -17,7 +17,7 @@ using std::unique_ptr;
 class Image : public Object
 {
 public:
-    Image(Object *parent, const string& image);
+    Image(Object *parent, const string& id, const string& image);
     ~Image();
 
 private:

@@ -50,6 +50,12 @@ public:
 
     void set_visible(bool visible = true);
 
+    bool walkable();
+    double mass();
+
+    void set_walkable(bool walkable = true);
+    void set_mass(double mass);
+
     void set_position(double x, double y);
     void set_dimensions(double w, double h);
     void set_parent(Object *parent);

@@ -62,6 +62,8 @@ void init_table()
     m_key_table[SDLK_PERIOD] = KeyboardEvent::PERIOD;
     m_key_table[SDLK_SLASH] = KeyboardEvent::SLASH;
 
+    m_key_table[SDLK_LSHIFT] = KeyboardEvent::LSHIFT;
+
     m_key_table[SDLK_0] = KeyboardEvent::ZERO;
     m_key_table[SDLK_1] = KeyboardEvent::ONE;
     m_key_table[SDLK_2] = KeyboardEvent::TWO;

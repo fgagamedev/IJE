@@ -17,7 +17,7 @@ do desenvolvimento do jogo, levando em consideração a duração do semestre
 letivo. A medida que o curso for avançando, o cronograma pode, e deve, ser
 atualizado para refletir as novas tarefas, atrasos e reduções de escopo.
 
-### Outputs:
+### Outputs
 
 Um cronograma de trabalho, contendo a relação das atividades a
 serem desenvolvidas, com datas de início, fim, responsáveis e dependências.

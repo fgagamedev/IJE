@@ -10,3 +10,4 @@ lib
 engine/test/res
 engine/test/test
 *.tar.gz
+*.log

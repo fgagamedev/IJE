@@ -1,4 +1,4 @@
-=== Músicas ===
+### Músicas
 
 Assim como os gráficos, as músicas permitem a devida caracterização do mundo
 do jogo, gerando a imersão necessário para que o jogador assuma o papel da
@@ -12,16 +12,15 @@ Super Mario Bros. e Sonic the Hedgehog).
 
 As principais partes do jogo que devem ter uma música/trilha associada são:
 
-	1. Tema (tela de abertura)
-	2. Estágios/mapas/níveis (1 por estágio)
-	3. Tela de opções
-	4. Mapa/tela de seleção de estágios
-	5. Tela de game over
-	6. Créditos
+1. Tema (tela de abertura)
+2. Estágios/mapas/níveis (1 por estágio)
+3. Tela de opções
+4. Mapa/tela de seleção de estágios
+5. Tela de game over
+6. Créditos
 
+### Outputs
 
-=> Outputs:
-
-As músicas listadas acima, em formato OGG. Estas músicas devem estar no 
+As músicas listadas acima, em formato `.ogg`. Estas músicas devem estar no
 diretório de recursos do jogo (res, resources, etc) e devem estar nomeadas de
 acordo com o momento em que serão utilizadas no jogo.

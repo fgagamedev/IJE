@@ -1,4 +1,4 @@
-=== Low-Fi Sketches ===
+### _Low-Fi Sketches_
 
 Logo nos primeiros estágios da codificação é necessário ter alguma arte para
 seguir em frente. Estas artes iniciais, que são rascunhos de baixa fidelidade,
@@ -9,13 +9,12 @@ pelo mesmo motivo.
 
 O termo _low-fi sketches_ é mais comumente utilizado para designar a
 arte conceitual inicial, com as primeiras versões das personagens, cenários,
-etc. No contexto de uma disciplina, dado o pouco tempo disponível e o tamanho 
+etc. No contexto de uma disciplina, dado o pouco tempo disponível e o tamanho
 da equipe, esta arte conceitual inicial já será utilizada na codificação.
 
+### Outputs
 
-=> Outputs:
-
-Uma série de imagens, em formato PNG, com a arte inicial do jogo, conforme os 
+Uma série de imagens, em formato `.png`, com a arte inicial do jogo, conforme os 
 critérios descritos acima. Devem haver imagens suficientes para representar
 a personagem principal e os elementos básicos de composição do cenário do
 jogo.

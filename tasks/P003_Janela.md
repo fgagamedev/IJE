@@ -1,23 +1,22 @@
-=== Janela ===
+### Janela
 
-Concluída a implementação do laço principal, um ponto interessante para o 
+Concluída a implementação do laço principal, um ponto interessante para o
 início da construção do jogo é a implementação do código necessário para se
 criar uma janela no sistema operacional. Este código também servirá como
 teste da configuração do ambiente de desenvolvimento: se tudo estiver correto,
-será possível editar os códigos fontes, posicioná-los nos diretórios 
+será possível editar os códigos fontes, posicioná-los nos diretórios
 adequados, compilar e executar o código, além de poder depurar o código em
 busca de erros e _bugs_.
 
 Neste momento não é necessário exibir gráficos nem tratar eventos: o importante
-é a validação das APIs e das ferramentas escolhidas. Também é importante 
-atentar à arquitetura do código e preservar sua organização desde este 
+é a validação das APIs e das ferramentas escolhidas. Também é importante
+atentar à arquitetura do código e preservar sua organização desde este
 primeiro momento, para evitar que o desenvolvimento _top-down_ acabe
-por se tornar um desenvolvimento _ad-hoc_. Portanto, desde já 
+por se tornar um desenvolvimento _ad-hoc_. Portanto, desde já
 posicione os códigos e funções em suas posições logicamente e conceitualmente
 "corretas".
 
+### Outputs
 
-=> Outputs:
-
-Um commit com os códigos que permitam a criação de uma janela no sistema 
-operacional onde o jogo será desenvolvido. 
+Os códigos que permitam a criação de uma janela no sistema 
+operacional onde o jogo será desenvolvido.

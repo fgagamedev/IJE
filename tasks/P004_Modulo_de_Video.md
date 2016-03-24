@@ -1,44 +1,43 @@
-=== Módulo de Vídeo ===
+### Módulo de Vídeo
 
 O módulo de vídeo é o responsável pela criação e configuração da janela do
 jogo (contemplada na tarefa anterior), e também pela exibição dos gráficos do
 na área desenhável da janela.
 
-Os gráficos podem ser gerados através de duas formas básicas: manipulação 
+Os gráficos podem ser gerados através de duas formas básicas: manipulação
 direta de _pixels_ ou leitura de arquivos de imagens. Embora a segunda
 forma seja a mais utilizada no desenvolvimento de jogos, a primeira permite
 a implementação de efeitos especiais ou de marcadores e indicadores visuais.
 
 Nesta tarefa, o foco é na manipulação de imagens a nível de _pixels_,
-desenvolvendo rotinas que permitam escrever e ler _pixels_ 
+desenvolvendo rotinas que permitam escrever e ler _pixels_
 individualmente, além de algoritmos para o desenho de primitivas geométricas
-básicas, como retas, círculos e retângulos. Geralmente estas rotinas são 
+básicas, como retas, círculos e retângulos. Geralmente estas rotinas são
 denominadas rotinas gráficas de baixo nível.
 
 Além disso, é interessante compôr uma cena estática, através destas primitivas,
 que ilustre um momento chave do jogo. Esta cena servirá como validação das
 rotinas gráficas de baixo nível, além de servir como _feedback_ sobre
 o posicionamento, tamanho e distribuição dos elementos visuais do jogo.
- 
-Ao incluir rotinas no código do jogo, é importante identificar o que faz 
+
+Ao incluir rotinas no código do jogo, é importante identificar o que faz
 parte da _engine_ (código genérico, reutilizável) do jogo e o que
 faz parte do jogo em si (código especializado), e separá-los em arquivos e
 módulos distintos. Esta organização permitirá o reuso da _engine_ nos
-próximos jogos da equipe, além da facilitar o processo de localização e 
+próximos jogos da equipe, além da facilitar o processo de localização e
 remoção de _bugs_.
 
-Outro fator a ser destacado é a criação de classes e módulos para cada ente 
+Outro fator a ser destacado é a criação de classes e módulos para cada ente
 do jogo. A tendência neste momento inicial é aglomerar todo o código em um
-único arquivo fonte (em geral, o arquivo principal), prática que em pouco 
-tempo leva a dificuldades de edição e manutenção do arquivo e, mais 
+único arquivo fonte (em geral, o arquivo principal), prática que em pouco
+tempo leva a dificuldades de edição e manutenção do arquivo e, mais
 importante, compromete a arquitetura e organização do código como um todo.
-Portanto, sempre que for possível e estiver de acordo com a arquitetura 
+Portanto, sempre que for possível e estiver de acordo com a arquitetura
 proposta para o jogo, crie novas classes, estruturas, arquivos e funções para
 representar os novos elementos que forem inseridos no código.
 
+### Outputs
 
-=> Outputs:
-
-Os códigos que implementem as rotinas gráficas de baixo nível, além da
-exibição de uma cena chave do jogo, composta apenas por _pixels_ e 
+Os códigos que implementam as rotinas gráficas de baixo nível, além da
+exibição de uma cena chave do jogo, composta apenas por _pixels_ e
 por primitivas geométricas.

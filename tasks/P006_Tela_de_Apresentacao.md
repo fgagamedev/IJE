@@ -1,15 +1,15 @@
-=== Tela de Apresentação ===
+### Tela de Apresentação
 
 A tela de apresentação é o ponto inicial de um jogo, do ponto de vista do
 jogador. Há várias telas que a antecedem, e que estão descritas no GDD. Estas
 telas constituem uma boa oportunidade para testar o módulo de carregamento de
-imagens, dada a simplicidade das mesmas, antes de utilizar as imagens 
+imagens, dada a simplicidade das mesmas, antes de utilizar as imagens
 efetivamente no jogo.
 
 Como o módulo de eventos ainda não está codificado, a tela de apresentação
 deve ser sucedida pelo jogo após um intervalo de tempo determinado.
 
-=> Outputs:
+### Outputs
 
-Os códigos e imagens das telas de front end (descritas no GDD) e a tela de
+Os códigos e imagens das telas de _front end_ (descritas no GDD) e a tela de
 apresentação do jogo, ainda sem o devido tratamento de eventos.

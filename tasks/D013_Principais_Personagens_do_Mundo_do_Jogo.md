@@ -1,17 +1,17 @@
-=== Principais Personagens do Mundo do Jogo ===
+### Principais Personagens do Mundo do Jogo
 
 Uma forma de se criar o mundo do jogo é definir suas personagens principais,
 e a partir delas construir um mundo verossímil. Estas personagens podem ser
-jogáveis ou não, mas devem ser os pilares que sustentam a história e a 
+jogáveis ou não, mas devem ser os pilares que sustentam a história e a
 premissa do jogo.
 
 Para cada uma destas personagens, é preciso definir
 
-	1. sua história pregressa;
-	2. aliados e inimigos;
-	3. interesses amorosos;
-	4. visual;
-	5. idade, gênero, características marcantes.
+1. sua história pregressa;
+2. aliados e inimigos;
+3. interesses amorosos;
+4. visual;
+5. idade, gênero, características marcantes.
 
 Mesmo que todos estes elementos se apresentem de forma direta na versão
 final do jogo, detalhá-los no GDD permite construir um mundo dinâmico e vivo,
@@ -21,11 +21,10 @@ extra, materiais publicitários, livros, filmes ou mesmo continuações.
 
 Boas referências sobre este assunto são as mesmas utilizadas pelos estudantes
 de literatura e cinema, pois o princípio básico de construções de personagens
-é o mesmo, com a particularidade de que, nos jogos, dependendo do gênero, é 
+é o mesmo, com a particularidade de que, nos jogos, dependendo do gênero, é
 possível não haver história ou personagens (Tetris, por exemplo).
 
-
-=> Outputs:
+### Outputs:
 
 Um capítulo ou seção do GDD, contemplando a descrição das principais personagens
 do mundo do jogo.

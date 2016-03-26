@@ -1,4 +1,4 @@
-=== NPCs ===
+### NPCs
 
 Os NPCs (_non-player characteres_) são as personagens não controladas
 pelos jogadores que habitam o mundo do jogo. Embora cada NPC possa ter maior
@@ -7,24 +7,23 @@ deixar claro porque aquela personagem deve fazer parte do jogo, quais suas
 motivações e como ela se relaciona com as demais personagens, com a trama e
 com o mundo do jogo.
 
-Antes de listar cada NPC individualmente, o game designer deve listar as 
-categorias de NPCs que estarão presentes. Estas categorias (informante, 
-fornecedor de missões, escolta, mercador, etc.) facilitarão o posicionamento 
+Antes de listar cada NPC individualmente, o game designer deve listar as
+categorias de NPCs que estarão presentes. Estas categorias (informante,
+fornecedor de missões, escolta, mercador, etc.) facilitarão o posicionamento
 de cada NPC no contexto do jogo.
 
 Delimitadas e descritas as categorias, deve ser feita uma lista com todos os
 NPCs do jogo, onde serão descritos, para cada personagem,
 
-	1. nome;
-	2. sexo;
-	3. idade;
-	4. background (história, motivações, relações de parentesco, etc);
-	5. nível ou níveis onde será encontrado;
-	6. diálogos;
-	7. colisão;
-	8. recompensas.
+1. nome;
+2. sexo;
+3. idade;
+4. _background_ (história, motivações, relações de parentesco, etc);
+5. nível ou níveis onde será encontrado;
+6. diálogos;
+7. colisão;
+8. recompensas.
 
-
-=> Outputs:
+### Outputs
 
 Um capítulo ou seção do GDD, contemplando a descrição dos NPCs do jogo.

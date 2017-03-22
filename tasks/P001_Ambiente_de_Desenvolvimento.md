@@ -17,7 +17,7 @@ de ferramentas pré-selecionadas.
 
 Um documento sucinto com a relação das ferramentas escolhidas para o ambiente
 de desenvolvimento, acompanhadas de uma descrição breve (um parágrafo) dos
-critérios utilizados para a escolha daquela ferramenta. O conjunto deve
+critérios utilizados para a escolha daquela ferramenta. O conjunto de
 ferramentas deve conter, no mínimo,
 
 1. linguagem de programação;

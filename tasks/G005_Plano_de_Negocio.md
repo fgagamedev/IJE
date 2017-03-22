@@ -7,7 +7,7 @@ atividades, é necessário primeiramente determinar o foco do projeto, de acordo
 com o triângulo de prioridades: Tempo, Qualidade, Recursos.
 
 Em seguida, deve acontecer a definição das plataformas que receberão o jogo
-e público-alvo, assim como a estratégia de divulgação do produto. Como estes
+e público-alvo, assim como a estratégia de divulgação do produto. Com estes
 pontos definidos, devem ser levantados os recursos financeiros disponíveis e
 estabelecer uma meta de lucro e de número de cópias a serem vendidas.
 
